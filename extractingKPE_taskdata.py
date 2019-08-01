@@ -30,10 +30,10 @@ def lookZero(b, offSet): # take Channel data and if we need to adjust timings
     for i, v in enumerate(b[1:]):
         if look_for_zero and v == 0:
             look_for_zero = False
-            time_offset.append(i/1000 - offSet)
+            time_offset.append(round(i/1000 - offSet))
         elif not look_for_zero and v != 0:
             look_for_zero = True
-            time_onset.append(i/1000 - offSet)
+            time_onset.append(round(i/1000 - offSet))
     return (time_onset, time_offset)
         
 #%% Function to extract actual data from subjects
@@ -53,7 +53,7 @@ def kpeTaskDat(filename):
     duration = []
     #condition = []
     for i in range(len(scriptTime[0])): # run through the set
-        duration.append(round(scriptTime[1][i] - scriptTime[0][i])) # create duration
+        duration.append(scriptTime[1][i] - scriptTime[0][i]) # create duration
     events= pd.DataFrame({'onset':scriptTime[0], 'duration':duration})
     return events
 
@@ -156,7 +156,7 @@ def getFile(subNum, session):
 # now we can iterate through subjects and sessions and create subject data for each
 # for now - lets create tsv files for each subject per each session
 subList = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
-subList = ['1403','1464']
+
 sessionList = [1,2,3,4]  
 
 for sub in subList:
