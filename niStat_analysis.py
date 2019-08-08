@@ -34,7 +34,7 @@ events = events[['trial_type','onset','duration']]
 
 
 from nistats.first_level_model import FirstLevelModel
-first_level_model = FirstLevelModel(t_r,  hrf_model='spm', memory = '/media/Data/work')
+first_level_model = FirstLevelModel(t_r,  hrf_model='spm', memory = '/media/Data/work', smoothing_fwhm=6, memory_level=2)
 
 
 first_level_model = first_level_model.fit(fmri_img, events=events, confounds=pd.DataFrame(removeVars(confoundFile)))
@@ -100,7 +100,7 @@ def plot_contrast(first_level_model):
         z_map = first_level_model.compute_contrast(
             contrast_val, output_type='z_score')
         plotting.plot_stat_map(
-            z_map, display_mode='z', threshold=3.0, title=contrast_id, axes=ax,
+            z_map, display_mode='z', threshold=2.5, title=contrast_id, axes=ax, 
             cut_coords=1)
 
 plot_contrast(first_level_model)

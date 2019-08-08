@@ -30,10 +30,10 @@ def lookZero(b, offSet): # take Channel data and if we need to adjust timings
     for i, v in enumerate(b[1:]):
         if look_for_zero and v == 0:
             look_for_zero = False
-            time_offset.append(round(i/1000 - offSet))
+            time_offset.append(i/1000 - offSet)
         elif not look_for_zero and v != 0:
             look_for_zero = True
-            time_onset.append(round(i/1000 - offSet))
+            time_onset.append(i/1000 - offSet)
     return (time_onset, time_offset)
         
 #%% Function to extract actual data from subjects
@@ -181,5 +181,5 @@ for sub in subList:
         onsetsDat['trial_type'] = conditionSession['condition'].tolist()
         # save as tsv file in specifi location BIDS compatible name (i.e. sub-subNum_ses_session_task_.tsv)
         # save filename in folder
-        onsetsDat.to_csv(r'/media/Data/PTSD_KPE/condition_files/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False)
+        onsetsDat.to_csv(r'/media/Data/PTSD_KPE/condition_files/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False, sep = '\t')
     
