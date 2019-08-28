@@ -149,7 +149,7 @@ smooth = Node(spm.Smooth(), name="smooth", fwhm = fwhm)
 
 modelspec = Node(interface=model.SpecifySPMModel(), name="modelspec") 
 modelspec.inputs.concatenate_runs = False
-modelspec.inputs.input_units = 'scans'
+modelspec.inputs.input_units = 'secs'
 modelspec.inputs.output_units = 'secs'
 #modelspec.inputs.outlier_files = '/media/Data/R_A_PTSD/preproccess_data/sub-1063_ses-01_task-3_bold_outliers.txt'
 modelspec.inputs.time_repetition = 1.  # make sure its with a dot 
@@ -226,6 +226,14 @@ wfSPM.connect([
         ])
 
 #%%
+wfSPM.write_graph("workflow_graph.dot", graph2use='colored', format='png', simple_form=True)
+%matplotlib inline
+from IPython.display import Image
+Image(filename="/workflow_graph.png")
+%matplotlib qt
+Image(filename = '/media/Data/work/KPE_SPM/l1spm/graph_detailed.png')
+wfSPM.write_graph(graph2use='flat')
+#%%
 wfSPM.run('MultiProc', plugin_args={'n_procs': 3})
 #%% simple graph
 import nilearn.plotting
@@ -246,7 +254,7 @@ for con_image in tImage:
         
 #    nilearn.plotting.plot_glass_brain(nilearn.image.smooth_img(con_image, 6),
 #                                      display_mode='lyrz', colorbar=True, plot_abs=False, threshold=2.3, bg_img=antimg)
-#%%
+
 #%% Gourp analysis - based on SPM - should condifer the fsl Randomize option (other script)
 # OneSampleTTestDesign - creates one sample T-Test Design
 onesamplettestdes = Node(spm.OneSampleTTestDesign(),
@@ -268,8 +276,8 @@ contrast_list = ['con_0001', 'con_0002', 'con_0003']
 # Threshold - thresholds contrasts
 level2thresh = Node(spm.Threshold(contrast_index=1,
                               use_topo_fdr=False,
-                              use_fwe_correction=False,
-                              #extent_threshold=10,
+                              use_fwe_correction=True, # here we can use fwe or fdr
+                              extent_threshold=10,
                               height_threshold= 0.005,
                               extent_fdr_p_threshold = 0.05,
                               height_threshold_type='p-value'),
@@ -329,7 +337,7 @@ import glob
 conImages = glob.glob('/media/Data/work/KPE_SPM/Sink/2ndLevel/_contrast_id_con_000*/spmT_0001.nii')
 for conImage in conImages:
     plot_glass_brain(conImage,colorbar=True,
-     threshold=3, display_mode='lyrz', black_bg=True)#, vmax=10);      
+     threshold=2.3, display_mode='lyrz', black_bg=True)#, vmax=10);      
 #%% Stat maps
 for con_image in conImages:
     nilearn.plotting.plot_stat_map(con_image, display_mode='ortho',
@@ -345,10 +353,10 @@ from nilearn import surface
 
 texture = surface.vol_to_surf(conImages[2], fsaverage.pial_right)
 from nilearn import plotting
-
+a = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1263/ses-1/func/sub-1263_ses-1_task-Memory_space-fsaverage5_hemi-R.func.gii'
 plotting.plot_surf_stat_map(fsaverage.infl_right, texture, hemi='right',
                             title='Surface right hemisphere', colorbar=True,
-                            threshold=1., bg_map=fsaverage.sulc_right)
+                            threshold=0., bg_map=a)#fsaverage.sulc_right)
 big_fsaverage = datasets.fetch_surf_fsaverage('fsaverage')
 fmri_img = nib.load(conImages[2])
 big_texture_right = surface.vol_to_surf(fmri_img, big_fsaverage.pial_right)
@@ -364,3 +372,4 @@ plotting.show()
 %matplotlib qt
 plotting.view_surf(big_fsaverage.infl_left, big_texture_right, threshold='95%',
                           bg_map=big_fsaverage.sulc_left)
+

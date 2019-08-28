@@ -6,7 +6,7 @@ Created on Mon Aug  5 15:57:41 2019
 @author: Or Duek
 Writing first & second level analysis for KPE study
 Based on poldrak's lab - paper publishe in BioRxiv: https://www.biorxiv.org/content/10.1101/694364v1
-
+For some reason this script has performance issue that should be resolved. Basically - film_gls takes ages to finish the run.
 """
 #%% Load packages
 from nipype.pipeline import engine as pe
@@ -20,9 +20,10 @@ from niworkflows.interfaces.bids import DerivativesDataSink# as BIDSDerivatives
 import os
 #%% data info
 fsl.FSLCommand.set_default_output_type('NIFTI_GZ')
+!export OPENBLAS_NUM_THREADS=1
 data_dir = os.path.abspath('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep')
-output_dir = '/media/Data/work/kpeTask'
-work_dir = '/home/or/work/FSL_KPE'
+output_dir = '/media/Data/work/kpeTaskTest'
+work_dir = '/home/or/work/FSL_KPE_test'
 fwhm = 6
 tr = 1
 #%% might not need to run
@@ -85,7 +86,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
 #%%
 
-subject_list = ['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
+subject_list = ['1263'] #['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
 # Map field names to individual subject runs.
 
 
@@ -129,14 +130,18 @@ workflow = pe.Workflow(name='firstLevelKPE',base_dir=work_dir)
 
 #workflow.run() # on local
 
-
+#%% set contrasts
+cont1 = ['Trauma>Sad', 'T', ['trauma', 'sad'], [1, -1]]
+cont2 = ['Trauma>Relax', 'T', ['trauma', 'relax'], [1, -1]]
+cont3 = ['Sad>Relax', 'T', ['sad', 'relax'], [1, -1]]
+contrasts = [cont1, cont2, cont3]
 
 
 #%%
 l1_spec = pe.Node(SpecifyModel(
     parameter_source='FSL',
     input_units='secs',
-    high_pass_filter_cutoff=100,
+    high_pass_filter_cutoff=120,
     time_repetition = tr,
 ), name='l1_spec')
 
@@ -145,17 +150,24 @@ l1_model = pe.Node(fsl.Level1Design(
     bases={'dgamma': {'derivs': True}},
     model_serial_correlations=True,
     interscan_interval = tr,
-    contrasts=[('Trauma-Sad', 'T', ['trauma', 'sad'], [1, -1]), 
-               ('Trauma-Relax', 'T', ['trauma','relax'], [1,-1]),
-               ('Sad-Relax', 'T', ['sad','relax'], [1,-1])],
+    contrasts=contrasts
     # orthogonalization=orthogonality,
 ), name='l1_model')
 
 # feat_spec generates an fsf model specification file
 feat_spec = pe.Node(fsl.FEATModel(), name='feat_spec')
-# feat_fit actually runs FEAT
-feat_fit = pe.Node(fsl.FEAT(), name='feat_fit') #, mem_gb=12)
 
+# feat_fit actually runs FEAT
+feat_fit = pe.Node(fsl.FEAT(), name='feat_fit', mem_gb=5)
+
+## instead of FEAT
+#modelestimate = pe.MapNode(interface=fsl.FILMGLS(smooth_autocorr=True,
+#                                                 mask_size=5,
+#                                                 threshold=1000),
+#                                                 name='modelestimate',
+#                                                 iterfield = ['design_file',
+#                                                              'in_file',
+#                                                              'tcon_file'])
 feat_select = pe.Node(nio.SelectFiles({
     'cope': 'stats/cope*.nii.gz',
     'pe': 'stats/pe[0-9][0-9].nii.gz',
@@ -186,6 +198,7 @@ workflow.connect([
     (selectfiles, susan, [('func', 'inputnode.in_files'), ('mask','inputnode.mask_file')]),
     (susan, runinfo, [('outputnode.smoothed_files', 'in_file')]),
     (susan, l1_spec, [('outputnode.smoothed_files', 'functional_runs')]),
+  #  (susan,modelestimate, [('outputnode.smoothed_files','in_file')]), # try to run FILMGLS
     (selectfiles, ds_cope, [('func', 'source_file')]),
     (selectfiles, ds_varcope, [('func', 'source_file')]),
     (selectfiles, ds_zstat, [('func', 'source_file')]),
@@ -199,6 +212,9 @@ workflow.connect([
         ('fsf_files', 'fsf_file'),
         ('ev_files', 'ev_files')]),
     (l1_model, feat_fit, [('fsf_files', 'fsf_file')]),
+#    (feat_spec,modelestimate,[('design_file','design_file'),
+#                            ('con_file','tcon_file')]),
+   
     (feat_fit, feat_select, [('feat_dir', 'base_directory')]),
     (feat_select, ds_cope, [('cope', 'in_file')]),
     (feat_select, ds_varcope, [('varcope', 'in_file')]),
@@ -214,8 +230,8 @@ workflow.connect([
 #workflow.write_graph(graph2use='flat')
 
 #%% Run workflow
-workflow.run('MultiProc', plugin_args={'n_procs': 2}) # doesn't work on local - not enough memory
-
+#workflow.run('MultiProc', plugin_args={'n_procs': 2,'memory_gb':40}) # doesn't work on local - not enough memory
+workflow.run(plugin='Linear', plugin_args={'n_procs': 1}) # try that in case fsl will run faster with it.
 #workflow.run() # on local
 #%% Now run second level
 cope_list = ['1','2','3']
@@ -254,8 +270,8 @@ varcopemerge = pe.Node(interface=fsl.Merge(dimension='t'),
 
 maskemerge = pe.Node(interface=fsl.Merge(dimension='t'),
                        name="maskemerge")
-copeImages = glob.glob('/media/Data/work/firstLevelKPE/_subject_id_*/feat_fit/run0.feat/stats/cope1.nii.gz')
-copemerge.inputs.in_files = copeImages
+#copeImages = glob.glob('/media/Data/work/firstLevelKPE/_subject_id_*/feat_fit/run0.feat/stats/cope1.nii.gz')
+#copemerge.inputs.in_files = copeImages
 
 
 
@@ -327,3 +343,110 @@ fig = plot_glass_brain('/home/or/work/FSL_KPE/2nd_level/_cope_1/randomize/random
 #%%
 fig = nilearn.plotting.plot_stat_map('/home/or/work/FSL_KPE/2nd_level/_cope_3/randomize/randomise_tstat1.nii.gz', alpha=0.5 )#, cut_coords=(0, 45, -7))
 fig.add_contours('/home/or/work/FSL_KPE/2nd_level/_cope_3/randomize/randomise_tfce_corrp_tstat1.nii.gz', levels=[0.95], colors='b')
+
+#%% Another option
+mask = '/media/Data/work/KPE_SPM/fslRandomize/group_mask.nii.gz'
+
+#ModelSettings
+input_units = 'secs'
+hpcutoff = 120.
+TR = 1.
+
+# ROI Masks - this node is needed if we want to look at specific region of interest.
+#ROI_Masks = [
+#             # data_dir + '/ROIs/HOMiddleFrontalGyrus.nii.gz',
+#             # data_dir + '/ROIs/lAG.nii.gz',
+#             '/home/rcf-proj/ib2/fmri/ROIs/lIPS.nii.gz',
+#             '/home/rcf-proj/ib2/fmri/ROIs/rIPS.nii.gz',
+#             '/home/rcf-proj/ib2/fmri/ROIs/rLingual.nii.gz',
+#             '/home/rcf-proj/ib2/fmri/ROIs/ACC.nii.gz',
+#             
+#             ]
+#%%
+#estimate a Random-FX level model
+flameo = pe.MapNode(interface=fsl.FLAMEO(run_mode='flame1',
+                                         mask_file = mask),
+                    name="flameo",
+                    iterfield=['cope_file','var_cope_file'])
+                    
+## z=1.645 was changed to z=3.1
+thresholdPositive = pe.MapNode(interface=fsl.Threshold(thresh = 3.1,
+                                               direction = 'below'),
+                     name = 'thresholdPositive',
+                     iterfield=['in_file'])
+                     
+## z=1.645 was changed to z=3.1
+thresholdNegative = pe.MapNode(interface=fsl.Threshold(thresh = 3.1,
+                                               direction = 'above'),
+                     name = 'thresholdNegative',
+                     iterfield=['in_file'])
+                     
+thresholdCombined = pe.MapNode(interface=fsl.BinaryMaths(operation = 'add'),
+                               name = 'thresholdCombined',
+                               iterfield=['in_file', 'operand_file'])
+
+#ROIs = pe.MapNode(interface = fsl.ApplyMask(),
+#                       name ='ROIs',
+#                       iterfield=['in_file'],
+#                       iterables = ('mask_file',ROI_Masks))
+
+'''
+===========
+Connections
+===========
+'''
+masterpipeline = pe.Workflow(name= "MasterWorkfow")
+masterpipeline.base_dir = work_dir + '/MFX'
+
+
+masterpipeline.connect([ (copeInput, selectCopes, [('cope', 'cope')]),
+    (selectCopes, copemerge, [('in_copes','in_files')]),
+    (selectCopes, varcopemerge, [('in_varcopes','in_files')]),
+    (selectCopes, maskemerge, [('mask','in_files')]),
+    (selectCopes, l2_model, [(('in_copes', _len), 'num_copes')]),
+    ])
+                        
+                        
+masterpipeline.connect([(copemerge,flameo,[('merged_file','cope_file')]),
+                        (varcopemerge,flameo,[('merged_file','var_cope_file')]),
+                        (l2_model,flameo, [('design_mat','design_file'),
+                                              ('design_con','t_con_file'),
+                                              ('design_grp','cov_split_file')]),
+                        ])  
+                        
+masterpipeline.connect([(flameo,thresholdPositive,[('zstats','in_file')]),
+                        (flameo,thresholdNegative,[('zstats','in_file')]),
+                        (thresholdPositive,thresholdCombined,[('out_file','in_file')]),
+                        (thresholdNegative,thresholdCombined,[('out_file','operand_file')]),
+                     #   (flameo,ROIs,[('zstats','in_file')])
+                     ])
+
+#masterpipeline.connect([(flameo,MFXdatasink,[('copes','copes'),
+#                                             ('tstats','tstats'),
+#                                             ('var_copes','var_copes'),
+#                                             ('zstats','zstats'),
+#                                             ]),
+#                         (thresholdPositive,MFXdatasink,[('out_file','thresholdedPositive')]),
+#                         (thresholdNegative,MFXdatasink,[('out_file','thresholdedNegative')]),
+#                         (thresholdCombined,MFXdatasink,[('out_file','thresholdedCombined')]),
+#                         (ROIs,MFXdatasink,[('out_file','ROIs')])
+#                         ])
+#%%
+masterpipeline.run(plugin='MultiProc', plugin_args={'n_procs':1, 'memory_gb':30})
+
+#%%
+cope3_z = '/home/or/work/FSL_KPE/MFX/MasterWorkfow/_cope_3/flameo/mapflow/_flameo0/stats/zstat1.nii.gz'
+cope3_ThresCombined = '/home/or/work/FSL_KPE/MFX/MasterWorkfow/_cope_3/thresholdCombined/mapflow/_thresholdCombined0/zstat1_thresh_maths.nii.gz'
+cope3_Positive = '/home/or/work/FSL_KPE/MFX/MasterWorkfow/_cope_3/thresholdPositive/mapflow/_thresholdPositive0/zstat1_thresh.nii.gz'
+cope3_negative = '/home/or/work/FSL_KPE/MFX/MasterWorkfow/_cope_3/thresholdNegative/mapflow/_thresholdNegative0/zstat1_thresh.nii.gz'
+#%%
+%matplotlib qt
+nilearn.plotting.plot_stat_map(cope3_z, display_mode='ortho',
+                              threshold=3, title = "Z regular")
+nilearn.plotting.plot_stat_map(cope3_ThresCombined, display_mode='ortho',
+                              threshold=3, title = "Threshold combined")
+nilearn.plotting.plot_stat_map(cope3_Positive, display_mode='ortho',
+                              threshold=3, title = "Thr Pos")
+
+nilearn.plotting.plot_stat_map(cope3_negative, display_mode='ortho',
+                              threshold=3, title = "Thr Neg")
