@@ -19,6 +19,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from nilearn import plotting
+import scipy
 # yeo
 #atlas_filename = '/home/or/Downloads/1000subjects_reference_Yeo/Yeo_JNeurophysiol11_SplitLabels/MNI152/Yeo2011_17Networks_N1000.split_components.FSL_MNI152_1mm.nii.gz'
 #atlas_labes = pd.read_csv('/home/or/Downloads/1000subjects_reference_Yeo/Yeo_JNeurophysiol11_SplitLabels/Yeo2011_17networks_N1000.split_components.glossary.csv')
@@ -87,7 +88,7 @@ from nilearn.input_data import NiftiLabelsMasker
 
 # use different masker when using Yeo atlas. 
 masker = NiftiLabelsMasker(labels_img=atlas_filename, standardize=True, smoothing_fwhm = 6,
-                        memory="/media/Data/nilearn",t_r=1, verbose=5) # As it is task based we dont' bandpassing high_pass=.01 , low_pass = .1)
+                        memory="/media/Data/nilearn",t_r=1, verbose=5, high_pass=.01 , low_pass = .1) # As it is task based we dont' bandpassing high_pass=.01 , low_pass = .1)
                            
 from nilearn.connectome import ConnectivityMeasure
 #correlation_measure = ConnectivityMeasure(kind='partial correlation') # can choose partial - it might be better
@@ -95,7 +96,7 @@ correlation_measure = ConnectivityMeasure(kind='correlation') # can choose parti
 
 #%% load files (image, task events)
 subject_list =['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
-subject_list3 =['1223','1263','1293','1307','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464'] # subjects who has 3 scans
+subject_list3 =['1223','1263','1293','1307','1322','1339','1343','1356','1364','1369','1387','1390','1403','1464'] # subjects who has 3 scans '1351',
 
 def fileList(subjects, session):
     func_files = ['/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-%s/ses-%s/func/sub-%s_ses-%s_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz' % (sub,session,sub,session) for sub in subjects]
@@ -171,11 +172,11 @@ def stratifyTimeseries (events_file, subject_timeseries, subject_id, trial_line)
 
 #%% Create subject's files per line
 # first - move to relevant folder
-os.chdir('/home/or/kpe_conn/ShenParc/session_3')
+os.chdir('/home/or/kpe_conn/ShenParc/session_2')
 # run loop
-for sub in subject_list3:
-    events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-3.csv' %sub
-    timeseries = '/home/or/kpe_conn/ShenParc/session_3/sub-%s_session-3_timeseries.npy' %sub
+for sub in subject_list:
+    events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-2.csv' %sub
+    timeseries = '/home/or/kpe_conn/ShenParc/session_2/sub-%s_session-2_timeseries.npy' %sub
     subject_id = sub
     stratifyTimeseries(events_files,timeseries,sub,0)
 #%% just plot timeseries of one subject
@@ -214,6 +215,7 @@ def creatSubCor(subject_list, session, fileName):
     # takes subject list, session number and filename of file name and returnt 3D array of subject (0 axis) correlation matrix
     correlation_allSubs = []
     for sub in subject_list:
+        print(sub)
         timeseries = np.load('/home/or/kpe_conn/ShenParc/session_%s/subject_%s/%s'%(session,sub,fileName) )
         correlation_matrix = correlation_measure.fit_transform([timeseries])[0]
         correlation_allSubs.append(correlation_matrix)
@@ -266,8 +268,8 @@ pos_corr , neg_corr = pos_neg(trauma_2_1st_ses_thr)
 np.savetxt("pos_cor_Traum2_ses1.csv" , pos_corr, delimiter= ",")
 np.savetxt("neg_cor_Traum2_ses1.csv" , neg_corr, delimiter= ",")
 #%% do trauma on second session
-trauma_2nd_ses = creatSubCor(subject_list, '2', 'speficTrial_0_trauma.npy')
-trauma_2ndSes_corr = tresholMat(trauma_2nd_ses, 0.01)
+trauma_2nd_ses2 = creatSubCor(subject_list, '2', 'speficTrial_0_trauma.npy')
+trauma_2ndSes2_corr = tresholMat(trauma_2nd_ses2, 0.01)
 pos_corr , neg_corr = pos_neg(trauma_2ndSes_corr)
 np.savetxt("pos_cor_TraumSes2.csv" , pos_corr, delimiter= ",")
 np.savetxt("neg_cor_TraumSes2.csv" , neg_corr, delimiter= ",")
@@ -320,9 +322,9 @@ sorted(l,key = l.get, reverse = True)
 plotting.plot_connectome(correlation_matrix, coords,
                              edge_threshold=0.7, colorbar=True, black_bg = True, annotate = True)
 #%% Compare matrices between sessions
-deltaMatrix = trauma_2ndSes_corr - trauma_1st_thr # contrast the two matrices
+deltaMatrix = trauma_2ndSes2_corr - trauma_1st_thr # contrast the two matrices
 # run -ttest
-tr_1_2Ttest = scipy.stats.ttest_rel(trauma_1st_ses, trauma_2nd_ses, axis = 0)
+tr_1_2Ttest = scipy.stats.ttest_rel(trauma_1st_ses, trauma_2nd_ses2, axis = 0)
 p_vals = tr_1_2Ttest[1]
 delta_mat_thr = np.array(deltaMatrix)
 # now I can treshold the mean matrix
@@ -359,3 +361,34 @@ trt2Reshape = np.moveaxis(np.array(trauma_2_1st_ses),0,-1)
 from bct import nbs
 # we compare ket1 and ket3
 pval, adj, _ = nbs.nbs_bct(trt1Reshape, trt2Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# one network is different
+
+#%% compare sad to trauma 1
+sad1Reshape = np.moveaxis(np.array(sad_corr_subs),0,-1)
+pvalSadTr, adjSadTr, _ = nbs.nbs_bct(trt1Reshape, sad1Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# sig difference between those two networks. 
+# now contrast between the mean matrices of each condition
+contMat = np.mean(trauma_1st_ses, axis = 0) - np.mean(sad_corr_subs, axis = 0)  
+# then multiply by the adjacency matrix created by NBS.
+adjCor = contMat * adjSadTr
+np.max(adjCor)
+# now we can differentiate to two positive and negative matrices
+pos_cor = np.array(adjCor)
+pos_cor[pos_cor<=0] = 0 # zero for everything lower than zero
+np.max(pos_cor)
+
+neg_cor = np.array(adjCor)
+neg_cor[neg_cor>=0] = 0 # zero everything more than zero
+np.min(neg_cor)
+
+# save to csv
+np.savetxt("pos_cor_NBS_adj.csv" , pos_cor, delimiter= ",")
+np.savetxt("neg_cor_NBS_adj.csv" , neg_cor, delimiter= ",")
+
+#%% lets check trauma 2 with sad2
+ 
+#%%now lets check if there's a difference between sad and trauma at the second session
+# load the second session first sad script
+sad_corr_subs_ses2 = creatSubCor(subject_list, '2', 'speficTrial_2_sad.npy') # take sad
+session = '2'
+fileName = 'speficTrial_2_sad.npy'
