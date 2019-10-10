@@ -95,8 +95,8 @@ from nilearn.connectome import ConnectivityMeasure
 correlation_measure = ConnectivityMeasure(kind='correlation') # can choose partial - it might be better        
 
 #%% load files (image, task events)
-subject_list =['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
-subject_list3 =['1223','1263','1293','1307','1322','1339','1343','1356','1364','1369','1387','1390','1403','1464'] # subjects who has 3 scans '1351',
+subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464', '1468', '1480', '1499']
+subject_list3 =['008''1223','1263','1293','1307','1322','1339','1343','1356','1364','1369','1387','1390','1403','1464'] # subjects who has 3 scans '1351',
 
 def fileList(subjects, session):
     func_files = ['/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-%s/ses-%s/func/sub-%s_ses-%s_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz' % (sub,session,sub,session) for sub in subjects]
@@ -121,7 +121,7 @@ np.save("session_2TimeseriesShen",session2)
 np.save("session_3TimeseriesShen", session3)
 #%% load sessions
 session1 = list(np.load('session_1Timeseries_Shen.npy', allow_pickle = True)) # loading the saved array
-sessoin2 = list(np.load('session_2TimeseriesShen.npy', allow_pickle = True)) # loading the saved array
+session2 = list(np.load('session_2TimeseriesShen.npy', allow_pickle = True)) # loading the saved array
 session3 = list(np.load('session_3TimeseriesShen.npy', allow_pickle = True))
 #%% Build and save each subject's timeseries in a file
 def saveSubjectSeries(subject_list, session, timeSerArray):
@@ -172,11 +172,11 @@ def stratifyTimeseries (events_file, subject_timeseries, subject_id, trial_line)
 
 #%% Create subject's files per line
 # first - move to relevant folder
-os.chdir('/home/or/kpe_conn/ShenParc/session_2')
+os.chdir('/home/or/kpe_conn/ShenParc/session_1')
 # run loop
 for sub in subject_list:
-    events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-2.csv' %sub
-    timeseries = '/home/or/kpe_conn/ShenParc/session_2/sub-%s_session-2_timeseries.npy' %sub
+    events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-1.csv' %sub
+    timeseries = '/home/or/kpe_conn/ShenParc/session_1/sub-%s_session-1_timeseries.npy' %sub
     subject_id = sub
     stratifyTimeseries(events_files,timeseries,sub,0)
 #%% just plot timeseries of one subject
@@ -212,12 +212,14 @@ np.savetxt("negative_corr.csv", correlation_negative, delimiter = ',')
 np.savetxt("positive_corr.csv", correlation_positive, delimiter = ',')
 #%% Method to create array of correlation matrices for subjects
 def creatSubCor(subject_list, session, fileName):
-    # takes subject list, session number and filename of file name and returnt 3D array of subject (0 axis) correlation matrix
+    # takes subject list, session number and filename and return 3D array of subject (0 axis) correlation matrix
     correlation_allSubs = []
     for sub in subject_list:
         print(sub)
         timeseries = np.load('/home/or/kpe_conn/ShenParc/session_%s/subject_%s/%s'%(session,sub,fileName) )
         correlation_matrix = correlation_measure.fit_transform([timeseries])[0]
+        # add a line to save correlation matrix as csv file
+       # np.savetxt('sub-%s_ses-%s_corrMat.csv'%(sub, session), correlation_matrix, delimiter=',')
         correlation_allSubs.append(correlation_matrix)
     return correlation_allSubs
 #%% running t-test on all subjects to set treshold of edges
@@ -270,12 +272,17 @@ np.savetxt("neg_cor_Traum2_ses1.csv" , neg_corr, delimiter= ",")
 #%% do trauma on second session
 trauma_2nd_ses2 = creatSubCor(subject_list, '2', 'speficTrial_0_trauma.npy')
 trauma_2ndSes2_corr = tresholMat(trauma_2nd_ses2, 0.01)
-pos_corr , neg_corr = pos_neg(trauma_2ndSes_corr)
+pos_corr , neg_corr = pos_neg(trauma_2ndSes2_corr)
 np.savetxt("pos_cor_TraumSes2.csv" , pos_corr, delimiter= ",")
 np.savetxt("neg_cor_TraumSes2.csv" , neg_corr, delimiter= ",")
 
 # check difference between first and second script:
 deltaMatrix = np.mean(np.array(trauma_2_1st_ses), axis = 0) - np.mean(np.array(trauma_1st_ses), axis = 0) # contrast the two matrices
+deltaMatrix_each = np.array(trauma_2nd_ses2) - np.array(trauma_1st_ses)
+for mat, sub in zip(deltaMatrix_each, subject_list):
+    print (sub)
+    np.savetxt('sub-%s_deltaMat1_2.csv' %sub, mat, delimiter=',')
+
 # run -ttest
 tr_1_2Ttest = scipy.stats.ttest_rel(trauma_1st_ses, trauma_2_1st_ses, axis = 0)
 p_vals = tr_1_2Ttest[1]
@@ -308,7 +315,8 @@ plotting.plot_connectome(trauma_1st_thr, coords, edge_threshold='95%', colorbar=
 plotting.plot_matrix(trauma_2_1st_ses_thr, labels=atlas_labes[:,0], colorbar=True, tri = 'diag', grid = 'color')
 #%% Graph theory calculations (Degree centrality etc)
 import networkx as nx
-G = nx.from_numpy_array(trauma_0_corr)
+G = nx.from_numpy_array(adjTrt1_2)
+%matplotlib qt
 nx.draw(G, with_labels=True, node_color='orange', node_size=400, edge_color='gray', linewidths=1, font_size=15)
 list(nx.connected_components(G))
 sorted(d for n, d in G.degree())
@@ -390,5 +398,338 @@ np.savetxt("neg_cor_NBS_adj.csv" , neg_cor, delimiter= ",")
 #%%now lets check if there's a difference between sad and trauma at the second session
 # load the second session first sad script
 sad_corr_subs_ses2 = creatSubCor(subject_list, '2', 'speficTrial_2_sad.npy') # take sad
-session = '2'
-fileName = 'speficTrial_2_sad.npy'
+# problem with 1403 - run timeseries for this one again
+#time_series_1403 = masker.fit_transform('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1403/ses-2/func/sub-1403_ses-2_task-Memoryb_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz', confounds=removeVars('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1403/ses-2/func/sub-1403_ses-2_task-Memoryb_desc-confounds_regressors.tsv'))
+## save the new fixed timeseries:
+#session = '2'
+#sub = '1403'
+#np.save(('session_%s/sub-%s_session-%s_timeseries'%(session,sub,session)), time_series_1403)
+# extract task specific
+# now run 1st trauma on 2nd session
+trt1_ses2Reshape = np.moveaxis(np.array(trauma_2nd_ses2), 0 , -1)
+# back to comparing sad2 and trauma 2
+# reshape sad2
+sad2Reshape = np.moveaxis(np.array(sad_corr_subs_ses2),0,-1)
+pvalSad2, adjSad2, _ = nbs.nbs_bct(trt1_ses2Reshape, sad2Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# no significant difference
+
+#%% Lets check difference between trauma 1 and trauma on second session
+pvalTrt1_2 , adjTrt1_2, _ = nbs.nbs_bct(trt1_ses2Reshape, trt1Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# almost sig. difference between trauma on first session and on second (0.052) - should check again with more subjects.
+
+trt1_vs2_meanDistance = np.mean(np.array(trauma_2nd_ses2), axis = 0) - np.mean(np.array(trauma_1st_ses), axis = 0) # create delta between two matrices
+trt1_vs2_meanDistance.min()
+# treshold according to adjacancy matrix
+
+trt1_vs2_tresh = np.array(trt1_vs2_meanDistance) * adjTrt1_2
+trt1_vs2_tresh.max()
+# creating positive matrix
+trt1_vs2_pos = np.array(trt1_vs2_tresh)
+trt1_vs2_pos[trt1_vs2_pos<0] = 0
+trt1_vs2_pos.min()
+sumPosTrt1vs2.sum()
+
+trt1_vs2_neg = np.array(trt1_vs2_tresh)
+trt1_vs2_neg[trt1_vs2_neg >= 0] = 0
+trt1_vs2_neg.min()
+#%% Function that takes original matrices and returns sum of positive and negative correlations and delta matrix (if needed)
+# need to do it for each subject
+def sumPosEdges(matrix1, matrix2, adj):
+    # delta
+    deltaMat = np.array(matrix2) - np.array(matrix1)
+    deltaMat_thr = np.array(deltaMat) * adj
+    deltaMat_thr_pos = np.array(deltaMat_thr)
+    deltaMat_thr_pos[deltaMat_thr_pos<0] = 0
+    subjectSum_pos = deltaMat_thr_pos.sum()
+    deltaMat_thr_neg = np.array(deltaMat_thr)
+    deltaMat_thr_neg[deltaMat_thr_neg>0] = 0 # create negarive matrix
+    subjectSum_neg = deltaMat_thr_neg.sum()
+    return subjectSum_pos , subjectSum_neg , deltaMat_thr
+#%%
+subjectPosEdges = []
+for i,n in enumerate(subject_list):
+    print(i)
+    print(n)
+    subjectPosEdges.append(sumPosEdges(trauma_1st_ses[i], trauma_2nd_ses2[i], adjTrt1_2)[0]) # take only positive
+    
+subjectPosEdges_Neg = []
+for i,n in enumerate(subject_list):
+    print(i)
+    print(n)
+    subjectPosEdges_Neg.append(sumPosEdges(trauma_1st_ses[i], trauma_2nd_ses2[i], adjTrt1_2)[1]) # take only negative
+
+#%% Compare different groups - take group label from database
+import pandas as pd
+from pandas import ExcelWriter
+from pandas import ExcelFile
+
+df = pd.read_excel('/home/or/Documents/kpe_analyses/KPEIHR0009_data_all_scored.xlsx') #, sheetname='KPE DATA')
+# take only what we want
+df_clinical = df.filter(['scr_id','med_cond','caps5_totals','pcl5_total_screen','pcl5_total_visit1','pcl5_total_visit7','pcl5_total_followup1','pcl5_total_followup2','cadss_total', 'bdi_total_screen', 'bdi_total_visit1', 'bdi_total_visit7', 'bdi_total_followup1', 'bdi_total_followup2']) #, (like='bdi_total')]
+#df_clinical_no008 = df_clinical[df_clinical.scr_id != 'KPE008']
+# so simple linear regression - take tresholded positive edges and sum them up
+scipy.stats.pearsonr(subjectPosEdges, df_clinical['pcl5_total_visit1'])
+# check the difference
+diffPCL = df_clinical['pcl5_total_followup1'] - df_clinical['pcl5_total_visit7']
+diffPCL_FU_screen = df_clinical['pcl5_total_followup1'] - df_clinical['pcl5_total_visit1']
+diffPCL[2] = 0
+#np.savetxt('diffPCL_FU1.csv', diffPCL, delimiter=',')
+# check differences in pcl from FU1 to Visit7 - compare with trauma positive edges
+scipy.stats.pearsonr(subjectPosEdges[mask], diffPCL[mask])
+
+mask = ~np.isnan(subjectPosEdges[0:18]) & ~np.isnan(diffPCL) & ~np.isnan(df_clinical['med_cond'])
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(np.array(subjectPosEdges[0:18])[mask],diffPCL[mask])
+import matplotlib.pyplot as plt
+line = slope*np.array(subjectPosEdges)[mask]+intercept
+
+# plot the regression model
+plt.title('Positive sum of correlations - 16 valid subjects')
+plt.xlabel('Sum of connectivity')
+plt.ylabel('Change in PCL (end of trt to 30 days)')
+plt.plot(subjectPosEdges, diffPCL, 'o', np.array(subjectPosEdges)[mask], line)
+plt.show()
+
+# lets check the negative matrix
+mask = ~np.isnan(subjectPosEdges_Neg) & ~np.isnan(diffPCL) & np.isnan(df_clinical['med_cond'])
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(np.array(subjectPosEdges_Neg)[mask],diffPCL_FU_screen[mask])
+import matplotlib.pyplot as plt
+line = slope*np.array(subjectPosEdges_Neg)[mask]+intercept
+plt.plot(subjectPosEdges_Neg, diffPCL_FU_screen, 'o', np.array(subjectPosEdges_Neg)[mask], line)
+#%% comparing sad1 to sad2
+pvalSad1vs2, adjSad1_vs2, _ = nbs.nbs_bct(sad1Reshape, sad2Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# no difference
+
+
+#%% Now we should look at amygdala and hippocampus as seed and analyze connectivity before and after treatment for these two
+# this is done in seedTovoxel.py script
+
+#%% Run linear regression using sckit learn - check preditction
+import seaborn as seabornInstance 
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+df_clinical.describe()
+X = np.array(subjectPosEdges)[mask].reshape(-1,1)
+y = np.array(diffPCL)[mask].reshape(-1,1)
+# set 80% train 20% test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+regressor = LinearRegression(fit_intercept=True, normalize=True)  
+model = regressor.fit(X_train, y_train) #training the algorithm
+predictions = regressor.predict(X_test)
+
+
+## The line / model
+plt.scatter(y_test, predictions)
+plt.xlabel("True Values")
+plt.ylabel("Predictions")
+
+print (f'Score: {model.score(X_test, y_test)}')
+
+plt.scatter(X_train, y_train, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+plt.title('Positive connectome and change in PCL (train set)')
+plt.xlabel('Positive connectome score')
+plt.ylabel('PCL change (end of trt to F/U1) ')
+plt.show()
+
+plt.scatter(X_test, y_test, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+plt.title('Positive connectome and change in PCL (test set)')
+plt.xlabel('Positive connectome score')
+plt.ylabel('PCL change (end of trt to F/U1) ')
+plt.show()
+
+# The coefficients
+print('Coefficients: \n', regressor.coef_)
+# The mean squared error
+print("Mean squared error: %.2f" %mean_squared_error(y_test, y_pred))
+# Explained variance score: 1 is perfect prediction
+print('Variance score: %.2f' % r2_score(y_test, y_pred))
+
+plt.scatter(X_train, y_train,  color='black')
+plt.plot(X_test, y_pred, color='blue', linewidth=3)
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+# prediction is low for now
+#%% Using statsmodel to do linear regression
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+from statsmodels.sandbox.regression.predstd import wls_prediction_std
+df_reg = pd.DataFrame({'pos_edges': np.array(subjectPosEdges)[mask], 'med_cond': df_clinical['med_cond'][mask], 'diffPCL': np.array(diffPCL)[mask]})
+X = df_reg[['pos_edges', 'med_cond']]
+X = sm.add_constant(X)
+y = df_reg['diffPCL']
+df_reg.to_csv('df_reg.csv') # save as csv to run analysis on R --> analysis turned out to be the same
+model = sm.OLS(y, X)
+results = model.fit()
+print(results.summary())
+
+#%% Ridge
+from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LinearRegression
+
+
+lin_reg = LinearRegression(normalize=True)
+
+MSEs = cross_val_score(lin_reg, X, y, scoring='r2', cv=16)
+
+MSEs.mean()
+MSEs.std()
+mean_MSE = np.mean(MSEs)
+
+print(mean_MSE)
+#
+from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import Ridge
+
+alpha = [1e-15, 1e-10, 1e-8, 1e-4, 1e-3,1e-2, 1, 5, 10, 20]
+
+ridge = Ridge()
+
+parameters = {'alpha': [1e-15, 1e-10, 1e-8, 1e-4, 1e-3,1e-2, 1, 5, 10, 20]}
+
+ridge_regressor = GridSearchCV(ridge, parameters,scoring='explained_variance', cv=16)
+
+ridge_regressor.fit(X, y)
+ridge_regressor.best_params_
+ridge_regressor.best_score_
+ridge_regressor.cv_results_['mean_test_score']
+# worse score compared to linear
+
+##
+from sklearn.linear_model import Lasso
+
+lasso = Lasso()
+
+parameters = {'alpha': [1e-15, 1e-10, 1e-8, 1e-4, 1e-3,1e-2, 1, 5, 10, 20]}
+
+lasso_regressor = GridSearchCV(lasso, parameters, scoring='neg_mean_squared_error', cv = 16)
+
+lasso_regressor.fit(X, y)
+
+lasso_regressor.best_params_
+lasso_regressor.best_score_
+# performs worse compared to linear regression
+##
+
+#%% try with leave one out
+import numpy as np
+from sklearn.model_selection import LeaveOneOut
+loo = LeaveOneOut()
+
+#loo.get_n_splits(X)
+loo.get_n_splits(np.array(subject_list[0:18])[mask])
+# chose subject number
+t1 = creatSubCor(subject_list, '1', 'speficTrial_0_trauma.npy')
+
+df_clinical.describe()
+X = np.array(subjectPosEdges[0:18])[mask].reshape(-1,1)
+y = np.array(diffPCL)[mask]#.reshape(-1,1)
+print(loo)
+
+for train_index, test_index in loo.split(np.array(subject_list[0:18])[mask]):
+   # should insert matrx tresholding for all subjects picked and calculating (each iteration) the Sum of Positive edges
+   print(np.array(subject_list)[train_index])
+   print("TRAIN:", train_index, "TEST:", test_index)
+   X_train, X_test = X[train_index], X[test_index]
+   y_train, y_test = y[train_index], y[test_index]
+   slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(X_train,y_train)
+  # print(X_train, X_test, y_train, y_test)
+   print(f'The R value is: {r_value} and the p = {p_value}')
+   # run regression
+   
+   ##
+   
+
+
+#%% Compare groups
+med_group_df = df.filter(['scr_id', 'med_cond'])
+ketSubject = med_group_df.loc[med_group_df['med_cond'] == 1.0]
+
+midSubject = med_group_df.loc[med_group_df['med_cond'] == 0.0]
+print(f'Number of Ketamine subjects is {len(ketSubject)}')
+print(f'Number of midazolam subjects is {len(midSubject)}')
+
+#%% check connectivity between amygdala and hippocampus (92 - 93-95 hippocampus | 228 - 229-232) and see if changes correlates to changes in symptoms
+deltMatAmg_Hippo = deltaMatrix_each[:,[92,93,94,95,228,229,230,231,232],:]# [92,93,94,95,228,229,230,231,232]]
+vecAmg_92_93 = deltMatAmg_Hippo[:,4,232]
+df_clinical['amg92_93'] = vecAmg_92_93[0:18]
+
+mask = ~np.isnan(diffPCL_FU_screen) & ~np.isnan(df_clinical['med_cond'])
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df_clinical['amg92_93'][mask],diffPCL_FU_screen[mask])
+import matplotlib.pyplot as plt
+line = slope*np.array(df_clinical['amg92_93'])[mask]+intercept
+
+# plot the regression model
+plt.title('Positive sum of correlations - 16 valid subjects')
+plt.xlabel('Sum of connectivity')
+plt.ylabel('Change in PCL (end of trt to 30 days)')
+plt.plot(df_clinical['amg92_93'], diffPCL_FU_screen, 'o',np.array(df_clinical['amg92_93'])[mask], line)
+plt.show()
+
+#%% Run the same but now first we z-fisher the matrices before delta them
+deltaMatrix_each = np.array(trauma_2nd_ses2) - np.array(trauma_1st_ses)
+deltaMat_zfisher = []
+for mat2, mat1 in zip(trauma_2nd_ses2, trauma_1st_ses):
+    mat1z = np.arctanh(mat1)
+    mat2z = np.arctanh(mat2)
+    deltaMat = mat2z - mat1z
+    deltaMat_zfisher.append(deltaMat)
+
+deltaMatz = np.array(deltaMat_zfisher)
+
+
+deltMatAmg_Hippo = deltaMatz[:,[92,93,94,95,228,229,230,231,232],:]# [92,93,94,95,228,229,230,231,232]]
+vecAmg_92_93 = deltMatAmg_Hippo[:,4,232]
+df_clinical['amg92_93'] = vecAmg_92_93[0:18]
+
+mask = ~np.isnan(diffPCL_FU_screen) & ~np.isnan(df_clinical['med_cond'])
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df_clinical['amg92_93'][mask],diffPCL_FU_screen[mask])
+import matplotlib.pyplot as plt
+line = slope*np.array(df_clinical['amg92_93'])[mask]+intercept
+
+# plot the regression model
+plt.title('Positive sum of correlations - 16 valid subjects')
+plt.xlabel('Sum of connectivity')
+plt.ylabel('Change in PCL (end of trt to 30 days)')
+plt.plot(df_clinical['amg92_93'], diffPCL_FU_screen, 'o',np.array(df_clinical['amg92_93'])[mask], line)
+plt.show()
+
+#%% Using statsmodel to do linear regression
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+from statsmodels.sandbox.regression.predstd import wls_prediction_std
+#df_reg = pd.DataFrame({'pos_edges': np.array(subjectPosEdges)[mask], 'med_cond': df_clinical['med_cond'][mask], 'diffPCL': np.array(diffPCL)[mask]})
+X = df_clinical['amg92_93'][mask]
+X = sm.add_constant(X)
+y = diffPCL_FU_screen[mask]
+df_reg.to_csv('df_reg.csv') # save as csv to run analysis on R --> analysis turned out to be the same
+model = sm.OLS(y, X)
+results = model.fit()
+print(results.summary())
+#%% lets try this with scikit learn
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression
+# set variables
+X = df_clinical['amg92_93'][mask]
+y = diffPCL_FU_screen[mask]
+
+# run model
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+regressor = LinearRegression(fit_intercept=True, normalize=True)  
+# fit and predict
+model = regressor.fit(X_train, y_train) #training the algorithm
+predictions = regressor.predict(X_test)
+
+
+## plot predictions
+plt.scatter(y_test, predictions)
+plt.xlabel("True Values")
+plt.ylabel("Predictions")
+
+# print score
+print (f'Score: {model.score(X_test, y_test)}')
+

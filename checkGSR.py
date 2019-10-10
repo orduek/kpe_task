@@ -13,6 +13,7 @@ events_file = '/media/Data/PTSD_KPE/condition_files/sub-1223_ses-1.csv'
 
 import numpy as np
 import pandas as pd
+from scipy import signal 
 events = pd.read_csv(events_file, sep=r'\s+')
 
 from biosppy import storage
@@ -25,9 +26,15 @@ a= bioread.read('/media/Data/PTSD_KPE/physio_data/raw/kpe1223/scan_1/kpe1223.1_s
 # choose scripts channel
 b = a.named_channels["GSR100C"].raw_data
 
-c = b[10565:140000]
-out = eda.eda(signal=c, sampling_rate=1000., show=True)
+a_resample = signal.decimate(b, 40)
+plt.plot(b)
+plt.plot(a_resample)
+plt.show()
+c = a_resample[int(7000/40):int(130000/40)]
+out = eda.eda(signal=b, sampling_rate=1000., show=True)
+len(out['filtered'])
 
+plt.plot(out['ts'])
 d = b[130000:252799]
 out = eda.eda(signal=b, sampling_rate=1000., show=True)
 
@@ -55,9 +62,9 @@ import seaborn as sns
 
 # loading BioPack file
 df, sampling_rate = nk.read_acqknowledge('/media/Data/PTSD_KPE/physio_data/raw/kpe1223/scan_2/kpe1223.2_scripts_2017-02-06T08_39_32.acq', return_sampling_rate=True)
-df.plot()
+df[['GSR100C', 'Script']].plot()
 # Process the signals
-bio = nk.bio_process(eda=df["GSR100C"], add=df["Script"], sampling_rate=sampling_rate)
+bio = nk.bio_process(eda=df["GSR100C"], add=df["Script"], sampling_rate=1000.)
 # Plot the processed dataframe, normalizing all variables for viewing purpose
 #%%
 condition_list = ["Trauma", "Relax", "Sad","Relax","Trauma", "Sad","Relax", "Trauma", "Sad"]
@@ -113,3 +120,39 @@ for i in data_all:
 
 sns.lineplot(y="SCR_Magnitude", data = scan1_dat)
 plt.plot(scan3_dat["SCR_Magnitude"])
+
+#%% GSR analysis with cvxEDA
+import os
+os.chdir('/home/or/kpe_task_analysis')
+import cvxEDA
+y = b[7000:130000]
+yn = (y - y.mean()) / y.std()
+Fs = 1000.
+[r, p, t, l, d, e, obj] = cvxEDA.cvxEDA(yn, 1./Fs)
+import pylab as pl
+tm = pl.arange(1., len(y)+1.) / Fs
+pl.hold(True)
+pl.plot(tm, yn)
+pl.plot(tm, r)
+pl.plot(tm, p)
+pl.plot(tm, t)
+pl.show()
+#%% using pypsy
+import Pypsy as ps
+ps.signal.analysis.interimpulse_fit()
+
+
+#%% Using ledapay
+import ledapy
+import scipy.io as sio
+from numpy import array as npa
+import bioread
+a= bioread.read('/media/Data/PTSD_KPE/physio_data/raw/kpe1223/scan_1/kpe1223.1_scripts_2017-01-30T08_17_08.acq')
+sampling_rate = 1000
+# choose scripts channel
+rawdata  = a.named_channels["GSR100C"].raw_data
+
+phasicdata = ledapy.runner.getResult(rawdata, 'phasicdriver', sampling_rate, downsample=40, optimisation=2)
+import matplotlib.pyplot as plt  # note: requires matplotlib, not installed by default
+plt.plot(phasicdata)
+plt.show()

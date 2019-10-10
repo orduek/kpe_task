@@ -14,7 +14,7 @@ To run the script you should call all functions and then run a loop (at bottom o
 
 import bioread
 import os
-
+import pandas as pd
 # loading file
 #a= bioread.read('/media/Drobo/Levy_Lab/Projects/PTSD_KPE/physio_data/raw/kpe1387/scan_1/kpe1387.1_scripts_2018-09-10T08_39_24.acq')
 
@@ -156,7 +156,7 @@ def getFile(subNum, session):
 # now we can iterate through subjects and sessions and create subject data for each
 # for now - lets create tsv files for each subject per each session
 subList = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
-
+subList = ['1468','1480','1499']
 sessionList = [1,2,3,4]  
 
 for sub in subList:

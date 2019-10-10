@@ -90,7 +90,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
+subject_list = ['1223']#,'1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
 # Map field names to individual subject runs.
 
 
@@ -124,7 +124,8 @@ runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
 cont1 = ['Trauma>Sad', 'T', ['trauma', 'sad'], [1, -1]]
 cont2 = ['Trauma>Relax', 'T', ['trauma', 'relax'], [1, -1]]
 cont3 = ['Sad>Relax', 'T', ['sad', 'relax'], [1, -1]]
-contrasts = [cont1, cont2, cont3]
+cont4 = ['Trauma', 'T', ['trauma'], [1,0]]
+contrasts = [cont1, cont2, cont3, cont4]
 #%%
 gunzip = MapNode(Gunzip(), name='gunzip',
                  iterfield=['in_file'])
@@ -241,17 +242,17 @@ import nilearn.plotting
 %matplotlib inline
 import matplotlib.pyplot as plt
 import glob
-anatimg = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1464/anat/sub-1464_space-MNI152NLin2009cAsym_desc-preproc_T1w.nii.gz'
-tImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1464/spmT_00*.nii')
+anatimg = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1223/anat/sub-1223_space-MNI152NLin2009cAsym_desc-preproc_T1w.nii.gz'
+tImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1223/spmT_00*.nii')
 for con_image in tImage:
     nilearn.plotting.plot_glass_brain(con_image,
-                                      display_mode='lyrz', colorbar=True, plot_abs=False, threshold=2.3)
+                                      display_mode='lyrz', colorbar=True, plot_abs=False, threshold=2)
 
-conImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1464/con_00*.nii') 
+conImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1223/con_00*.nii') 
 for con_image in tImage:
     nilearn.plotting.plot_stat_map(nilearn.image.smooth_img(con_image, 6), display_mode='x',
                                       threshold=2.3, bg_img=anatimg, dim=1) #, cut_coords=(-5, 0, 5, 10, 15), dim=1)
-        
+    
 #    nilearn.plotting.plot_glass_brain(nilearn.image.smooth_img(con_image, 6),
 #                                      display_mode='lyrz', colorbar=True, plot_abs=False, threshold=2.3, bg_img=antimg)
 
