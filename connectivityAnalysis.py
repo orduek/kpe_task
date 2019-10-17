@@ -165,6 +165,34 @@ def stratifyTimeseries (events_file, subject_timeseries, subject_id, trial_line)
             trial_type = line[1].trial_type
             specTimeline = timeSeries[onset:(onset+duration),:]
             np.save('subject_%s/speficTrial_%s_%s' %(subject_id,numberRow, trial_type), specTimeline)
+    elif trial_line==1: # read by trial type and create specific timeline for each script
+        traumaOnset = []
+        sadOnset = []
+        relaxOnset = []
+        traumaDuration = []
+        sadDuration = []
+        relaxDuration = []
+        for line in events.iterrows(): # runs trhough the events file, takes the specific files and create timeseries per each
+            print (line)
+            if line[1]['trial_type'].find('trauma')!= -1:
+                print('trauma')
+                traumaOnset.append(round(line[1].onset))
+                traumaDuration.append(round(line[1].duration))
+            elif line[1]['trial_type'].find('sad')!= -1:
+                print('sad')
+                sadOnset.append(round(line[1].onset))
+                sadDuration.append(round(line[1].duration))
+            elif line[1]['trial_type'].find('relax')!= -1:
+                print('relax')
+                relaxOnset.append(round(line[1].onset))
+                relaxDuration.append(round(line[1].duration))
+        trauma_timeline = np.concatenate([timeSeries[traumaOnset[0]:traumaOnset[0] + traumaDuration[0],:], timeSeries[traumaOnset[1]:traumaOnset[1]+ traumaDuration[1],:], timeSeries[traumaOnset[2]:traumaOnset[2]+traumaDuration[2],:]])
+        sad_timeline = np.concatenate([timeSeries[sadOnset[0]:sadOnset[0] + sadDuration[0],:], timeSeries[traumaOnset[1]:sadOnset[1]+ sadDuration[1],:], timeSeries[sadOnset[2]:sadOnset[2]+sadDuration[2],:]])
+        relax_timeline = np.concatenate([timeSeries[relaxOnset[0]:relaxOnset[0] + relaxDuration[0],:], timeSeries[relaxOnset[1]:relaxOnset[1]+ relaxDuration[1],:], timeSeries[relaxOnset[2]:relaxOnset[2]+relaxDuration[2],:]])
+        np.save('subject_%s/traumaTrials' %(subject_id), trauma_timeline)
+        np.save('subject_%s/sadTrials' %(subject_id), sad_timeline)
+        np.save('subject_%s/relaxTrials' %(subject_id), relax_timeline)
+        
     # or read by trial type and create matrix per trial type
     else:
         print ("Need to run by task")
@@ -172,13 +200,19 @@ def stratifyTimeseries (events_file, subject_timeseries, subject_id, trial_line)
 
 #%% Create subject's files per line
 # first - move to relevant folder
-os.chdir('/home/or/kpe_conn/ShenParc/session_1')
+os.chdir('/home/or/kpe_conn/ShenParc/session_4')
 # run loop
+misDat = [] # array that will hold subjects with missing data
 for sub in subject_list:
-    events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-1.csv' %sub
-    timeseries = '/home/or/kpe_conn/ShenParc/session_1/sub-%s_session-1_timeseries.npy' %sub
-    subject_id = sub
-    stratifyTimeseries(events_files,timeseries,sub,0)
+    try:
+        events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-4.csv' %sub
+        timeseries = '/home/or/kpe_conn/ShenParc/session_4/sub-%s_session-4_timeseries.npy' %sub
+        subject_id = sub
+        stratifyTimeseries(events_files,timeseries,sub,1) # set 0 to do by row (i.e. each script) or 1 to do by task (i.e. 3 scripts per condition)
+    except:
+        print(f'Subject {sub} does not have a valid file')
+        misDat.append(sub)
+        
 #%% just plot timeseries of one subject
 sub1 = session1[0]
 sub2 = session1[1]
@@ -216,11 +250,16 @@ def creatSubCor(subject_list, session, fileName):
     correlation_allSubs = []
     for sub in subject_list:
         print(sub)
-        timeseries = np.load('/home/or/kpe_conn/ShenParc/session_%s/subject_%s/%s'%(session,sub,fileName) )
-        correlation_matrix = correlation_measure.fit_transform([timeseries])[0]
+        try:
+            timeseries = np.load('/home/or/kpe_conn/ShenParc/session_%s/subject_%s/%s'%(session,sub,fileName) )
+            correlation_matrix = correlation_measure.fit_transform([timeseries])[0]
+            correlation_allSubs.append(correlation_matrix)
+        except: 
+            print (f'Subject {sub} does not have a valid file')
+        
         # add a line to save correlation matrix as csv file
        # np.savetxt('sub-%s_ses-%s_corrMat.csv'%(sub, session), correlation_matrix, delimiter=',')
-        correlation_allSubs.append(correlation_matrix)
+        
     return correlation_allSubs
 #%% running t-test on all subjects to set treshold of edges
 # create a method to treshold a matrix
@@ -398,6 +437,7 @@ np.savetxt("neg_cor_NBS_adj.csv" , neg_cor, delimiter= ",")
 #%%now lets check if there's a difference between sad and trauma at the second session
 # load the second session first sad script
 sad_corr_subs_ses2 = creatSubCor(subject_list, '2', 'speficTrial_2_sad.npy') # take sad
+sad2_1stSes = creatSubCor(subject_list, '1', 'speficTrial_5_sad.npy')
 # problem with 1403 - run timeseries for this one again
 #time_series_1403 = masker.fit_transform('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1403/ses-2/func/sub-1403_ses-2_task-Memoryb_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz', confounds=removeVars('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1403/ses-2/func/sub-1403_ses-2_task-Memoryb_desc-confounds_regressors.tsv'))
 ## save the new fixed timeseries:
@@ -409,10 +449,12 @@ sad_corr_subs_ses2 = creatSubCor(subject_list, '2', 'speficTrial_2_sad.npy') # t
 trt1_ses2Reshape = np.moveaxis(np.array(trauma_2nd_ses2), 0 , -1)
 # back to comparing sad2 and trauma 2
 # reshape sad2
-sad2Reshape = np.moveaxis(np.array(sad_corr_subs_ses2),0,-1)
-pvalSad2, adjSad2, _ = nbs.nbs_bct(trt1_ses2Reshape, sad2Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+sad2Reshape = np.moveaxis(np.array(sad2_1stSes),0,-1)
+pvalSad2trt2, adjSad2trt2, _ = nbs.nbs_bct(trt2Reshape, sad2Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
 # no significant difference
-
+#%% Compare trauma 2 and sad 2
+sad2_1stSesReshape = np.moveaxis(np.array(sad2_1stSes), 0 ,-1)
+pvalSad2, adjSad2, _ = nbs.nbs_bct(trt1_ses2Reshape, sad2_1stSesReshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
 #%% Lets check difference between trauma 1 and trauma on second session
 pvalTrt1_2 , adjTrt1_2, _ = nbs.nbs_bct(trt1_ses2Reshape, trt1Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
 # almost sig. difference between trauma on first session and on second (0.052) - should check again with more subjects.
@@ -498,6 +540,34 @@ plt.plot(subjectPosEdges_Neg, diffPCL_FU_screen, 'o', np.array(subjectPosEdges_N
 #%% comparing sad1 to sad2
 pvalSad1vs2, adjSad1_vs2, _ = nbs.nbs_bct(sad1Reshape, sad2Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
 # no difference
+
+#%%
+############################# Run same analysis on the whole task (i.e. all three trauma and sad scripts no just the first one) ###########################################################
+trt_ses1 = creatSubCor(subject_list, '1', 'traumaTrials.npy') 
+np.save('trauma_ses_1', trt_ses1)
+trt_ses2 = creatSubCor(subject_list, '2', 'traumaTrials.npy')
+np.save('trauma_ses_2', trt_ses2)
+trt_ses3 = creatSubCor(subject_list, '3', 'traumaTrials.npy')
+trt_ses4 = creatSubCor(subject_list, '4', 'traumaTrials.npy')
+sad_ses1 = creatSubCor(subject_list, '1', 'sadTrials.npy')
+sad_ses2 = creatSubCor(subject_list, '2', 'sadTrials.npy')
+sad_ses3 = creatSubCor(subject_list, '3', 'sadTrials.npy')
+
+# comparing the two networks
+# reshaping the arrays
+trt_ses1_reshape = np.moveaxis(np.array(trt_ses1),0,-1)
+trt_ses2_reshape = np.moveaxis(np.array(trt_ses2),0,-1)
+trt_ses3_reshape = np.moveaxis(np.array(trt_ses3),0,-1)
+sad_ses1_reshape = np.moveaxis(np.array(sad_ses1),0,-1)
+# run nbs
+pvals_sad_trt_ses1, adj_sad_trt_ses1, _ = nbs.nbs_bct(trt_ses1_reshape, sad_ses1_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+
+# compare the two trauma networks
+pvals_trt1_trt2, adj_trt1_trt2, _ = nbs.nbs_bct(trt_ses1_reshape, trt_ses2_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# significant difference between trauma in session 1 and 2. 
+
+# check session 3 also
+pvals_trt1_trt3, adj_trt1_trt3, _ = nbs.nbs_bct(trt_ses1_reshape, trt_ses3_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
 
 
 #%% Now we should look at amygdala and hippocampus as seed and analyze connectivity before and after treatment for these two
