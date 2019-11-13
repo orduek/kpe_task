@@ -83,7 +83,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     return [runinfo], str(out_motion)
 #%%
 
-subject_list = ['1263']#['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
+subject_list = ['1223']#,'1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
 # Map field names to individual subject runs.
 
 
@@ -123,12 +123,6 @@ susan.inputs.inputnode.fwhm = fwhm
 workflow = pe.Workflow(name='firstLevelKPE',base_dir="/home/oad4/scratch60/work/kpeTask")
 
 
-#workflow.run('MultiProc') #, plugin_args={'n_procs': 3}) # doesn't work on local - not enough memory
-#workflow.run() # on local
-
-
-
-
 #%%
 l1_spec = pe.Node(SpecifyModel(
     parameter_source='FSL',
@@ -151,7 +145,7 @@ l1_model = pe.Node(fsl.Level1Design(
 # feat_spec generates an fsf model specification file
 feat_spec = pe.Node(fsl.FEATModel(), name='feat_spec')
 # feat_fit actually runs FEAT
-feat_fit = pe.Node(fsl.FEAT(), name='feat_fit', mem_gb=12)
+feat_fit = pe.Node(fsl.FEAT(), name='feat_fit')#, mem_gb=12)
 
 feat_select = pe.Node(nio.SelectFiles({
     'cope': 'stats/cope1.nii.gz',
@@ -211,6 +205,8 @@ workflow.connect([
 #workflow.write_graph(graph2use='flat')
 
 #%% Run workflow
-workflow.run('MultiProc', plugin_args={'n_procs': 1, 'memory_gb':30}) # doesn't work on local - not enough memory
 
-#workflow.run() # on local
+
+#workflow.run('MultiProc', plugin_args={'n_procs': 10}) # doesn't work on local - not enough memory
+
+workflow.run() # on local

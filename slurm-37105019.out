@@ -1,0 +1,416 @@
+Running script
+190813-12:57:09,545 nipype.workflow INFO:
+	 Workflow firstLevelKPE settings: ['check', 'execution', 'logging', 'monitoring']
+190813-12:57:10,236 nipype.workflow INFO:
+	 Running in parallel.
+190813-12:57:10,260 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 17 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+/gpfs/ysm/project/oad4/conda_envs/py37_dev/lib/python3.6/site-packages/sklearn/externals/joblib/__init__.py:15: DeprecationWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
+  warnings.warn(msg, category=DeprecationWarning)
+190813-12:57:10,575 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1464/selectfiles".
+190813-12:57:10,579 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1403/selectfiles".
+190813-12:57:10,582 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1390/selectfiles".
+190813-12:57:10,588 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1387/selectfiles".
+190813-12:57:10,591 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1369/selectfiles".
+190813-12:57:10,595 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1364/selectfiles".
+190813-12:57:10,600 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1356/selectfiles".
+190813-12:57:10,604 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1351/selectfiles".
+190813-12:57:10,605 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,607 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1343/selectfiles".
+190813-12:57:10,615 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,615 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.selectfiles" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1339/selectfiles".
+190813-12:57:10,618 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,621 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,623 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,632 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,633 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,635 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,638 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,638 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+190813-12:57:10,638 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,646 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,646 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,654 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,657 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,656 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,660 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,664 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,666 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:10,666 nipype.workflow INFO:
+	 [Node] Finished "firstLevelKPE.selectfiles".
+190813-12:57:12,258 nipype.workflow INFO:
+	 [Job 0] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,261 nipype.workflow INFO:
+	 [Job 17] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,263 nipype.workflow INFO:
+	 [Job 34] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,264 nipype.workflow INFO:
+	 [Job 51] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,266 nipype.workflow INFO:
+	 [Job 68] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,268 nipype.workflow INFO:
+	 [Job 85] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,270 nipype.workflow INFO:
+	 [Job 102] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,272 nipype.workflow INFO:
+	 [Job 119] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,274 nipype.workflow INFO:
+	 [Job 136] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,276 nipype.workflow INFO:
+	 [Job 153] Completed (firstLevelKPE.selectfiles).
+190813-12:57:12,281 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 27 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+190813-12:57:12,449 nipype.workflow INFO:
+	 [Job 1] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:12,458 nipype.workflow INFO:
+	 [Job 3] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:12,467 nipype.workflow INFO:
+	 [Job 18] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:12,476 nipype.workflow INFO:
+	 [Job 20] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:12,484 nipype.workflow INFO:
+	 [Job 35] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:12,493 nipype.workflow INFO:
+	 [Job 37] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:12,501 nipype.workflow INFO:
+	 [Job 52] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:12,509 nipype.workflow INFO:
+	 [Job 54] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:12,517 nipype.workflow INFO:
+	 [Job 69] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:12,525 nipype.workflow INFO:
+	 [Job 71] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:14,262 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 22 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+190813-12:57:14,451 nipype.workflow INFO:
+	 [Job 2] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:14,499 nipype.workflow INFO:
+	 [Job 19] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:14,526 nipype.workflow INFO:
+	 [Job 36] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:14,551 nipype.workflow INFO:
+	 [Job 53] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:14,618 nipype.workflow INFO:
+	 [Job 70] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:14,625 nipype.workflow INFO:
+	 [Job 86] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:14,632 nipype.workflow INFO:
+	 [Job 88] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:14,639 nipype.workflow INFO:
+	 [Job 103] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:14,645 nipype.workflow INFO:
+	 [Job 105] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:14,652 nipype.workflow INFO:
+	 [Job 120] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:16,262 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 20 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+190813-12:57:16,388 nipype.workflow INFO:
+	 [Job 4] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:16,446 nipype.workflow INFO:
+	 [Job 21] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:16,482 nipype.workflow INFO:
+	 [Job 38] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:16,541 nipype.workflow INFO:
+	 [Job 55] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:16,582 nipype.workflow INFO:
+	 [Job 72] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:16,602 nipype.workflow INFO:
+	 [Job 87] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:16,624 nipype.workflow INFO:
+	 [Job 104] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:16,642 nipype.workflow INFO:
+	 [Job 121] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:16,649 nipype.workflow INFO:
+	 [Job 122] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:16,656 nipype.workflow INFO:
+	 [Job 137] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:18,263 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 19 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+190813-12:57:18,398 nipype.workflow INFO:
+	 [Job 5] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:18,407 nipype.workflow INFO:
+	 [Job 22] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:18,427 nipype.workflow INFO:
+	 [Job 39] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:18,448 nipype.workflow INFO:
+	 [Job 56] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:18,503 nipype.workflow INFO:
+	 [Job 73] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:18,573 nipype.workflow INFO:
+	 [Job 89] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:18,621 nipype.workflow INFO:
+	 [Job 106] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:18,769 nipype.workflow INFO:
+	 [Job 123] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:18,804 nipype.workflow INFO:
+	 [Job 138] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:18,811 nipype.workflow INFO:
+	 [Job 139] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:20,265 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 18 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+190813-12:57:20,426 nipype.workflow INFO:
+	 [Job 6] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:20,454 nipype.workflow INFO:
+	 [Job 23] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:20,486 nipype.workflow INFO:
+	 [Job 40] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:20,513 nipype.workflow INFO:
+	 [Job 57] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:20,539 nipype.workflow INFO:
+	 [Job 74] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:20,558 nipype.workflow INFO:
+	 [Job 90] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:20,579 nipype.workflow INFO:
+	 [Job 107] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:20,623 nipype.workflow INFO:
+	 [Job 124] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:20,678 nipype.workflow INFO:
+	 [Job 140] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:20,685 nipype.workflow INFO:
+	 [Job 154] Cached (firstLevelKPE.susan_smooth.mask).
+190813-12:57:22,385 nipype.workflow INFO:
+	 [Job 7] Cached (firstLevelKPE.runinfo).
+190813-12:57:22,409 nipype.workflow INFO:
+	 [Job 24] Cached (firstLevelKPE.runinfo).
+190813-12:57:22,434 nipype.workflow INFO:
+	 [Job 41] Cached (firstLevelKPE.runinfo).
+190813-12:57:22,454 nipype.workflow INFO:
+	 [Job 58] Cached (firstLevelKPE.runinfo).
+190813-12:57:22,477 nipype.workflow INFO:
+	 [Job 75] Cached (firstLevelKPE.runinfo).
+190813-12:57:22,516 nipype.workflow INFO:
+	 [Job 91] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:22,545 nipype.workflow INFO:
+	 [Job 108] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:22,571 nipype.workflow INFO:
+	 [Job 125] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:22,609 nipype.workflow INFO:
+	 [Job 141] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:22,645 nipype.workflow INFO:
+	 [Job 155] Cached (firstLevelKPE.susan_smooth.meanfunc2).
+190813-12:57:24,269 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 17 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+190813-12:57:24,493 nipype.workflow INFO:
+	 [Job 8] Cached (firstLevelKPE.l1_spec).
+190813-12:57:24,603 nipype.workflow INFO:
+	 [Job 25] Cached (firstLevelKPE.l1_spec).
+190813-12:57:24,712 nipype.workflow INFO:
+	 [Job 42] Cached (firstLevelKPE.l1_spec).
+190813-12:57:24,854 nipype.workflow INFO:
+	 [Job 59] Cached (firstLevelKPE.l1_spec).
+190813-12:57:24,958 nipype.workflow INFO:
+	 [Job 76] Cached (firstLevelKPE.l1_spec).
+190813-12:57:24,975 nipype.workflow INFO:
+	 [Job 92] Cached (firstLevelKPE.runinfo).
+190813-12:57:24,994 nipype.workflow INFO:
+	 [Job 109] Cached (firstLevelKPE.runinfo).
+190813-12:57:25,33 nipype.workflow INFO:
+	 [Job 126] Cached (firstLevelKPE.runinfo).
+190813-12:57:25,60 nipype.workflow INFO:
+	 [Job 142] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:25,67 nipype.workflow INFO:
+	 [Job 156] Cached (firstLevelKPE.susan_smooth.median).
+190813-12:57:26,888 nipype.workflow INFO:
+	 [Job 9] Cached (firstLevelKPE.l1_model).
+190813-12:57:27,408 nipype.workflow INFO:
+	 [Job 26] Cached (firstLevelKPE.l1_model).
+190813-12:57:27,947 nipype.workflow INFO:
+	 [Job 43] Cached (firstLevelKPE.l1_model).
+190813-12:57:28,486 nipype.workflow INFO:
+	 [Job 60] Cached (firstLevelKPE.l1_model).
+190813-12:57:28,999 nipype.workflow INFO:
+	 [Job 77] Cached (firstLevelKPE.l1_model).
+190813-12:57:29,110 nipype.workflow INFO:
+	 [Job 93] Cached (firstLevelKPE.l1_spec).
+190813-12:57:29,216 nipype.workflow INFO:
+	 [Job 110] Cached (firstLevelKPE.l1_spec).
+190813-12:57:29,333 nipype.workflow INFO:
+	 [Job 127] Cached (firstLevelKPE.l1_spec).
+190813-12:57:29,361 nipype.workflow INFO:
+	 [Job 143] Cached (firstLevelKPE.runinfo).
+190813-12:57:29,419 nipype.workflow INFO:
+	 [Job 157] Cached (firstLevelKPE.susan_smooth.merge).
+190813-12:57:29,428 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 22 jobs ready. Free memory (GB): 453.50/453.50, Free processors: 10/10.
+190813-12:57:29,624 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1464/feat_fit".
+190813-12:57:29,640 nipype.workflow INFO:
+	 [Job 16] Cached (firstLevelKPE.feat_spec).
+190813-12:57:29,714 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1403/feat_fit".
+190813-12:57:29,731 nipype.workflow INFO:
+	 [Job 33] Cached (firstLevelKPE.feat_spec).
+190813-12:57:29,737 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1464/l1_model/run0.fsf
+190813-12:57:29,770 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1390/feat_fit".
+190813-12:57:29,787 nipype.workflow INFO:
+	 [Job 50] Cached (firstLevelKPE.feat_spec).
+190813-12:57:29,844 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1387/feat_fit".
+190813-12:57:29,861 nipype.workflow INFO:
+	 [Job 67] Cached (firstLevelKPE.feat_spec).
+190813-12:57:29,893 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1390/l1_model/run0.fsf
+190813-12:57:29,913 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1369/feat_fit".
+190813-12:57:29,923 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1403/l1_model/run0.fsf
+190813-12:57:29,928 nipype.workflow INFO:
+	 [Job 84] Cached (firstLevelKPE.feat_spec).
+190813-12:57:29,981 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1387/l1_model/run0.fsf
+190813-12:57:30,53 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1369/l1_model/run0.fsf
+190813-12:57:31,430 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 12 jobs ready. Free memory (GB): 393.50/453.50, Free processors: 5/10.
+                     Currently running:
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+190813-12:57:32,102 nipype.workflow INFO:
+	 [Job 94] Cached (firstLevelKPE.l1_model).
+190813-12:57:32,616 nipype.workflow INFO:
+	 [Job 111] Cached (firstLevelKPE.l1_model).
+190813-12:57:33,156 nipype.workflow INFO:
+	 [Job 128] Cached (firstLevelKPE.l1_model).
+190813-12:57:33,270 nipype.workflow INFO:
+	 [Job 144] Cached (firstLevelKPE.l1_spec).
+190813-12:57:33,295 nipype.workflow INFO:
+	 [Job 158] Cached (firstLevelKPE.susan_smooth.multi_inputs).
+190813-12:57:33,429 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 15 jobs ready. Free memory (GB): 393.50/453.50, Free processors: 5/10.
+                     Currently running:
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+190813-12:57:33,585 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1364/feat_fit".
+190813-12:57:33,600 nipype.workflow INFO:
+	 [Job 101] Cached (firstLevelKPE.feat_spec).
+190813-12:57:33,644 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1356/feat_fit".
+190813-12:57:33,658 nipype.workflow INFO:
+	 [Job 118] Cached (firstLevelKPE.feat_spec).
+190813-12:57:33,663 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1364/l1_model/run0.fsf
+190813-12:57:33,695 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1351/feat_fit".
+190813-12:57:33,728 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1356/l1_model/run0.fsf
+190813-12:57:33,791 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1351/l1_model/run0.fsf
+190813-12:57:35,431 nipype.workflow INFO:
+	 [MultiProc] Running 8 tasks, and 10 jobs ready. Free memory (GB): 357.50/453.50, Free processors: 2/10.
+                     Currently running:
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+190813-12:57:35,565 nipype.workflow INFO:
+	 [Job 135] Cached (firstLevelKPE.feat_spec).
+190813-12:57:36,105 nipype.workflow INFO:
+	 [Job 145] Cached (firstLevelKPE.l1_model).
+190813-12:57:37,592 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1343/feat_fit".
+190813-12:57:37,659 nipype.workflow INFO:
+	 [Job 152] Cached (firstLevelKPE.feat_spec).
+190813-12:57:37,690 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1343/l1_model/run0.fsf
+190813-12:57:39,434 nipype.workflow INFO:
+	 [MultiProc] Running 9 tasks, and 8 jobs ready. Free memory (GB): 345.50/453.50, Free processors: 1/10.
+                     Currently running:
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+190813-12:57:39,557 nipype.workflow INFO:
+	 [Job 159] Cached (firstLevelKPE.susan_smooth.smooth).
+190813-12:57:41,646 nipype.workflow INFO:
+	 [Job 160] Cached (firstLevelKPE.runinfo).
+190813-12:57:43,655 nipype.workflow INFO:
+	 [Job 161] Cached (firstLevelKPE.l1_spec).
+190813-12:57:46,76 nipype.workflow INFO:
+	 [Job 162] Cached (firstLevelKPE.l1_model).
+190813-12:57:47,438 nipype.workflow INFO:
+	 [MultiProc] Running 9 tasks, and 9 jobs ready. Free memory (GB): 345.50/453.50, Free processors: 1/10.
+                     Currently running:
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+190813-12:57:47,600 nipype.workflow INFO:
+	 [Node] Setting-up "firstLevelKPE.feat_fit" in "/gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1339/feat_fit".
+190813-12:57:47,738 nipype.workflow INFO:
+	 [Node] Running "feat_fit" ("nipype.interfaces.fsl.model.FEAT"), a CommandLine Interface with command:
+feat /gpfs/ysm/scratch60/oad4/work/kpeTask/firstLevelKPE/_subject_id_1339/l1_model/run0.fsf
+190813-12:57:49,440 nipype.workflow INFO:
+	 [MultiProc] Running 10 tasks, and 8 jobs ready. Free memory (GB): 333.50/453.50, Free processors: 0/10.
+                     Currently running:
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+                       * firstLevelKPE.feat_fit
+slurmstepd: error: *** JOB 37105019 ON c24n01 CANCELLED AT 2019-08-13T22:56:11 DUE TO TIME LIMIT ***

@@ -1,0 +1,28 @@
+The ``--output_space`` option has been deprecated in version 1.4.0. Your selection of spaces "template, fsaverage5" will be inserted at the front of the ``--output-spaces`` argument list. Please update your scripts to use ``--output-spaces``.
+Option "--use-aroma" requires functional images to be resampled to MNI152NLin6Asym space. The argument "MNI152NLin6Asym:res-2" has been automatically added to the list of output spaces (option ``--output-spaces``).
+fMRIPrep failed: Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 316, in _send_procs_to_workers
+    self.procs[jobid].run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/fmriprep/interfaces/reports.py", line 100, in _run_interface
+    return super(SubjectSummary, self)._run_interface(runtime)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/fmriprep/interfaces/reports.py", line 64, in _run_interface
+    segment = self._generate_segment()
+  File "/usr/local/miniconda/lib/python3.7/site-packages/fmriprep/interfaces/reports.py", line 124, in _generate_segment
+    for series in bold_series)
+  File "/usr/local/miniconda/lib/python3.7/collections/__init__.py", line 566, in __init__
+    self.update(*args, **kwds)
+  File "/usr/local/miniconda/lib/python3.7/collections/__init__.py", line 653, in update
+    _count_elements(self, iterable)
+  File "/usr/local/miniconda/lib/python3.7/site-packages/fmriprep/interfaces/reports.py", line 124, in <genexpr>
+    for series in bold_series)
+TypeError: 'NoneType' object is not subscriptable
+
+Preprocessing did not finish successfully. Errors occurred while processing data from participants: 1220 (1). Check the HTML reports for details.
