@@ -24,29 +24,29 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-fmri_img = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/fmriprep/sub-1223/ses-1/func/sub-1223_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'
-confoundFile = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/fmriprep/sub-1223/ses-1/func/sub-1223_ses-1_task-Memory_desc-confounds_regressors.tsv'
+fmri_img = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1223/ses-1/func/sub-1223_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'
+confoundFile = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1223/ses-1/func/sub-1223_ses-1_task-Memory_desc-confounds_regressors.tsv'
 t_r = 1
 events_file = '/media/Data/PTSD_KPE/condition_files/sub-1223_ses-1.csv'
 
-events= pd.read_csv(events_file)
+events= pd.read_csv(events_file, sep = "\t")
 events = events[['trial_type','onset','duration']]
 
 
 from nistats.first_level_model import FirstLevelModel
 first_level_model = FirstLevelModel(t_r,  hrf_model='spm', memory = '/media/Data/work', smoothing_fwhm=6, memory_level=2)
-
+#%%
 
 first_level_model = first_level_model.fit(fmri_img, events=events, confounds=pd.DataFrame(removeVars(confoundFile)))
 design_matrix = first_level_model.design_matrices_[0]
-
+%matplotlib qt
 from nistats.reporting import plot_design_matrix
 plot_design_matrix(design_matrix)
 
 plt.show()
 
 
-
+#%%
 
 def make_localizer_contrasts(design_matrix):
     """ returns a dictionary of four contrasts, given the design matrix"""
@@ -75,7 +75,7 @@ def make_localizer_contrasts(design_matrix):
         
     }
     return contrasts
-
+#%%
 
 contrasts = make_localizer_contrasts(design_matrix)
 plt.figure(figsize=(5, 9))
@@ -100,8 +100,8 @@ def plot_contrast(first_level_model):
         z_map = first_level_model.compute_contrast(
             contrast_val, output_type='z_score')
         plotting.plot_stat_map(
-            z_map, display_mode='z', threshold=2.5, title=contrast_id, axes=ax, 
-            cut_coords=1)
+            z_map, display_mode='z', threshold=2.5, title=contrast_id, axes=ax)#, 
+            #cut_coords=1)
 
 plot_contrast(first_level_model)
 plt.show()

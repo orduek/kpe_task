@@ -18,7 +18,7 @@ import glob
 
 
 # grab all spm T images
-spmTimages = glob.glob('/media/Data/work/datasink/1stLevel/_subject_id_*/spmT_000*.nii')
+spmTimages = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_*/spmT_000*.nii')
 print(spmTimages)
 
 # show all results (all T images per subject)
@@ -28,7 +28,7 @@ for con_image in spmTimages:
 
 
 # grab all contrast images
-con_images = glob.glob('/media/Data/work/datasink/1stLevel/_subject_id_*/con_0001.nii')
+con_images = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_*/con_0001.nii')
 for con_image in con_images:
     nilearn.plotting.plot_glass_brain(nilearn.image.smooth_img(con_image, 8),
                                       display_mode='lyrz', colorbar="w", plot_abs=False)
@@ -36,13 +36,14 @@ for con_image in con_images:
 
 
 #%% Now we grab al the contrasts per subject
-subjectList = ['1063' , '1072', '1206', '1244','1273' ,'1291', '1305', '1340', '1345', '1346']
+subjectList = ['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
 
+copes = ['/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_%s/con_0003.nii' % (sub) for sub in subjectList]
 copes = {}
 ess = {}
 for i in subjectList:
-    con_images = glob.glob('/media/Data/work/datasink/1stLevel/_subject_id_' + i + '/con_000*.nii')
-    ess_images = glob.glob('/media/Data/work/datasink/1stLevel/_subject_id_' + i + '/ess_000*.nii')
+    con_images = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_' + i + '/con_0001.nii')
+    ess_images = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_' + i + '/ess_000*.nii')
     copes[i] = list(con_images)
     ess[i] = list(ess_images)
     print(copes)
@@ -50,8 +51,9 @@ for i in subjectList:
 #%% Smoothing the specific contrast we want (v[3] meaning the 4th contrast)
 smooth_copes = []
 for k,v in copes.items():
-    smooth_cope = nilearn.image.smooth_img(v[2], 8)
-    print(v[2])
+    
+    smooth_cope = nilearn.image.smooth_img(v[0], 1)
+    print(v)
     smooth_copes.append(smooth_cope)
     nilearn.plotting.plot_glass_brain(smooth_cope,
                                       display_mode='lyrz', 
@@ -65,8 +67,9 @@ nilearn.plotting.plot_glass_brain(nilearn.image.mean_img(smooth_copes),
                                   plot_abs=False)
 
 #%% Grabing brain mask for analysis
-brainmasks = glob.glob('/media/Data/FromHPC/output/fmriprep/sub-*/ses-1/func/sub-*_ses-1_task-3_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz')
+brainmasks = glob.glob('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-*/ses-1/func/sub-*_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz')
 print(brainmasks)
+%matplotlib inline
 for mask in brainmasks:
     nilearn.plotting.plot_roi(mask)
     
@@ -78,28 +81,28 @@ nilearn.plotting.plot_roi(group_mask)
 
 #%% Creating concatenated contrast (across subjects) and group mask
 copes_concat = nilearn.image.concat_imgs(smooth_copes, auto_resample=True)
-copes_concat.to_filename("/media/Data/work/custom_modelling_spm/negGainRisk_cope.nii.gz")
+copes_concat.to_filename("/media/Data/work/KPE_SPM/fslRandomize/TraumaVsSad_cope.nii.gz")
 
-#group_mask = nilearn.image.resample_to_img(group_mask, copes_concat, interpolation='nearest')
-#group_mask.to_filename(os.path.join("/media/Data/work/", "custom_modelling_spm", "group_mask.nii.gz"))
+group_mask = nilearn.image.resample_to_img(group_mask, copes_concat, interpolation='nearest')
+group_mask.to_filename(os.path.join("/media/Data/work/KPE_SPM/fslRandomize",  "group_mask.nii.gz"))
 
 #%% Running randomization
 from  nipype.interfaces import fsl
 import nipype.pipeline.engine as pe  # pypeline engine
-randomize = pe.Node(interface = fsl.Randomise(), base_dir = '/media/Data/work/custom_modelling_spm/neg',
+randomize = pe.Node(interface = fsl.Randomise(), base_dir = '/media/Data/work/KPE_SPM/fslRandomize',
                     name = 'randomize')
-randomize.inputs.in_file = '/media/Data/work/custom_modelling_spm/oppnegGainRisk_cope.nii.gz' # choose which file to run permutation test on
-randomize.inputs.mask = '/media/Data/work/custom_modelling_spm/group_mask.nii.gz' # group mask file (was created earlier)
+randomize.inputs.in_file = '/media/Data/work/KPE_SPM/fslRandomize/TraumaVsSad_cope.nii.gz' # choose which file to run permutation test on
+randomize.inputs.mask = '/media/Data/work/KPE_SPM/fslRandomize/group_mask.nii.gz' # group mask file (was created earlier)
 randomize.inputs.one_sample_group_mean = True
 randomize.inputs.tfce = True
 randomize.inputs.vox_p_values = True
-randomize.inputs.num_perm = 1000
+randomize.inputs.num_perm = 200
 #randomize.inputs.var_smooth = 5
 
 randomize.run()
 #%% Graph it
-fig = nilearn.plotting.plot_stat_map('/media/Data/work/custom_modelling_spm/randomize/randomise_tstat1.nii.gz', alpha=0.7 , cut_coords=(0, 45, -7))
-fig.add_contours('/media/Data/work/custom_modelling_spm/randomize/randomise_tfce_corrp_tstat1.nii.gz', levels=[0.95], colors='w')
+fig = nilearn.plotting.plot_stat_map('/media/Data/work/KPE_SPM/fslRandomize/randomize/randomise_tstat1.nii.gz', alpha=0.7 , cut_coords=(0, 45, -7))
+fig.add_contours('/media/Data/work/custom_modelling_spm/randomize/randomise_tfce_corrp_tstat1.nii.gz', levels=[0.99], colors='w')
 #%% opposite image run
 fig = nilearn.plotting.plot_stat_map('/media/Data/work/custom_modelling_spm/neg/randomize/randomise_tstat1.nii.gz', alpha=0.7 , cut_coords=(0, 45, -7))
 fig.add_contours('/media/Data/work/custom_modelling_spm/neg/randomize/randomise_tfce_corrp_tstat1.nii.gz', levels=[0.95], colors='w')
