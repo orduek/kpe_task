@@ -96,7 +96,7 @@ correlation_measure = ConnectivityMeasure(kind='correlation') # can choose parti
 
 #%% load files (image, task events)
 subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464', '1468', '1480', '1499']
-subject_list3 =['008''1223','1263','1293','1307','1322','1339','1343','1356','1364','1369','1387','1390','1403','1464'] # subjects who has 3 scans '1351',
+subject_list3 =['008','1223','1263','1293','1307','1322','1339','1343','1356','1364','1369','1387','1390','1403','1464', '1499'] # subjects who has 3 scans '1351',
 
 def fileList(subjects, session):
     func_files = ['/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-%s/ses-%s/func/sub-%s_ses-%s_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz' % (sub,session,sub,session) for sub in subjects]
@@ -136,7 +136,7 @@ def saveSubjectSeries(subject_list, session, timeSerArray):
         print (f'Saving subject No {sub}')
         np.save(('session_%s/sub-%s_session-%s_timeseries'%(session,sub,session)), arr)
 
-#%% first session
+#%% Seperate session of all subject and save each subjec's time series
 saveSubjectSeries(subject_list, '1', session1)
 saveSubjectSeries(subject_list, '2', session2)
 saveSubjectSeries(subject_list3, '3', session3)
@@ -200,13 +200,13 @@ def stratifyTimeseries (events_file, subject_timeseries, subject_id, trial_line)
 
 #%% Create subject's files per line
 # first - move to relevant folder
-os.chdir('/home/or/kpe_conn/ShenParc/session_4')
+os.chdir('/home/or/kpe_conn/ShenParc/session_3')
 # run loop
 misDat = [] # array that will hold subjects with missing data
 for sub in subject_list:
     try:
-        events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-4.csv' %sub
-        timeseries = '/home/or/kpe_conn/ShenParc/session_4/sub-%s_session-4_timeseries.npy' %sub
+        events_files = '/media/Data/PTSD_KPE/condition_files/sub-%s_ses-3.csv' %sub
+        timeseries = '/home/or/kpe_conn/ShenParc/session_3/sub-%s_session-3_timeseries.npy' %sub
         subject_id = sub
         stratifyTimeseries(events_files,timeseries,sub,1) # set 0 to do by row (i.e. each script) or 1 to do by task (i.e. 3 scripts per condition)
     except:
@@ -392,7 +392,7 @@ empty = np.zeros((268,268))
 empty[227,:] = trauma_1st_thr[227,:]
 empty[:,227] = trauma_1st_thr[:,227]
 # plot
-plotting.plot_connectome(empty, coords, edge_threshold='95%', colorbar=True, black_bg = True, annotate = True, node_color = color_node)
+plotting.plot_connectome(empty, coords, edge_threshold='95%', colorbar=True, black_bg = False, annotate = True, node_color = color_node)
 
 # plot in browser
 view = plotting.view_connectome(empty, coords, threshold='90%') 
@@ -469,11 +469,15 @@ trt1_vs2_tresh.max()
 trt1_vs2_pos = np.array(trt1_vs2_tresh)
 trt1_vs2_pos[trt1_vs2_pos<0] = 0
 trt1_vs2_pos.min()
-sumPosTrt1vs2.sum()
+#sumPosTrt1vs2.sum()
 
 trt1_vs2_neg = np.array(trt1_vs2_tresh)
 trt1_vs2_neg[trt1_vs2_neg >= 0] = 0
 trt1_vs2_neg.min()
+
+# save pos and neg thr correlation matrices
+np.savetxt("pos_corTrauma_1vs2_NBS_adj.csv" , trt1_vs2_pos, delimiter= ",")
+np.savetxt("neg_corTrauma_1vs2_NBS_adj.csv" , trt1_vs2_neg, delimiter= ",")
 #%% Function that takes original matrices and returns sum of positive and negative correlations and delta matrix (if needed)
 # need to do it for each subject
 def sumPosEdges(matrix1, matrix2, adj):
@@ -492,51 +496,56 @@ subjectPosEdges = []
 for i,n in enumerate(subject_list):
     print(i)
     print(n)
-    subjectPosEdges.append(sumPosEdges(trauma_1st_ses[i], trauma_2nd_ses2[i], adjTrt1_2)[0]) # take only positive
+    subjectPosEdges.append(sumPosEdges(trt_ses1[i], trt_ses2[i], adj_trt1_trt2)[0]) # take only positive
     
 subjectPosEdges_Neg = []
 for i,n in enumerate(subject_list):
     print(i)
     print(n)
-    subjectPosEdges_Neg.append(sumPosEdges(trauma_1st_ses[i], trauma_2nd_ses2[i], adjTrt1_2)[1]) # take only negative
+    subjectPosEdges_Neg.append(sumPosEdges(trt_ses1[i], trt_ses2[i], adj_trt1_trt2)[1]) # take only negative
 
 #%% Compare different groups - take group label from database
 import pandas as pd
 from pandas import ExcelWriter
 from pandas import ExcelFile
-
-df = pd.read_excel('/home/or/Documents/kpe_analyses/KPEIHR0009_data_all_scored.xlsx') #, sheetname='KPE DATA')
+df = pd.read_csv('/home/or/kpe_task_analysis/fullPCL.csv')
+df['30Vsscreen'] = df['30_days'] - df['screening']
+df['30Vs1'] = df['30_days'] - df['visit_1']
+df['90VsScreen'] = df['90_days'] - df['screening']
+df['90Vs1'] = df['90_days'] - df['visit_1']
+df['7toScreen'] = df['visit_7'] - df['screening']
+df['sumPos'] = subjectPosEdges
+df['sumNeg'] = subjectPosEdges_Neg
+df.to_csv('clinicalPCL.csv')
+#df = pd.read_excel('/home/or/Documents/kpe_analyses/KPEIHR0009_data_all_scored.xlsx') #, sheetname='KPE DATA')
 # take only what we want
-df_clinical = df.filter(['scr_id','med_cond','caps5_totals','pcl5_total_screen','pcl5_total_visit1','pcl5_total_visit7','pcl5_total_followup1','pcl5_total_followup2','cadss_total', 'bdi_total_screen', 'bdi_total_visit1', 'bdi_total_visit7', 'bdi_total_followup1', 'bdi_total_followup2']) #, (like='bdi_total')]
+#df_clinical = df.filter(['scr_id','med_cond','caps5_totals','pcl5_total_screen','pcl5_total_visit1','pcl5_total_visit7','pcl5_total_followup1','pcl5_total_followup2','cadss_total', 'bdi_total_screen', 'bdi_total_visit1', 'bdi_total_visit7', 'bdi_total_followup1', 'bdi_total_followup2']) #, (like='bdi_total')]
 #df_clinical_no008 = df_clinical[df_clinical.scr_id != 'KPE008']
 # so simple linear regression - take tresholded positive edges and sum them up
-scipy.stats.pearsonr(subjectPosEdges, df_clinical['pcl5_total_visit1'])
-# check the difference
-diffPCL = df_clinical['pcl5_total_followup1'] - df_clinical['pcl5_total_visit7']
-diffPCL_FU_screen = df_clinical['pcl5_total_followup1'] - df_clinical['pcl5_total_visit1']
-diffPCL[2] = 0
+mask = ~np.isnan(subjectPosEdges) & ~np.isnan(df['30Vsscreen']) & ~np.isnan(df['med_cond'])
+print(f'Number of valid subjects is: {sum(mask)}')
 #np.savetxt('diffPCL_FU1.csv', diffPCL, delimiter=',')
 # check differences in pcl from FU1 to Visit7 - compare with trauma positive edges
-scipy.stats.pearsonr(subjectPosEdges[mask], diffPCL[mask])
+scipy.stats.pearsonr(np.array(subjectPosEdges)[mask], df['30Vsscreen'][mask])
 
-mask = ~np.isnan(subjectPosEdges[0:18]) & ~np.isnan(diffPCL) & ~np.isnan(df_clinical['med_cond'])
-slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(np.array(subjectPosEdges[0:18])[mask],diffPCL[mask])
+
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(np.array(subjectPosEdges)[mask],df['30Vsscreen'][mask])
 import matplotlib.pyplot as plt
 line = slope*np.array(subjectPosEdges)[mask]+intercept
 
 # plot the regression model
-plt.title('Positive sum of correlations - 16 valid subjects')
+plt.title(f'Positive sum of correlations - {sum(mask)} valid subjects')
 plt.xlabel('Sum of connectivity')
 plt.ylabel('Change in PCL (end of trt to 30 days)')
-plt.plot(subjectPosEdges, diffPCL, 'o', np.array(subjectPosEdges)[mask], line)
+plt.plot(subjectPosEdges, df['7toScreen'], 'o', np.array(subjectPosEdges)[mask], line)
 plt.show()
 
 # lets check the negative matrix
-mask = ~np.isnan(subjectPosEdges_Neg) & ~np.isnan(diffPCL) & np.isnan(df_clinical['med_cond'])
-slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(np.array(subjectPosEdges_Neg)[mask],diffPCL_FU_screen[mask])
+mask = ~np.isnan(subjectPosEdges_Neg) & ~np.isnan(df['30Vs1']) & ~np.isnan(df['med_cond'])
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(np.array(subjectPosEdges_Neg)[mask],df['30Vs1'][mask])
 import matplotlib.pyplot as plt
 line = slope*np.array(subjectPosEdges_Neg)[mask]+intercept
-plt.plot(subjectPosEdges_Neg, diffPCL_FU_screen, 'o', np.array(subjectPosEdges_Neg)[mask], line)
+plt.plot(subjectPosEdges_Neg, df['30Vs1'], 'o', np.array(subjectPosEdges_Neg)[mask], line)
 #%% comparing sad1 to sad2
 pvalSad1vs2, adjSad1_vs2, _ = nbs.nbs_bct(sad1Reshape, sad2Reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
 # no difference
@@ -716,90 +725,63 @@ for train_index, test_index in loo.split(np.array(subject_list[0:18])[mask]):
 
 
 #%% Compare groups
-med_group_df = df.filter(['scr_id', 'med_cond'])
-ketSubject = med_group_df.loc[med_group_df['med_cond'] == 1.0]
-
-midSubject = med_group_df.loc[med_group_df['med_cond'] == 0.0]
-print(f'Number of Ketamine subjects is {len(ketSubject)}')
-print(f'Number of midazolam subjects is {len(midSubject)}')
-
-#%% check connectivity between amygdala and hippocampus (92 - 93-95 hippocampus | 228 - 229-232) and see if changes correlates to changes in symptoms
-deltMatAmg_Hippo = deltaMatrix_each[:,[92,93,94,95,228,229,230,231,232],:]# [92,93,94,95,228,229,230,231,232]]
-vecAmg_92_93 = deltMatAmg_Hippo[:,4,232]
-df_clinical['amg92_93'] = vecAmg_92_93[0:18]
-
-mask = ~np.isnan(diffPCL_FU_screen) & ~np.isnan(df_clinical['med_cond'])
-slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df_clinical['amg92_93'][mask],diffPCL_FU_screen[mask])
-import matplotlib.pyplot as plt
-line = slope*np.array(df_clinical['amg92_93'])[mask]+intercept
-
-# plot the regression model
-plt.title('Positive sum of correlations - 16 valid subjects')
-plt.xlabel('Sum of connectivity')
-plt.ylabel('Change in PCL (end of trt to 30 days)')
-plt.plot(df_clinical['amg92_93'], diffPCL_FU_screen, 'o',np.array(df_clinical['amg92_93'])[mask], line)
-plt.show()
-
-#%% Run the same but now first we z-fisher the matrices before delta them
-deltaMatrix_each = np.array(trauma_2nd_ses2) - np.array(trauma_1st_ses)
-deltaMat_zfisher = []
-for mat2, mat1 in zip(trauma_2nd_ses2, trauma_1st_ses):
-    mat1z = np.arctanh(mat1)
-    mat2z = np.arctanh(mat2)
-    deltaMat = mat2z - mat1z
-    deltaMat_zfisher.append(deltaMat)
-
-deltaMatz = np.array(deltaMat_zfisher)
+med_cond = df.med_cond
+# using the vector to create specific subject lists
+ketSubject = np.array(subject_list)[med_cond==1]
+midSubject = np.array(subject_list)[med_cond==0]
 
 
-deltMatAmg_Hippo = deltaMatz[:,[92,93,94,95,228,229,230,231,232],:]# [92,93,94,95,228,229,230,231,232]]
-vecAmg_92_93 = deltMatAmg_Hippo[:,4,232]
-df_clinical['amg92_93'] = vecAmg_92_93[0:18]
+trt_ses1_ketamine = creatSubCor(ketSubject, '1', 'traumaTrials.npy') 
+np.save('trauma_ses_1_ketamine', trt_ses1_ketamine)
+trt_ses2_ketamine = creatSubCor(ketSubject, '2', 'traumaTrials.npy')
+np.save('trauma_ses_2_ketamine', trt_ses2_ketamine)
+trt_ses3_ketamine = creatSubCor(ketSubject, '3', 'traumaTrials.npy')
 
-mask = ~np.isnan(diffPCL_FU_screen) & ~np.isnan(df_clinical['med_cond'])
-slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df_clinical['amg92_93'][mask],diffPCL_FU_screen[mask])
-import matplotlib.pyplot as plt
-line = slope*np.array(df_clinical['amg92_93'])[mask]+intercept
+sad_ses1_ketamine = creatSubCor(ketSubject, '1', 'sadTrials.npy')
+sad_ses2_ketamine = creatSubCor(ketSubject, '2', 'sadTrials.npy')
+sad_ses3_ketamine = creatSubCor(ketSubject, '3', 'sadTrials.npy')
 
-# plot the regression model
-plt.title('Positive sum of correlations - 16 valid subjects')
-plt.xlabel('Sum of connectivity')
-plt.ylabel('Change in PCL (end of trt to 30 days)')
-plt.plot(df_clinical['amg92_93'], diffPCL_FU_screen, 'o',np.array(df_clinical['amg92_93'])[mask], line)
-plt.show()
+# Midazolam
+trt_ses1_mid= creatSubCor(midSubject, '1', 'traumaTrials.npy') 
+trt_ses2_mid= creatSubCor(midSubject, '2', 'traumaTrials.npy')
+trt_ses3_mid= creatSubCor(midSubject, '3', 'traumaTrials.npy')
+sad_ses1_mid= creatSubCor(midSubject, '1', 'sadTrials.npy')
+sad_ses2_mid= creatSubCor(midSubject, '2', 'sadTrials.npy')
+trt_ses1M_reshape = np.moveaxis(np.array(trt_ses1_mid),0,-1)
+trt_ses2M_reshape = np.moveaxis(np.array(trt_ses2_mid),0,-1)
+trt_ses3M_reshape = np.moveaxis(np.array(trt_ses3_mid),0,-1)
+sad_ses1M_reshape = np.moveaxis(np.array(sad_ses1_mid),0,-1)
+# comparing the two networks
+# reshaping the arrays
+trt_ses1K_reshape = np.moveaxis(np.array(trt_ses1_ketamine),0,-1)
+trt_ses2K_reshape = np.moveaxis(np.array(trt_ses2_ketamine),0,-1)
+trt_ses3K_reshape = np.moveaxis(np.array(trt_ses3_ketamine),0,-1)
+sad_ses1K_reshape = np.moveaxis(np.array(sad_ses1_ketamine),0,-1)
+sad_ses2K_reshape = np.moveaxis(np.array(sad_ses2_ketamine),0,-1)
 
-#%% Using statsmodel to do linear regression
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
-from statsmodels.sandbox.regression.predstd import wls_prediction_std
-#df_reg = pd.DataFrame({'pos_edges': np.array(subjectPosEdges)[mask], 'med_cond': df_clinical['med_cond'][mask], 'diffPCL': np.array(diffPCL)[mask]})
-X = df_clinical['amg92_93'][mask]
-X = sm.add_constant(X)
-y = diffPCL_FU_screen[mask]
-df_reg.to_csv('df_reg.csv') # save as csv to run analysis on R --> analysis turned out to be the same
-model = sm.OLS(y, X)
-results = model.fit()
-print(results.summary())
-#%% lets try this with scikit learn
-from sklearn.model_selection import train_test_split 
-from sklearn.linear_model import LinearRegression
-# set variables
-X = df_clinical['amg92_93'][mask]
-y = diffPCL_FU_screen[mask]
+# check session 3 also
+pvals_ketTrt1_2, adj_Ktrt1_trt2, _ = nbs.nbs_bct(trt_ses1K_reshape, trt_ses2K_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# Finding a difference between trauma in session 1 and two in the ketamine group.
+# lets check the midazolam
 
-# run model
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-regressor = LinearRegression(fit_intercept=True, normalize=True)  
-# fit and predict
-model = regressor.fit(X_train, y_train) #training the algorithm
-predictions = regressor.predict(X_test)
+pvals_MidTrt1_2, adj_Midtrt1_trt2, _ = nbs.nbs_bct(trt_ses1M_reshape, trt_ses2M_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# no difference between the two
 
+# lets test sad
+pvals_ketTrt1_Sad1, adj_Ktrt1_Sad1, _ = nbs.nbs_bct(trt_ses1K_reshape, sad_ses1K_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# p=0.16 almost
+pvals_ketTrt2_Sad2, adj_Ktrt2_Sad2, _ = nbs.nbs_bct(trt_ses2K_reshape, sad_ses2K_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# no diff at all
 
-## plot predictions
-plt.scatter(y_test, predictions)
-plt.xlabel("True Values")
-plt.ylabel("Predictions")
+#lets check midazolam
+pvals_midTrt1_Sad1, adj_Midtrt1_Sad1, _ = nbs.nbs_bct(trt_ses1M_reshape, sad_ses1M_reshape, thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# p = 0.29
 
-# print score
-print (f'Score: {model.score(X_test, y_test)}')
+# comparing Mid and Ket on each session
+pvals_midKet_trt1, adj_MidKettrt1, _ = nbs.nbs_bct(trt_ses1M_reshape, trt_ses1K_reshape[:,:,0:10], thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# not different (as expected)
 
+pvals_midKet_trt2, adj_MidKettrt2, _ = nbs.nbs_bct(trt_ses2M_reshape, trt_ses2K_reshape[:,:,1:11], thresh=2.5, tail='both',k=500, paired=True, verbose = True)
+# not different
+
+#choose random subjetct

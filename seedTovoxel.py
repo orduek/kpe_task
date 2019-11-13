@@ -130,7 +130,9 @@ def eventfList(subjects, session):
     confound_files = ['/media/Data/PTSD_KPE/condition_files/sub-%s_ses-%s.csv' % (sub,session) for sub in subjects]
     return confound_files
 
-#%% run seed based on coords for all subjects
+#%% run seed based on coords for all subjects - This is the actual code to run all of the above - you can use only this code (and the functions associated with it)
+## to run seed based connectivity. Set session, script name (or task name) and seed name.
+    
 #######################################################
 session = '1' # set the session number
 script = 'trauma' # set the specific script

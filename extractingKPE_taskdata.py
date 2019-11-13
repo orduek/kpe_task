@@ -52,7 +52,7 @@ def kpeTaskDat(filename):
     scriptTime = lookZero(b, diff)
     duration = []
     #condition = []
-    for i in range(len(scriptTime[0])): # run through the set
+    for i in range(len(scriptTime[0])): # run through the set 1
         duration.append(scriptTime[1][i] - scriptTime[0][i]) # create duration
     events= pd.DataFrame({'onset':scriptTime[0], 'duration':duration})
     return events
@@ -156,8 +156,8 @@ def getFile(subNum, session):
 # now we can iterate through subjects and sessions and create subject data for each
 # for now - lets create tsv files for each subject per each session
 subList = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
-subList = ['1468','1480','1499']
-sessionList = [1,2,3,4]  
+subList = ['1499']
+sessionList = [1,2,3]  
 
 for sub in subList:
     subNum = sub
