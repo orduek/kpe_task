@@ -58,14 +58,20 @@ confound_filename = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmri
 
 
 brain_time_series = brain_masker.fit_transform(func_filename, confounds=removeVars(confound_filename))
+np.save('brainSeries', brain_time_series)
+
+
+arr = np.load('brainSeries.npy', mmap_mode='r')
 #ward_time_series = ward.fit_transform(func_filename, confounds=confound_filename)
 # create correlation matrix
 from nilearn.connectome import ConnectivityMeasure
 #correlation_measure = ConnectivityMeasure(kind='partial correlation') # can choose partial - it might be better
 correlation_measure = ConnectivityMeasure(kind='correlation') # can choose partial - it might be better      
-correlation_matrix = correlation_measure.fit_transform([brain_time_series])
+correlation_matrix = correlation_measure.fit_transform([arr])[0]
 
-
+# run a loop 
+brainSeries = np.reshape(arr, (brain_time_series.shape[1], brain_time_series.shape[0]))
+cor = np.corrcoef(brainSeries)
 #%%
 
 ward_labels_img = ward.labels_img_

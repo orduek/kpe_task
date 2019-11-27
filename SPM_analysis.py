@@ -35,10 +35,9 @@ from nipype.interfaces.matlab import MatlabCommand
 MatlabCommand.set_default_paths('/home/or/Downloads/spm12/') # set default SPM12 path in my computer. 
 
 data_dir = os.path.abspath('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep')
-output_dir = '/media/Data/work/kpeTask'
+output_dir = '/media/Data/work/kpeTask_2'
 fwhm = 6
 tr = 1
-#%%
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file,
                      regressors_names=None,
@@ -90,9 +89,9 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['1223']#,'1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
+subject_list = ['1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464', '1480','1499']
 # Map field names to individual subject runs.
-
+session = '2' # choose session
 
 infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
                                             ],
@@ -101,10 +100,10 @@ infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
 infosource.iterables = [('subject_id', subject_list)]
 
 # SelectFiles - to grab the data (alternativ to DataGrabber)
-templates = {'func': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
-             'mask': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
-             'regressors': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_desc-confounds_regressors.tsv',
-             'events': '/media/Data/PTSD_KPE/condition_files/sub-{subject_id}_ses-1.csv'}
+templates = {'func': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
+             'mask': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
+             'regressors': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
+             'events': '/media/Data/PTSD_KPE/condition_files/sub-{subject_id}_ses-' + session + '.csv'}
 selectfiles = pe.Node(nio.SelectFiles(templates,
                                base_directory=data_dir),
                    name="selectfiles")
@@ -124,8 +123,9 @@ runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
 cont1 = ['Trauma>Sad', 'T', ['trauma', 'sad'], [1, -1]]
 cont2 = ['Trauma>Relax', 'T', ['trauma', 'relax'], [1, -1]]
 cont3 = ['Sad>Relax', 'T', ['sad', 'relax'], [1, -1]]
-cont4 = ['Trauma', 'T', ['trauma'], [1,0]]
-contrasts = [cont1, cont2, cont3, cont4]
+cont4 = ['Trauma', 'T', ['trauma'], [1]]
+cont5 = ['Sad', 'T', ['sad'], [1]]
+contrasts = [cont1, cont2, cont3, cont4, cont5]
 #%%
 gunzip = MapNode(Gunzip(), name='gunzip',
                  iterfield=['in_file'])
@@ -167,7 +167,7 @@ level1design.inputs.model_serial_correlations = 'AR(1)'
 
 #######################################################################################################################
 # Initiation of a workflow
-wfSPM = Workflow(name="l1spm", base_dir="/media/Data/work/KPE_SPM")
+wfSPM = Workflow(name="l1spm", base_dir="/media/Data/work/KPE_SPM_ses-2")
 wfSPM.connect([
         (infosource, selectfiles, [('subject_id', 'subject_id')]),
         (selectfiles, runinfo, [('events','events_file'),('regressors','regressors_file')]),
@@ -212,7 +212,7 @@ wfSPM.connect([
 #%% Adding data sink
 ########################################################################
 # Datasink
-datasink = Node(nio.DataSink(base_directory='/media/Data/work/KPE_SPM/Sink'),
+datasink = Node(nio.DataSink(base_directory='/media/Data/work/KPE_SPM/Sink_ses-2'),
                                          name="datasink")
                        
 
@@ -235,20 +235,22 @@ Image(filename="/workflow_graph.png")
 Image(filename = '/media/Data/work/KPE_SPM/l1spm/graph_detailed.png')
 wfSPM.write_graph(graph2use='flat')
 #%%
-wfSPM.run('MultiProc', plugin_args={'n_procs': 3})
+#[]
+
+wfSPM.run('MultiProc', plugin_args={'n_procs': 5})
 #%% simple graph
 import nilearn.plotting
 %matplotlib qt 
 %matplotlib inline
 import matplotlib.pyplot as plt
 import glob
-anatimg = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1223/anat/sub-1223_space-MNI152NLin2009cAsym_desc-preproc_T1w.nii.gz'
-tImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1223/spmT_00*.nii')
+anatimg = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1263/anat/sub-1263_space-MNI152NLin2009cAsym_desc-preproc_T1w.nii.gz'
+tImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1263/spmT_00*.nii')
 for con_image in tImage:
     nilearn.plotting.plot_glass_brain(con_image,
                                       display_mode='lyrz', colorbar=True, plot_abs=False, threshold=2)
 
-conImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1223/con_00*.nii') 
+conImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1263/con_00*.nii') 
 for con_image in tImage:
     nilearn.plotting.plot_stat_map(nilearn.image.smooth_img(con_image, 6), display_mode='x',
                                       threshold=2.3, bg_img=anatimg, dim=1) #, cut_coords=(-5, 0, 5, 10, 15), dim=1)
@@ -272,11 +274,11 @@ cont1 = ['Group', 'T', ['mean'], [1]]
 level2conestimate.inputs.contrasts = [cont1]
 
 # Which contrasts to use for the 2nd-level analysis
-contrast_list = ['con_0001', 'con_0002', 'con_0003']
+contrast_list = ['con_0001', 'con_0002', 'con_0003', 'con_0004', 'con_0005']
 
 # Threshold - thresholds contrasts
 level2thresh = Node(spm.Threshold(contrast_index=1,
-                              use_topo_fdr=False,
+                              use_topo_fdr=True,
                               use_fwe_correction=True, # here we can use fwe or fdr
                               extent_threshold=10,
                               height_threshold= 0.005,
@@ -290,7 +292,8 @@ infosource = Node(util.IdentityInterface(fields=['contrast_id']),
 infosource.iterables = [('contrast_id', contrast_list)]
 
 # SelectFiles - to grab the data (alternative to DataGrabber)
-templates = {'cons': opj('/media/Data/work/KPE_SPM/Sink/1stLevel/_sub*/', 
+
+templates = {'cons': opj('/media/Data/work/KPE_SPM/Sink_ses-2/1stLevel/_sub*/', 
                          '{contrast_id}.nii')}
 selectfiles = Node(SelectFiles(templates,
                                base_directory='/media/Data/work',
@@ -339,6 +342,18 @@ conImages = glob.glob('/media/Data/work/KPE_SPM/Sink/2ndLevel/_contrast_id_con_0
 for conImage in conImages:
     plot_glass_brain(conImage,colorbar=True,
      threshold=2.3, display_mode='lyrz', black_bg=True)#, vmax=10);      
+    
+plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-1/2ndLevel/_contrast_id_con_0001/spmT_0001_thr.nii', threshold = 2.3)
+plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-1/2ndLevel/_contrast_id_con_0004/spmT_0001_thr.nii', threshold = 2.3)
+plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-1/2ndLevel/_contrast_id_con_0005/spmT_0001_thr.nii', threshold = 2.3)
+
+### 2 session
+plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001_thr.nii', threshold = 2.3)
+plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0005/spmT_0001_thr.nii', threshold = 2.3)
+plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0004/spmT_0001_thr.nii', threshold = 2.3)
+%matplotlib qt
+nilearn.plotting.plot_stat_map(nilearn.image.smooth_img('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001_thr.nii', 3), display_mode='x',
+                                      threshold=2.3, bg_img=anatimg, dim=1)
 #%% Stat maps
 for con_image in conImages:
     nilearn.plotting.plot_stat_map(con_image, display_mode='ortho',
@@ -352,14 +367,14 @@ from nilearn import datasets
 fsaverage = datasets.fetch_surf_fsaverage()
 from nilearn import surface
 
-texture = surface.vol_to_surf(conImages[2], fsaverage.pial_right)
+texture = surface.vol_to_surf('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001_thr.nii', fsaverage.pial_right)
 from nilearn import plotting
 a = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1263/ses-1/func/sub-1263_ses-1_task-Memory_space-fsaverage5_hemi-R.func.gii'
 plotting.plot_surf_stat_map(fsaverage.infl_right, texture, hemi='right',
                             title='Surface right hemisphere', colorbar=True,
                             threshold=0., bg_map=a)#fsaverage.sulc_right)
 big_fsaverage = datasets.fetch_surf_fsaverage('fsaverage')
-fmri_img = nib.load(conImages[2])
+fmri_img = nib.load('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001_thr.nii')
 big_texture_right = surface.vol_to_surf(fmri_img, big_fsaverage.pial_right)
 %matplotlib inline
 
