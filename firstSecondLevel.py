@@ -157,7 +157,7 @@ infosource.iterables = [('subject_id', subject_list)]
 
 # SelectFiles - to grab the data (alternativ to DataGrabber)
 <<<<<<< HEAD
-templates = {'func': '/home/oad4/scratch60/KPE_fmriPrep_preproc/kpeOutput/fmriprep/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
+_templates = {'func': '/home/oad4/scratch60/KPE_fmriPrep_preproc/kpeOutput/fmriprep/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
              'mask': '/home/oad4/scratch60/KPE_fmriPrep_preproc/kpeOutput/fmriprep/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
              'regressors': '/home/oad4/scratch60/KPE_fmriPrep_preproc/kpeOutput/fmriprep/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_desc-confounds_regressors.tsv',
              'events': '/home/oad4/scratch60/condition_files/sub-{subject_id}_ses-1.csv'}

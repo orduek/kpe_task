@@ -51,6 +51,7 @@ data_dir = os.path.abspath('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivativ
 output_dir = '/media/Data/work/kpeTask'
 fwhm = 6
 tr = 1
+removeTR = 4#Number of TR's to remove before initiating the analysis
 #%%
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file,
@@ -90,7 +91,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     for condition in runinfo.conditions:
         event = events[events.trial_type.str.match(condition)]
 
-        runinfo.onsets.append(np.round(event.onset.values, 3).tolist())
+        runinfo.onsets.append(np.round(event.onset.values-removeTR, 3).tolist()) # added -removeTR to align to the onsets after removing X number of TRs from the scan
         runinfo.durations.append(np.round(event.duration.values, 3).tolist())
         if 'amplitudes' in events.columns:
             runinfo.amplitudes.append(np.round(event.amplitudes.values, 3).tolist())
@@ -103,7 +104,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list =['1253'] # ['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
+subject_list =['1339', '1343'] # ['1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
 # Map field names to individual subject runs.
 
 
@@ -178,6 +179,7 @@ modelgen = pe.MapNode(
 Use :class:`nipype.interfaces.fsl.FILMGLS` to estimate a model specified by a
 mat file and a functional run
 """
+
 
 modelestimate = pe.MapNode(
     interface=fsl.FILMGLS(smooth_autocorr=True, mask_size=5, threshold=1000),

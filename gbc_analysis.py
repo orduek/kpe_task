@@ -11,13 +11,13 @@ from nilearn import input_data
 import pandas as pd
 import numpy as np
 
-mask_file = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-008/ses-1/func/sub-008_ses-1_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz'#set a file to create the same voxel map for all subjects
+mask_file = '/home/oad4/scratch60/output_kpe1480_1468/fmriprep/sub-1468/ses-1/func/sub-1468_ses-1_task-rest_space-MNI152NLin6Asym_desc-brain_mask.nii.gz'#set a file to create the same voxel map for all subjects
 
 brain_masker = input_data.NiftiMasker(mask_img = mask_file,
         smoothing_fwhm=4,
         detrend=True, standardize=True,
         low_pass=0.1, high_pass=0.01, t_r=1.,
-        memory='/media/Data/nilearn', memory_level=1, verbose=2)
+        memory='/home/oad4/scratch60/nilearn', memory_level=1, verbose=2)
 
 #from nilearn.regions import Parcellations
 #ward = Parcellations(method='ward', n_parcels=1000,
@@ -53,8 +53,8 @@ def removeVars (confoundFile):
 
 #%% run and create voxelwise timeseries
     
-func_filename =  '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-008/ses-2/func/sub-008_ses-2_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'
-confound_filename = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-008/ses-2/func/sub-008_ses-2_task-rest_desc-confounds_regressors.tsv'
+func_filename =  '/home/oad4/scratch60/output_kpe1480_1468/fmriprep/sub-1468/ses-1/func/sub-1468_ses-1_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'
+confound_filename = '/home/oad4/scratch60/output_kpe1480_1468/fmriprep/sub-1468/ses-1/func/sub-1468_ses-1_task-rest_desc-confounds_regressors.tsv'
 
 
 brain_time_series = brain_masker.fit_transform(func_filename, confounds=removeVars(confound_filename))
@@ -63,8 +63,9 @@ brain_time_series = brain_masker.fit_transform(func_filename, confounds=removeVa
 from nilearn.connectome import ConnectivityMeasure
 #correlation_measure = ConnectivityMeasure(kind='partial correlation') # can choose partial - it might be better
 correlation_measure = ConnectivityMeasure(kind='correlation') # can choose partial - it might be better      
-correlation_matrix = correlation_measure.fit_transform([brain_time_series])
+correlation_matrix = correlation_measure.fit_transform([brain_time_series])[0]
 
+cor = np.dot(brain_time_series.T , brain_time_series) / brain_time_series.shape[0]
 
 #%%
 
