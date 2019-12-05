@@ -204,7 +204,9 @@ workflow = pe.Workflow(name='firstLevelKPE',base_dir=work_dir)
 cont1 = ['Trauma>Sad', 'T', ['trauma', 'sad'], [1, -1]]
 cont2 = ['Trauma>Relax', 'T', ['trauma', 'relax'], [1, -1]]
 cont3 = ['Sad>Relax', 'T', ['sad', 'relax'], [1, -1]]
-contrasts = [cont1, cont2, cont3]
+cont4 = ['Trauma', 'T',['trauma'], [1]]
+cont5 = ['Sad', 'T',['sad'], [1]]
+contrasts = [cont1, cont2, cont3, cont4, cont5]
 
 
 #%%
