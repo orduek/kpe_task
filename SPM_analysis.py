@@ -278,10 +278,10 @@ contrast_list = ['con_0001', 'con_0002', 'con_0003', 'con_0004', 'con_0005']
 
 # Threshold - thresholds contrasts
 level2thresh = Node(spm.Threshold(contrast_index=1,
-                              use_topo_fdr=True,
+                              use_topo_fdr=False,
                               use_fwe_correction=True, # here we can use fwe or fdr
                               extent_threshold=10,
-                              height_threshold= 0.005,
+                              height_threshold= 0.05,
                               extent_fdr_p_threshold = 0.05,
                               height_threshold_type='p-value'),
                               
@@ -331,10 +331,10 @@ l2analysis.connect([(infosource, selectfiles, [('contrast_id', 'contrast_id'),
                     (level2thresh, datasink, [('thresholded_map',
                                                '2ndLevel.@threshold')]),
                                                         ])
-#%%                                                     
+# %%                                                     
 l2analysis.run('MultiProc', plugin_args={'n_procs': 4})
 
-#%% plotting 2nd level results
+# %% plotting 2nd level results
 from nilearn.plotting import plot_glass_brain
 import nilearn.plotting
 import glob
@@ -348,13 +348,12 @@ plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-1/2ndLevel/_contrast_id_con_
 plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-1/2ndLevel/_contrast_id_con_0005/spmT_0001_thr.nii', threshold = 2.3)
 
 ### 2 session
-plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001_thr.nii', threshold = 2.3)
+plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001.nii', threshold = 5.5, colorbar=True)
 plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0005/spmT_0001_thr.nii', threshold = 2.3)
 plot_glass_brain('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0004/spmT_0001_thr.nii', threshold = 2.3)
 %matplotlib qt
-nilearn.plotting.plot_stat_map(nilearn.image.smooth_img('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001_thr.nii', 3), display_mode='x',
-                                      threshold=2.3, bg_img=anatimg, dim=1)
-#%% Stat maps
+nilearn.plotting.plot_stat_map(nilearn.image.smooth_img('/media/Data/work/KPE_SPM/Sink_ses-2/2ndLevel/_contrast_id_con_0001/spmT_0001.nii', 3), display_mode='x',
+                                      threshold=5.5, bg_img=anatimg, dim=1)#%% Stat maps
 for con_image in conImages:
     nilearn.plotting.plot_stat_map(con_image, display_mode='ortho',
                               threshold=2.3)#, cut_coords=(20,55)) #, 10, 15), dim=1) 
