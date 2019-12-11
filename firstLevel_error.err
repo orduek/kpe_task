@@ -1,3 +1,0 @@
-/gpfs/ysm/project/oad4/conda_envs/py37_dev/lib/python3.6/site-packages/sklearn/externals/joblib/__init__.py:15: DeprecationWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
-  warnings.warn(msg, category=DeprecationWarning)
-slurmstepd: error: *** JOB 37279240 ON c24n01 CANCELLED AT 2019-08-16T01:27:52 DUE TO TIME LIMIT ***
