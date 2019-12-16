@@ -79,7 +79,7 @@ rand.inputs.mask = '/home/oad4/scratch60/kpe_fsl/derivatives/fmriprep/sub-1369/s
 rand.inputs.one_sample_group_mean = True
 rand.inputs.tfce = True
 rand.inputs.vox_p_values = True
-rand.inputs.num_perm = 200
+rand.inputs.num_perm = 5000
 # Thresholding - FDR ################################################
 # Calculate pvalues with ztop
 fdr_ztop = pe.Node(fsl.ImageMaths(op_string='-ztop', suffix='_pval'),

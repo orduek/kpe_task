@@ -2,17 +2,11 @@
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
 """
-=========
-fMRI: FSL
-=========
+Created on Wed Dec  4 14:29:06 2019
 
-A workflow that uses fsl to perform a first level analysis on the nipype
-tutorial data set::
-
-    python fmri_fsl.py
-
-
-First tell python where to find the appropriate functions.
+@author: Or Duek
+1st level analysis using FSL output
+In this one we smooth using SUSAN, which takes longer. 
 """
 
 from __future__ import print_function
