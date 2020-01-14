@@ -87,7 +87,7 @@ from nilearn.input_data import NiftiLabelsMasker
 #                          memory="/home/oad4/scratch60/shenPar_nilearn",high_pass=.01 , low_pass = .1, t_r=1, verbose=5)
 
 # use different masker when using Yeo atlas. 
-masker = NiftiLabelsMasker(labels_img=atlas_filename, standardize=True, smoothing_fwhm = 6,
+masker = NiftiLabelsMasker(labels_img=atlas_filename, standardize=True, smoothing_fwhm = 4,
                         memory="/media/Data/nilearn",t_r=1, verbose=5, high_pass=.01 , low_pass = .1) # As it is task based we dont' bandpassing high_pass=.01 , low_pass = .1)
                            
 from nilearn.connectome import ConnectivityMeasure

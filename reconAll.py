@@ -30,7 +30,7 @@ def changeToString(arr):
 
 
 subject_list = ['1263']
-session_list = ['1']
+session_list = ['2']
 # Map field names to individual subject runs.
 
 
