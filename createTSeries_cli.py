@@ -39,14 +39,19 @@ correlation_measure = ConnectivityMeasure(kind='correlation') # can choose parti
 #%% choose atlas
 
 # take each subject - create timeline - stratify to events - save. Move to next sub
-os.chdir(sys.argv[3])
+
 
 if sys.argv[2] == 'aal':
     # We want to run the analysis using two different atlases: 1. Shen and 2. AAL (for now)
+    print("Loading AAL")
     atlas = nilearn.datasets.fetch_atlas_aal(data_dir = work_dir)
+    atlas_filename = atlas.maps
 elif sys.argv[2]== 'shen':
-    atlas_filename = 'shen_atlas/shen_1mm_268_parcellation.nii.gz'
-    atlas_labes = pd.read_csv('shen_atlas/shen_268_parcellation_networklabels.csv')
+    print("loading Shen Parcellation")
+    atlas_filename = os.path.join(os.getcwd(),'shen_atlas/shen_1mm_268_parcellation.nii.gz')
+    atlas_labes = pd.read_csv(os.path.join(os.getcwd(),'shen_atlas/shen_268_parcellation_networklabels.csv'))
+
+os.chdir(sys.argv[3])
 
 def createTask_time(session, subject_list):
     # create a session folder
@@ -58,10 +63,11 @@ def createTask_time(session, subject_list):
     os.chdir('session_%s' %(session))
     for sub in subject_list:
         func_file = func_template.format(sub = sub,session = session) # use template and load specific files
+        print(func_file)
         confound_file = confound_template.format(sub = sub, session = session)
         event_file = event_file_template.format(sub=sub, session=session)
         try:
-            timeline = timeSeriesSingle(func_file, confound_file, atlas.maps)
+            timeline = timeSeriesSingle(func_file, confound_file, atlas_filename)
             stratifyTimeseries(event_file, timeline, sub, 1)
         except:
             print (f'Subject {sub} has no data files')
