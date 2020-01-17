@@ -1,0 +1,376 @@
+200116-14:08:17,702 nipype.workflow INFO:
+	 Workflow runSpecROI settings: ['check', 'execution', 'logging', 'monitoring']
+200116-14:08:17,709 nipype.workflow INFO:
+	 Running in parallel.
+200116-14:08:17,711 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 10 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 4/4.
+200116-14:08:17,749 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1499/runSpecROI".
+200116-14:08:17,751 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1480/runSpecROI".
+200116-14:08:17,752 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1468/runSpecROI".
+200116-14:08:17,752 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1464/runSpecROI".
+200116-14:08:17,755 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:17,757 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:17,758 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:17,758 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:17,769 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1499/runSpecROI)
+200116-14:08:17,771 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1480/runSpecROI)
+200116-14:08:17,772 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1468/runSpecROI)
+200116-14:08:17,772 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1464/runSpecROI)
+200116-14:08:19,718 nipype.workflow ERROR:
+	 Node runSpecROI.a9 failed to run on host or-ThinkStation-P520.
+200116-14:08:19,718 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a9-0d99de81-a72c-4e4e-9138-1dd9ee405c53.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:19,724 nipype.workflow ERROR:
+	 Node runSpecROI.a8 failed to run on host or-ThinkStation-P520.
+200116-14:08:19,724 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a8-b2d2e088-1501-4f14-8ded-183760e668fd.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:19,728 nipype.workflow ERROR:
+	 Node runSpecROI.a7 failed to run on host or-ThinkStation-P520.
+200116-14:08:19,728 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a7-0d123b66-3ca4-4f37-962e-6b031db7c16b.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:19,731 nipype.workflow ERROR:
+	 Node runSpecROI.a6 failed to run on host or-ThinkStation-P520.
+200116-14:08:19,731 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a6-b603a526-2419-4c60-8ce1-66212d434140.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:19,734 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 6 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 4/4.
+200116-14:08:19,773 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1403/runSpecROI".
+200116-14:08:19,774 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1390/runSpecROI".
+200116-14:08:19,774 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1387/runSpecROI".
+200116-14:08:19,775 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1369/runSpecROI".
+200116-14:08:19,776 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:19,778 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:19,778 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:19,779 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:19,786 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1369/runSpecROI)
+200116-14:08:19,790 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1403/runSpecROI)
+200116-14:08:19,791 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1390/runSpecROI)
+200116-14:08:19,792 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1387/runSpecROI)
+200116-14:08:21,719 nipype.workflow ERROR:
+	 Node runSpecROI.a5 failed to run on host or-ThinkStation-P520.
+200116-14:08:21,719 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a5-63dd725a-4def-42aa-89b0-a51b42142139.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:21,724 nipype.workflow ERROR:
+	 Node runSpecROI.a4 failed to run on host or-ThinkStation-P520.
+200116-14:08:21,725 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a4-7527a46a-f2de-492c-a676-85ceed44c4b7.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:21,729 nipype.workflow ERROR:
+	 Node runSpecROI.a3 failed to run on host or-ThinkStation-P520.
+200116-14:08:21,729 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a3-2a5bc18e-f7b7-48e7-8f85-9c2dcce09d3d.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:21,732 nipype.workflow ERROR:
+	 Node runSpecROI.a2 failed to run on host or-ThinkStation-P520.
+200116-14:08:21,733 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a2-acb2d843-c543-4ef1-a535-4197982e3017.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:21,735 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 2 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 4/4.
+200116-14:08:21,772 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1364/runSpecROI".
+200116-14:08:21,773 nipype.workflow INFO:
+	 [Node] Setting-up "runSpecROI.runSpecROI" in "/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1356/runSpecROI".
+200116-14:08:21,774 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:21,778 nipype.workflow INFO:
+	 [Node] Running "runSpecROI" ("nipype.interfaces.utility.wrappers.Function")
+200116-14:08:21,782 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1364/runSpecROI)
+200116-14:08:21,789 nipype.workflow WARNING:
+	 [Node] Error on "runSpecROI.runSpecROI" (/home/or/kpe_task_analysis/media/Data/work/runSpecROI/_subject_id_1356/runSpecROI)
+200116-14:08:23,721 nipype.workflow ERROR:
+	 Node runSpecROI.a1 failed to run on host or-ThinkStation-P520.
+200116-14:08:23,721 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140823-or-runSpecROI.a1-b248760f-a853-4af6-a748-7389229bdc4e.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:23,726 nipype.workflow ERROR:
+	 Node runSpecROI.a0 failed to run on host or-ThinkStation-P520.
+200116-14:08:23,727 nipype.workflow ERROR:
+	 Saving crash info to /home/or/kpe_task_analysis/crash-20200116-140823-or-runSpecROI.a0-75e7740b-829a-44f3-ba31-703d592cd70c.pklz
+Traceback (most recent call last):
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 472, in run
+    result = self._run_interface(execute=True)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 563, in _run_interface
+    return self._run_command(execute)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/pipeline/engine/nodes.py", line 643, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/base/core.py", line 375, in run
+    runtime = self._run_interface(runtime)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/site-packages/nipype/interfaces/utility/wrappers.py", line 144, in _run_interface
+    out = function_handle(**args)
+  File "<string>", line 4, in callSpecROI
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 339, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/home/or/miniconda3/envs/neuroAnalysis/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python /home/or/kpe_task_analysis/specROI_voxel.py': 'python /home/or/kpe_task_analysis/specROI_voxel.py'
+
+200116-14:08:23,730 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 0 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 4/4.
+200116-14:08:25,719 nipype.workflow INFO:
+	 ***********************************
+200116-14:08:25,719 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a9
+200116-14:08:25,719 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a9-0d99de81-a72c-4e4e-9138-1dd9ee405c53.pklz
+200116-14:08:25,719 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a8
+200116-14:08:25,719 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a8-b2d2e088-1501-4f14-8ded-183760e668fd.pklz
+200116-14:08:25,719 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a7
+200116-14:08:25,719 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a7-0d123b66-3ca4-4f37-962e-6b031db7c16b.pklz
+200116-14:08:25,719 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a6
+200116-14:08:25,719 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140819-or-runSpecROI.a6-b603a526-2419-4c60-8ce1-66212d434140.pklz
+200116-14:08:25,720 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a5
+200116-14:08:25,720 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a5-63dd725a-4def-42aa-89b0-a51b42142139.pklz
+200116-14:08:25,720 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a4
+200116-14:08:25,720 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a4-7527a46a-f2de-492c-a676-85ceed44c4b7.pklz
+200116-14:08:25,720 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a3
+200116-14:08:25,720 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a3-2a5bc18e-f7b7-48e7-8f85-9c2dcce09d3d.pklz
+200116-14:08:25,720 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a2
+200116-14:08:25,720 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140821-or-runSpecROI.a2-acb2d843-c543-4ef1-a535-4197982e3017.pklz
+200116-14:08:25,720 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a1
+200116-14:08:25,720 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140823-or-runSpecROI.a1-b248760f-a853-4af6-a748-7389229bdc4e.pklz
+200116-14:08:25,720 nipype.workflow ERROR:
+	 could not run node: runSpecROI.runSpecROI.a0
+200116-14:08:25,720 nipype.workflow INFO:
+	 crashfile: /home/or/kpe_task_analysis/crash-20200116-140823-or-runSpecROI.a0-75e7740b-829a-44f3-ba31-703d592cd70c.pklz
+200116-14:08:25,720 nipype.workflow INFO:
+	 ***********************************
