@@ -10,7 +10,7 @@ This script should be run outsidr of Spyder, for convenienvce
 
 Here I use sys.argv to get arguments from terminal. The first location (zero) is the script name. Next location will contain the session number (a string). Could add more later if we want. 
 cli code should look like that:
-    python createTSeries_cli.py session atlas output_dir
+    python createTSeries_cli.py session atlas ('aal','shen','yeo') output_dir
 """
 
 work_dir = '/media/Data/work'
@@ -50,6 +50,10 @@ elif sys.argv[2]== 'shen':
     print("loading Shen Parcellation")
     atlas_filename = os.path.join(os.getcwd(),'shen_atlas/shen_1mm_268_parcellation.nii.gz')
     atlas_labes = pd.read_csv(os.path.join(os.getcwd(),'shen_atlas/shen_268_parcellation_networklabels.csv'))
+elif sys.argv[2]=='yeo':
+    atlas = nilearn.datasets.fetch_atlas_yeo_2011()
+    atlas_filename = atlas.thick_17
+
 
 os.chdir(sys.argv[3])
 

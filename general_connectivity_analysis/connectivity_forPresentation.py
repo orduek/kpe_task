@@ -56,7 +56,8 @@ correlation_measure = ConnectivityMeasure(kind='correlation') # can choose parti
 
 # createTask_time('2',subject_list) # create a task timeseries for all subjects
 
-timeFile_template = '/home/or/kpe_conn/aal/session_{session}/subject_{sub}/traumaTrials.npy'
+
+timeFile_template = '/media/Data/KPE_results/shen/session_{session}/subject_{sub}/traumaTrials.npy'
 # create conn matrix for each trial type
 session = '2'
 ses_2_trauma_corr = []
@@ -70,9 +71,11 @@ for sub in subject_list:
 
 #%% reshaping and analysis
 # reshape array
-cor_z_array = np.array(ses_1_trauma_corr_z)
+cor_z_array_2 = np.array(ses_2_trauma_corr_z)
 reshape_ses1_trauma = np.moveaxis(np.array(cor_z_array),0,-1)
 reshape_Ses2_trauma = np.moveaxis(np.array(cor_z_array_2),0,-1)
+np.save('trauma_ses1_shen', reshape_ses1_trauma)
+np.save('trauma_ses2_shen', reshape_Ses2_trauma)
 #%% create a symmetric matrix for CPM
 sym_mat = []
 for i in range(len(ses_1_trauma_corr_z)):

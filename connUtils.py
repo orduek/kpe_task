@@ -76,13 +76,13 @@ def createCorMat(time_series):
 # #############################################################################
 # # Seed based functions
 
-def createSeedVoxelSeries(coords, func_filename, confound_filename, mask_file, subject):
+def createSeedVoxelSeries(roi_file, func_filename, confound_filename, mask_file, subject):
     from nilearn import input_data
-    seed_masker = input_data.NiftiSpheresMasker(
-        coords, radius=6,
+    seed_masker = input_data.NiftiMasker(mask_img = roi_file,
+        smoothing_fwhm=6,
         detrend=True, standardize=True,
         low_pass=0.1, high_pass=0.01, t_r=1.,
-        memory="/media/Data/nilearn", memory_level=1, verbose=2)
+        memory='/media/Data/nilearn', memory_level=1, verbose=2)
     
     brain_masker = input_data.NiftiMasker(mask_img = mask_file,
         smoothing_fwhm=6,
@@ -93,6 +93,8 @@ def createSeedVoxelSeries(coords, func_filename, confound_filename, mask_file, s
     seed_time_series = seed_masker.fit_transform(func_filename,
                                                  confounds=removeVars(confound_filename))
     
+    #seed_time_series = np.mean(seed_time_series, axis=0)
+    
     brain_time_series = brain_masker.fit_transform(func_filename,
                                                    confounds=removeVars(confound_filename))
     
@@ -101,7 +103,7 @@ def createSeedVoxelSeries(coords, func_filename, confound_filename, mask_file, s
 
 
 # stratify to events
-def seedVoxelCor(spec_seed_timeseries, spec_brain_timeseries, scriptName, subject, brain_masker, session, seedName):    
+def seedVoxelCor(spec_seed_timeseries, spec_brain_timeseries, scriptName, subject, brain_masker, func_file, session, seedName):    
     import numpy as np
     
     seed_to_voxel_correlations = (np.dot(spec_brain_timeseries.T, spec_seed_timeseries) /
@@ -114,7 +116,7 @@ def seedVoxelCor(spec_seed_timeseries, spec_brain_timeseries, scriptName, subjec
     seed_to_voxel_correlations_img = brain_masker.inverse_transform(
         seed_to_voxel_correlations.T)
 
-
+    
     seed_to_voxel_correlations_fisher_z = np.arctanh(seed_to_voxel_correlations)
     print("Seed-to-voxel correlation Fisher-z transformed: min = %.3f; max = %.3f"
           % (seed_to_voxel_correlations_fisher_z.min(),

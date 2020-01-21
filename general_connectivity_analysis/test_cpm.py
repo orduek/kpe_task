@@ -143,7 +143,7 @@ def kfold_cpm(X,y,k):
 
 
 
-def run_validate(X,y,cvtype,numNodes):
+def run_validate(X,y,cvtype):
     
     
     """
@@ -156,6 +156,7 @@ def run_validate(X,y,cvtype,numNodes):
     2) 5k: 
     """
     numsubs=X.shape[2]
+    numNodes = X.shape[0]
     X=np.reshape(X,[-1,numsubs])
     pheno = y
     
@@ -188,10 +189,10 @@ def run_validate(X,y,cvtype,numNodes):
                 behav_pred_neg[loo]='nan'
 
         
-        Rpos=stats.pearsonr(behav_pred_pos,pheno)[0]
-        Rneg=stats.pearsonr(behav_pred_neg,pheno)[0]
+        Rpos=stats.pearsonr(behav_pred_pos,pheno)#[0]
+        Rneg=stats.pearsonr(behav_pred_neg,pheno)#[0]
 
-        return Rpos,Rneg
+        return Rpos,Rneg, behav_pred_pos, behav_pred_neg
 
 
     elif cvtype == '5k':
@@ -238,12 +239,26 @@ def run_validate(X,y,cvtype,numNodes):
 
 
 #%% 
-first = np.array(reshape_ses1_trauma)
-second = np.array(reshape_Ses2_trauma)
-delta = np.subtract(second, first)
+# first = np.array(reshape_ses1_trauma)
+# second = np.array(reshape_Ses2_trauma)
+# delta = np.subtract(second, first)
 
-delta1 = np.delete(delta, mask, axis=2)
-delta1.shape
-y = np.array([2,  -1,  30,  17,  28,   4,  30,  18,  22,  18,  -1,  11,   2,   4, -16,  32,   8,  14,  20,   3,  23])
+# delta1 = np.delete(delta, mask, axis=2)
+# delta1.shape
+# y = np.array([2,  -1,  30,  17,  28,   4,  30,  18,  22,  18,  -1,  11,   2,   4, -16,  32,   8,  14,  20,   3,  23])
 
-cpm1_Rpos , cpm1_Rneg = run_validate(delta, y, 'LOO', 116)
+# cpm1_Rpos , cpm1_Rneg,behav_pred_pos, behav_pred_neg  = run_validate(delta, y, 'LOO')
+# #%%
+# X = delta
+# X=np.reshape(X,[-1,21])
+# pheno = y
+# fit_pos,fit_neg,posedges,negedges = train_cpm(X, pheno, 116)
+# np.savetxt('posEdgAAL.csv',posedges)
+# np.savetxt('negEdgAAL.csv',negedges)
+# #%%
+# # reshape and save as .mat for CPM
+# diffMat_21_CPM = np.moveaxis(np.array(delta),0, -1)
+# scipy.io.savemat('diffMat_2_1.mat', dict(x=delta))
+
+
+
