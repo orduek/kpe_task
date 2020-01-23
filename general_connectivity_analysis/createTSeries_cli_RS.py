@@ -21,7 +21,7 @@ import nilearn
 import pandas as pd
 import numpy as np
 import sys
-from connUtils import timeSeriesSingle, removeVars, stratifyTimeseries
+from connUtils import timeSeriesSingle, removeVars
 
 #%% [Subject list]
 subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464', '1468', '1480', '1499']
@@ -66,12 +66,12 @@ def create_time(session, subject_list):
         try:
             timeline = timeSeriesSingle(func_file, confound_file, atlas_filename)
             np.save('subject_%s/rest_ses-%s' %(subject_id, sessopm), timeline)
-            stratifyTimeseries(event_file, timeline, sub, 1)
+          
         except:
             print (f'Subject {sub} has no data files')
 
 if __name__ == "__main__": 
     print ("Creating time series")
-    createTask_time(sys.argv[1],subject_list) # create a task timeseries for all subjects takes session from CLI
+    create_time(sys.argv[1],subject_list) # create a task timeseries for all subjects takes session from CLI
 else: 
     print ("Error!!")

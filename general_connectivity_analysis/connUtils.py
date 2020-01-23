@@ -1,0 +1,261 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Dec  9 15:14:01 2019
+
+@author: Or Duek
+This file should contain all connectivity analysis functions so we could load from it to other files
+"""
+import numpy as np
+import scipy
+
+def removeVars (confoundFile):
+    # this method takes the csv regressors file (from fmriPrep) and chooses a few to confound. You can change those few
+    import pandas as pd
+    confound = pd.read_csv(confoundFile,sep="\t", na_values="n/a")
+    finalConf = confound[['csf', 'white_matter', 'framewise_displacement',
+                          'a_comp_cor_00', 'a_comp_cor_01',	'a_comp_cor_02', 'a_comp_cor_03', 'a_comp_cor_04', 
+                        'a_comp_cor_05', 'trans_x', 'trans_y', 'trans_z', 'rot_x', 'rot_y', 'rot_z']] # can add 'global_signal' also
+     # change NaN of FD to zero
+    finalConf = np.array(finalConf)
+    finalConf[0,2] = 0 # if removing FD than should remove this one also
+    return finalConf
+
+# build method for creating time series for subjects 
+def timeSeries(func_files, confound_files, atlas_filename):
+    # This function receives a list of funcional files and a list of matching confound files
+    # and outputs an array
+    from nilearn.input_data import NiftiLabelsMasker
+    # define masker here
+    masker = NiftiLabelsMasker(labels_img=atlas_filename, standardize=True, smoothing_fwhm = 6,
+                        memory="nilearn_cashe",t_r=1, verbose=5, high_pass=.01 , low_pass = .1) # As it is task based we dont' bandpassing high_pass=.01 , low_pass = .1)
+    total_subjects = [] # creating an empty array that will hold all subjects matrix 
+    # This function needs a masker object that will be defined outside the function
+    for func_file, confound_file in zip(func_files, confound_files):
+        print(f"proccessing file {func_file}") # print file name
+        confoundClean = removeVars(confound_file)
+        confoundArray = confoundClean#confoundClean.values
+        time_series = masker.fit_transform(func_file, confounds=confoundArray)
+        #time_series = extractor.fit_transform(func_file, confounds=confoundArray)
+        #masker.fit_transform(func_file, confoundArray)
+        total_subjects.append(time_series)
+    return total_subjects
+
+def timeSeriesSingle(func_file, confound_file, atlas_filename):
+    # this function receives one functional and one confound file and returns one time-series
+    from connUtils import removeVars
+    from nilearn.input_data import NiftiLabelsMasker
+    # define masker here
+    masker = NiftiLabelsMasker(labels_img=atlas_filename, standardize=True, smoothing_fwhm = 6,
+                        memory="nilearn_cashe",t_r=1, verbose=5, high_pass=.01 , low_pass = .1) # As it is task based we dont' bandpassing high_pass=.01 , low_pass = .1)
+    # This function needs a masker object that will be defined outside the function
+    confoundClean = removeVars(confound_file)
+    confoundArray = confoundClean#confoundClean.values
+    time_series = masker.fit_transform(func_file, confounds=confoundArray)
+    return time_series
+
+# contrasting two timePoints
+def contFuncs(time_series1, time_series2):
+    twoMinusOneMat = []
+    for scanMatrix, scanMatrix2 in zip(time_series1, time_series2):
+        a = scanMatrix2 - scanMatrix
+        twoMinusOneMat.append(a)
+    return np.array(twoMinusOneMat)
+
+# create correlation matrix per subject
+def createCorMat(time_series):
+    from nilearn.connectome import ConnectivityMeasure
+    correlation_measure = ConnectivityMeasure(kind='correlation') # can choose partial - it might be better        
+    # create correlation matrix for each subject
+    fullMatrix = []
+    for time_s in time_series:
+        correlation_matrix = correlation_measure.fit_transform([time_s])[0]
+        fullMatrix.append(correlation_matrix)
+    return fullMatrix
+
+# #############################################################################
+# # Seed based functions
+
+def createSeedVoxelSeries(roi_file, func_filename, confound_filename, mask_file, subject):
+    from nilearn import input_data
+    seed_masker = input_data.NiftiMasker(mask_img = roi_file,
+        smoothing_fwhm=6,
+        detrend=True, standardize=True,
+        low_pass=0.1, high_pass=0.01, t_r=1.,
+        memory='/media/Data/nilearn', memory_level=1, verbose=2)
+    
+    brain_masker = input_data.NiftiMasker(mask_img = mask_file,
+        smoothing_fwhm=6,
+        detrend=True, standardize=True,
+        low_pass=0.1, high_pass=0.01, t_r=1.,
+        memory='/media/Data/nilearn', memory_level=1, verbose=2)
+
+    seed_time_series = seed_masker.fit_transform(func_filename,
+                                                 confounds=removeVars(confound_filename))
+    
+    #seed_time_series = np.mean(seed_time_series, axis=0)
+    
+    brain_time_series = brain_masker.fit_transform(func_filename,
+                                                   confounds=removeVars(confound_filename))
+    
+    
+    return seed_time_series, brain_time_series, brain_masker
+
+
+# stratify to events
+def seedVoxelCor(spec_seed_timeseries, spec_brain_timeseries, scriptName, subject, brain_masker, func_file, session, seedName):    
+    import numpy as np
+    
+    seed_to_voxel_correlations = (np.dot(spec_brain_timeseries.T, spec_seed_timeseries) /
+                                  spec_seed_timeseries.shape[0]
+                                  )
+
+    
+    from nilearn import plotting
+    
+    seed_to_voxel_correlations_img = brain_masker.inverse_transform(
+        seed_to_voxel_correlations.T)
+
+    
+    seed_to_voxel_correlations_fisher_z = np.arctanh(seed_to_voxel_correlations)
+    print("Seed-to-voxel correlation Fisher-z transformed: min = %.3f; max = %.3f"
+          % (seed_to_voxel_correlations_fisher_z.min(),
+             seed_to_voxel_correlations_fisher_z.max()
+             )
+          )
+
+    # Finally, we can tranform the correlation array back to a Nifti image
+    # object, that we can save.
+    seed_to_voxel_correlations_fisher_z_img = brain_masker.inverse_transform(
+        seed_to_voxel_correlations_fisher_z.T)
+    seed_to_voxel_correlations_fisher_z_img.to_filename(
+        '%s_seed_%s_sub-%s_ses-%s_z.nii.gz' %(scriptName,seedName,subject, session))
+    
+    return seed_to_voxel_correlations, seed_to_voxel_correlations_fisher_z
+# this function returns the regular correlation matrix, the fishr-z transformation of correlation matrix and the brain masker (for inverse transform the brain back to nifti image)
+
+def createDelta(func_files1, func_files2, mask_img):
+    from nilearn.input_data import NiftiMasker
+    
+    # here I use a masked image so all will have same size
+    nifti_masker = NiftiMasker(
+        mask_img= mask_img,
+        smoothing_fwhm=6,
+        memory='nilearn_cache', memory_level=1, verbose=2)  # cache options
+    fmri_masked_ses1 = nifti_masker.fit_transform(func_files1)
+    fmri_masked_ses2 = nifti_masker.fit_transform(func_files2)
+    ###
+    from nilearn import input_data
+    brainMasker = input_data.NiftiMasker(
+            smoothing_fwhm=6,
+            detrend=True, standardize=True,
+            t_r=1.,
+            memory='nilearn_cashe', memory_level=1, verbose=2)
+    brainMasker.fit(func_files1)
+
+    ####
+    deltaCor_a = fmri_masked_ses2 - fmri_masked_ses1
+    print (f'Shape is: {deltaCor_a.shape}')
+
+    # run paired t-test 
+    testDelta = scipy.stats.ttest_rel(fmri_masked_ses1, fmri_masked_ses2) 
+    print (f'Sum of p values < 0.005 is {np.sum(testDelta[1]<0.005)}')
+    
+    
+    return deltaCor_a, testDelta # return the delta correlation and the t-test array
+
+def createZimg(deltaCor, scriptName, seedName):
+    from nilearn import input_data
+    brainMasker = input_data.NiftiMasker(
+            smoothing_fwhm=6,
+            detrend=True, standardize=True,
+            t_r=1.,
+            memory='nilearn_cashe', memory_level=1, verbose=2)
+    # mean across subjects
+    mean_zcor_Delta = np.mean(deltaCor,0)
+    mean_zcor_img_delta = brainMasker.inverse_transform(mean_zcor_Delta.T)
+    # save it as file
+    mean_zcor_img_delta.to_filename(
+        '%s_seed_%s_delta_z.nii.gz' %(scriptName,seedName))
+    
+    return mean_zcor_img_delta, mean_zcor_Delta # returns the image and the array 
+
+## now create a function to do FDR thresholding
+def fdrThr(testDelta, mean_zcor_Delta, alpha, brain_masker):
+    from statsmodels.stats import multitest
+    # we need to reshape the test p-values array to create 1D array
+    #b = np.reshape(np.array(testDelta[1]), -1)
+    fdr_mat = multitest.multipletests(testDelta[1], alpha=alpha, method='fdr_bh', is_sorted=False, returnsorted=False)
+    #fdr_mat = multitest.fdrcorrection(testDelta[1], alpha=0.7, method='indep', is_sorted=False)
+    np.sum(fdr_mat[1]<0.05)
+    corr_mat_thrFDR = np.array(mean_zcor_Delta)
+    corr_mat_thrFDR = np.reshape(corr_mat_thrFDR, -1)
+    corr_mat_thrFDR[fdr_mat[0]==False] = 0
+   
+    # now I can treshold the mean matrix
+    numNonZeroDelta = np.count_nonzero(corr_mat_thrFDR)
+    print (f'Number of voxels crossed the FDR thr is {numNonZeroDelta}')
+    # transofrm it back to nifti
+    nifti_fdr_thr = brain_masker.inverse_transform(corr_mat_thrFDR.T)
+    return corr_mat_thrFDR, nifti_fdr_thr # return matrix after FDR and nifti file
+
+#%% KPE specific functions
+# need to build a function that will read the event file - take onset and duration of each line and stratify the timeseries accordingly
+def stratifyTimeseries (events_file, subject_timeseries, subject_id, trial_line):
+    #trial_line is a parameter - if 0 then will create each line as file. If 1 then each task
+    import pandas as pd
+    import numpy as np
+    import os
+    # grab subject events file
+    events = pd.read_csv(events_file, sep=r'\s+')
+    timeSeries = subject_timeseries #np.array(np.load(subject_timeseries, allow_pickle = True))
+   
+    # create a subject folder
+    try:
+        # check if already there
+        os.makedirs('subject_%s' %(subject_id))
+    except:
+        print ("Dir already preset")
+    
+    # read line  by line and create matrix per line
+    if trial_line==0:
+        for line in events.iterrows():
+            print (f' Proccessing line {line}')
+            numberRow = line[0] # take row number to add to matrix name later
+            onset = round(line[1].onset) # take onset and round it
+            duration = round(line[1].duration)
+            trial_type = line[1].trial_type
+            specTimeline = timeSeries[onset:(onset+duration),:]
+            np.save('subject_%s/speficTrial_%s_%s' %(subject_id,numberRow, trial_type), specTimeline)
+    elif trial_line==1: # read by trial type and create specific timeline for each script
+        traumaOnset = []
+        sadOnset = []
+        relaxOnset = []
+        traumaDuration = []
+        sadDuration = []
+        relaxDuration = []
+        for line in events.iterrows(): # runs trhough the events file, takes the specific files and create timeseries per each
+            print (line)
+            if line[1]['trial_type'].find('trauma')!= -1:
+                print('trauma')
+                traumaOnset.append(round(line[1].onset))
+                traumaDuration.append(round(line[1].duration))
+            elif line[1]['trial_type'].find('sad')!= -1:
+                print('sad')
+                sadOnset.append(round(line[1].onset))
+                sadDuration.append(round(line[1].duration))
+            elif line[1]['trial_type'].find('relax')!= -1:
+                print('relax')
+                relaxOnset.append(round(line[1].onset))
+                relaxDuration.append(round(line[1].duration))
+        trauma_timeline = np.concatenate([timeSeries[traumaOnset[0]:traumaOnset[0] + traumaDuration[0],:], timeSeries[traumaOnset[1]:traumaOnset[1]+ traumaDuration[1],:], timeSeries[traumaOnset[2]:traumaOnset[2]+traumaDuration[2],:]])
+        sad_timeline = np.concatenate([timeSeries[sadOnset[0]:sadOnset[0] + sadDuration[0],:], timeSeries[traumaOnset[1]:sadOnset[1]+ sadDuration[1],:], timeSeries[sadOnset[2]:sadOnset[2]+sadDuration[2],:]])
+        relax_timeline = np.concatenate([timeSeries[relaxOnset[0]:relaxOnset[0] + relaxDuration[0],:], timeSeries[relaxOnset[1]:relaxOnset[1]+ relaxDuration[1],:], timeSeries[relaxOnset[2]:relaxOnset[2]+relaxDuration[2],:]])
+        np.save('subject_%s/traumaTrials' %(subject_id), trauma_timeline)
+        np.save('subject_%s/sadTrials' %(subject_id), sad_timeline)
+        np.save('subject_%s/relaxTrials' %(subject_id), relax_timeline)
+        
+    # or read by trial type and create matrix per trial type
+    else:
+        print ("Need to run by task")
+    # extract subject specific timeseries from 3D array
