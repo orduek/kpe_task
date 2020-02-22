@@ -17,11 +17,11 @@ from nipype.interfaces import fsl, utility as niu, io as nio
 import os
 #%% Set variables
 # set number of contrasts (cope)
-cope_list = ['1','2','3']
+cope_list = ['1','2','3', '4', '5']
 # setting working directory (same as first level)
-work_dir = '/home/oad4/scratch60/kpe_work/'
+work_dir = '/media/Data/work/'
 # set input directory (where original files are)
-mask_dir = '/home/oad4/scratch60/kpe_fsl/'
+mask_dir = '/media/Data/KPE_BIDS/'
 
 #%% Now run second level
 workflow2nd = pe.Workflow(name="2nd_level", base_dir=work_dir)
@@ -56,7 +56,7 @@ copemerge    = pe.Node(interface=fsl.Merge(dimension='t'),
 varcopemerge = pe.Node(interface=fsl.Merge(dimension='t'),
                        name="varcopemerge")
 
-maskemerge = pe.Node(interface=fsl.Merge(dimension='t'),
+maskemerge = pe.Node(interface=fsl.Merge(dimension='a'),
                        name="maskemerge")
 #copeImages = glob.glob('/media/Data/work/firstLevelKPE/_subject_id_*/feat_fit/run0.feat/stats/cope1.nii.gz')
 #copemerge.inputs.in_files = copeImages
@@ -75,11 +75,11 @@ rand = pe.Node(fsl.Randomise(),
                             name = "randomize") 
 
 
-rand.inputs.mask = '/home/oad4/scratch60/kpe_fsl/derivatives/fmriprep/sub-1369/ses-1/func/sub-1369_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz' # group mask file (was created earlier)
+rand.inputs.mask = '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-1369/ses-1/func/sub-1369_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz' # group mask file (was created earlier)
 rand.inputs.one_sample_group_mean = True
 rand.inputs.tfce = True
 rand.inputs.vox_p_values = True
-rand.inputs.num_perm = 5000
+rand.inputs.num_perm = 1000
 # Thresholding - FDR ################################################
 # Calculate pvalues with ztop
 fdr_ztop = pe.Node(fsl.ImageMaths(op_string='-ztop', suffix='_pval'),
@@ -112,12 +112,12 @@ workflow2nd.connect([
                             ('design_con', 't_con_file'),
                             ('design_grp', 'cov_split_file')]),
     (copemerge, rand, [('merged_file','in_file')]),
-  #  (maskemerge, rand, [('merged_file','mask')]),
+    #(maskemerge, rand, [('merged_file','mask')]),
     (l2_model, rand, [('design_con','tcon'), ('design_mat','design_mat')]),
     (maskemerge, fdr_ztop, [('merged_file','mask_file')]),
     (flameo_ols, fdr_ztop, [('zstats','in_file')]),
 ])
 #%%
-workflow2nd.run()
+workflow2nd.run('MultiProc', plugin_args={'n_procs': 3})
 
 

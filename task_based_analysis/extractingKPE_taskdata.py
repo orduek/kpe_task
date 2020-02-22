@@ -183,3 +183,36 @@ for sub in subList:
         # save filename in folder
         onsetsDat.to_csv(r'/media/Data/PTSD_KPE/condition_files/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False, sep = '\t')
     
+
+
+#%% Addind trialType numbe (trauma1/2/3, sad1/2/3 etc.)
+events_file = '/media/Data/PTSD_KPE/condition_files/sub-1403_ses-1.csv'
+# first read csv file
+import glob
+file_list = glob.glob('/media/Data/PTSD_KPE/condition_files/sub-*_ses-*.csv')
+for file in file_list:
+    events = pd.read_csv(file, sep=r'\t')
+    # for every line add number
+    subNum = file.split('sub-')[1].split('_')[0]
+    session = file.split('ses-')[1].split('.')[0]
+    # set index for each script
+    t_i = 1
+    s_i = 1
+    r_i = 1
+    trial_typeN = []
+    for line in events.iterrows():
+        print(line)
+        if line[1]['trial_type'].find('trauma')!= -1:
+            # it is trauma
+            trial_typeN.append('trauma' + str(t_i))
+            t_i = t_i +1
+        elif line[1]['trial_type'].find('sad')!= -1:
+            trial_typeN.append('sad' + str(s_i))
+            s_i = s_i +1
+        elif line[1]['trial_type'].find('relax')!= -1:
+            trial_typeN.append('relax' + str(r_i))
+            r_i = r_i +1
+    events["trial_type_N"] = trial_typeN
+    # save refined csv file
+    events.to_csv(r'/media/Data/PTSD_KPE/condition_files/withNumbers/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False, sep = '\t')
+            

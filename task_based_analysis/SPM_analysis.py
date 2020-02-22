@@ -34,9 +34,9 @@ from nipype.interfaces.matlab import MatlabCommand
 #mlab.MatlabCommand.set_default_matlab_cmd("matlab -nodesktop -nosplash")
 MatlabCommand.set_default_paths('/home/or/Downloads/spm12/') # set default SPM12 path in my computer. 
 
-data_dir = os.path.abspath('/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep')
-output_dir = '/media/Data/work/kpeTask_2'
-fwhm = 6
+data_dir = os.path.abspath('/media/Data/KPE_BIDS/derivatives/fmriprep')
+output_dir = '/media/Drobo/work/kpeTask'
+fwhm = 4
 tr = 1
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file,
@@ -47,7 +47,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     import numpy as np
     import pandas as pd
     from nipype.interfaces.base.support import Bunch
-
+    removeTR = 4
     # Process the events file
     events = pd.read_csv(events_file, sep=r'\s+')
 
@@ -70,13 +70,13 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     runinfo = Bunch(
         scans=in_file,
-        conditions=list(set(events.trial_type.values)),
+        conditions=list(set(events.trial_type_N.values)),
         **{k: [] for k in bunch_fields})
 
     for condition in runinfo.conditions:
-        event = events[events.trial_type.str.match(condition)]
+        event = events[events.trial_type_N.str.match(condition)]
 
-        runinfo.onsets.append(np.round(event.onset.values, 3).tolist())
+        runinfo.onsets.append(np.round(event.onset.values-removeTR, 3).tolist()) # added -removeTR to align to the onsets after removing X number of TRs from the scan
         runinfo.durations.append(np.round(event.duration.values, 3).tolist())
         if 'amplitudes' in events.columns:
             runinfo.amplitudes.append(np.round(event.amplitudes.values, 3).tolist())
@@ -85,13 +85,13 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     if 'regressor_names' in bunch_fields:
         runinfo.regressor_names = regressors_names
-        runinfo.regressors = regress_data[regressors_names].fillna(0.0).values.T.tolist()
+        runinfo.regressors = regress_data[regressors_names].fillna(0.0).values[removeTR:,].T.tolist() # adding removeTR to cut the first rows
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464', '1480','1499']
+subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468', '1480','1499']
 # Map field names to individual subject runs.
-session = '2' # choose session
+session = '1' # choose session
 
 infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
                                             ],
@@ -100,9 +100,9 @@ infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
 infosource.iterables = [('subject_id', subject_list)]
 
 # SelectFiles - to grab the data (alternativ to DataGrabber)
-templates = {'func': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
-             'mask': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
-             'regressors': '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
+templates = {'func': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
+             'mask': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
+             'regressors': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
              'events': '/media/Data/PTSD_KPE/condition_files/sub-{subject_id}_ses-' + session + '.csv'}
 selectfiles = pe.Node(nio.SelectFiles(templates,
                                base_directory=data_dir),
@@ -120,12 +120,14 @@ runinfo = pe.Node(util.Function(
 runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
     ['a_comp_cor_%02d' % i for i in range(6)] + ['cosine%02d' % i for i in range(4)]
 #%%
-cont1 = ['Trauma>Sad', 'T', ['trauma', 'sad'], [1, -1]]
-cont2 = ['Trauma>Relax', 'T', ['trauma', 'relax'], [1, -1]]
-cont3 = ['Sad>Relax', 'T', ['sad', 'relax'], [1, -1]]
-cont4 = ['Trauma', 'T', ['trauma'], [1]]
-cont5 = ['Sad', 'T', ['sad'], [1]]
-contrasts = [cont1, cont2, cont3, cont4, cont5]
+
+cont1 = ['Trauma1>Sad1', 'T', ['trauma1', 'sad1'], [1, -1]]
+cont2 = ['Trauma1>Relax1', 'T', ['trauma1', 'relax1'], [1, -1]]
+cont3 = ['Sad1>Relax1', 'T', ['sad1', 'relax1'], [1, -1]]
+cont4 = ['Sad1', 'T', ['sad1'], [1]]
+cont5 = ['Trauma1>Trauma2_3', 'T', ['trauma1', 'trauma2','trauma3'], [1, -0.5, -0.5]]
+cont6 = ['Trauma1', 'T', ['trauma1'], [1]]
+contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
 #%%
 gunzip = MapNode(Gunzip(), name='gunzip',
                  iterfield=['in_file'])
@@ -167,7 +169,7 @@ level1design.inputs.model_serial_correlations = 'AR(1)'
 
 #######################################################################################################################
 # Initiation of a workflow
-wfSPM = Workflow(name="l1spm", base_dir="/media/Data/work/KPE_SPM_ses-2")
+wfSPM = Workflow(name="l1spm", base_dir="/media/Drobo/work/KPE_SPM_ses-1")
 wfSPM.connect([
         (infosource, selectfiles, [('subject_id', 'subject_id')]),
         (selectfiles, runinfo, [('events','events_file'),('regressors','regressors_file')]),
@@ -212,7 +214,7 @@ wfSPM.connect([
 #%% Adding data sink
 ########################################################################
 # Datasink
-datasink = Node(nio.DataSink(base_directory='/media/Data/work/KPE_SPM/Sink_ses-2'),
+datasink = Node(nio.DataSink(base_directory='/media/Drobo/work/KPE_SPM/Sink_ses-1'),
                                          name="datasink")
                        
 
@@ -238,25 +240,6 @@ wfSPM.write_graph(graph2use='flat')
 #[]
 
 wfSPM.run('MultiProc', plugin_args={'n_procs': 5})
-#%% simple graph
-import nilearn.plotting
-%matplotlib qt 
-%matplotlib inline
-import matplotlib.pyplot as plt
-import glob
-anatimg = '/media/Data/KPE_fmriPrep_preproc/kpeOutput/derivatives/fmriprep/sub-1263/anat/sub-1263_space-MNI152NLin2009cAsym_desc-preproc_T1w.nii.gz'
-tImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1263/spmT_00*.nii')
-for con_image in tImage:
-    nilearn.plotting.plot_glass_brain(con_image,
-                                      display_mode='lyrz', colorbar=True, plot_abs=False, threshold=2)
-
-conImage = glob.glob('/media/Data/work/KPE_SPM/Sink/1stLevel/_subject_id_1263/con_00*.nii') 
-for con_image in tImage:
-    nilearn.plotting.plot_stat_map(nilearn.image.smooth_img(con_image, 6), display_mode='x',
-                                      threshold=2.3, bg_img=anatimg, dim=1) #, cut_coords=(-5, 0, 5, 10, 15), dim=1)
-    
-#    nilearn.plotting.plot_glass_brain(nilearn.image.smooth_img(con_image, 6),
-#                                      display_mode='lyrz', colorbar=True, plot_abs=False, threshold=2.3, bg_img=antimg)
 
 #%% Gourp analysis - based on SPM - should condifer the fsl Randomize option (other script)
 # OneSampleTTestDesign - creates one sample T-Test Design
@@ -278,8 +261,8 @@ contrast_list = ['con_0001', 'con_0002', 'con_0003', 'con_0004', 'con_0005']
 
 # Threshold - thresholds contrasts
 level2thresh = Node(spm.Threshold(contrast_index=1,
-                              use_topo_fdr=False,
-                              use_fwe_correction=True, # here we can use fwe or fdr
+                              use_topo_fdr=True,
+                              use_fwe_correction=False, # here we can use fwe or fdr
                               extent_threshold=10,
                               height_threshold= 0.05,
                               extent_fdr_p_threshold = 0.05,
