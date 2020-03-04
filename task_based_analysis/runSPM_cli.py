@@ -34,12 +34,13 @@ from nipype.interfaces.matlab import MatlabCommand
 #mlab.MatlabCommand.set_default_matlab_cmd("matlab -nodesktop -nosplash")
 MatlabCommand.set_default_paths('/home/or/Downloads/spm12/') # set default SPM12 path in my computer. 
 
-data_dir = os.path.abspath('/media/Data/KPE_BIDS/derivatives/fmriprep')
-output_dir = '/media/Drobo/work/kpeTask'
+data_dir = os.path.abspath('/media/Data/')
+output_dir = '/media/Data/work/kpeTask'
+removeTR = 4
 fwhm = 4
 tr = 1
 #%% Methods 
-def _bids2nipypeinfo(in_file, events_file, regressors_file,
+def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
                      regressors_names=None,
                      motion_columns=None,
                      decimals=3, amplitude=1.0):
@@ -47,7 +48,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     import numpy as np
     import pandas as pd
     from nipype.interfaces.base.support import Bunch
-    removeTR = 0
+    
     # Process the events file
     events = pd.read_csv(events_file, sep=r'\s+')
 
@@ -60,7 +61,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     out_motion = Path('motion.par').resolve()
 
     regress_data = pd.read_csv(regressors_file, sep=r'\s+')
-    np.savetxt(out_motion, regress_data[motion_columns].values, '%g')
+    np.savetxt(out_motion, regress_data[motion_columns].values[removeTR:,], '%g')
     if regressors_names is None:
         regressors_names = sorted(set(regress_data.columns) - set(motion_columns))
 
@@ -70,11 +71,11 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     runinfo = Bunch(
         scans=in_file,
-        conditions=list(set(events.trial_type_N.values)),
+        conditions=list(set(events.trial_type_30.values)),
         **{k: [] for k in bunch_fields})
 
     for condition in runinfo.conditions:
-        event = events[events.trial_type_N.str.match(condition)]
+        event = events[events.trial_type_30.str.match(condition)]
 
         runinfo.onsets.append(np.round(event.onset.values-removeTR, 3).tolist()) # added -removeTR to align to the onsets after removing X number of TRs from the scan
         runinfo.durations.append(np.round(event.duration.values, 3).tolist())
@@ -89,7 +90,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468', '1480','1499']
+subject_list = ['008']#,'1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468', '1480','1499']
 # Map field names to individual subject runs.
 session = '1' # choose session
 
@@ -100,10 +101,10 @@ infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
 infosource.iterables = [('subject_id', subject_list)]
 
 # SelectFiles - to grab the data (alternativ to DataGrabber)
-templates = {'func': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
-             'mask': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
-             'regressors': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
-             'events': '/media/Data/PTSD_KPE/condition_files/withNumbers/sub-{subject_id}_ses-' + session + '.csv'}
+templates = {'func': data_dir +  '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
+             'mask': data_dir + '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
+             'regressors': data_dir + '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
+             'events':  data_dir + '/KPE_BIDS/condition_files/withNumbers/sub-{subject_id}_ses-' + session + '_30sec_window' + '.csv'}
 selectfiles = pe.Node(nio.SelectFiles(templates,
                                base_directory=data_dir),
                    name="selectfiles")
@@ -121,22 +122,20 @@ runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
     ['a_comp_cor_%02d' % i for i in range(6)] + ['cosine%02d' % i for i in range(4)]
 #%%
 
-cont1 = ['Trauma1>Sad1', 'T', ['trauma1', 'sad1'], [1, -1]]
-cont2 = ['Trauma1>Relax1', 'T', ['trauma1', 'relax1'], [1, -1]]
-cont3 = ['Sad1>Relax1', 'T', ['sad1', 'relax1'], [1, -1]]
-cont4 = ['Sad1', 'T', ['sad1'], [1]]
-cont5 = ['Trauma1>Trauma2_3', 'T', ['trauma1', 'trauma2','trauma3'], [1, -0.5, -0.5]]
-cont6 = ['Trauma1', 'T', ['trauma1'], [1]]
+cont1 = ['Trauma1_0>Sad1_0', 'T', ['trauma1_0', 'sad1_0'], [1, -1]]
+cont2 = ['Trauma1_0>Relax1_0', 'T', ['trauma1_0', 'relax1_0'], [1, -1]]
+cont3 = ['Sad1_0>Relax1_0', 'T', ['sad1_0', 'relax1_0'], [1, -1]]
+cont4 = ['Sad1', 'T', ['sad1_0'], [1]]
+cont5 = ['Trauma1_0>Trauma1_1_2', 'T', ['trauma1_0', 'trauma1_1','trauma1_2'], [1, -0.5, -0.5]]
+cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'], [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
 contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
-#%%
-gunzip = MapNode(Gunzip(), name='gunzip',
-                 iterfield=['in_file'])
-
 #%% Addinf simple denozining procedures (remove dummy scans, smoothing, art detection) 
-#extract = Node(fsl.ExtractROI(t_min=4, t_size=-1, output_type='NIFTI'),
-#               name="extract")
+extract = Node(fsl.ExtractROI(t_size=-1, output_type='NIFTI'),
+              name="extract")
+extract.inputs.t_min = removeTR
 
 smooth = Node(spm.Smooth(), name="smooth", fwhm = fwhm)
+
 # Artifact Detection - determines outliers in functional images
 #art = Node(ArtifactDetect(norm_threshold=2,
 #                          zintensity_threshold=3,
@@ -169,12 +168,12 @@ level1design.inputs.model_serial_correlations = 'AR(1)'
 
 #######################################################################################################################
 # Initiation of a workflow
-wfSPM = Workflow(name="l1spm", base_dir="/media/Drobo/work/KPE_SPM_ses-1")
+wfSPM = Workflow(name="l1spm", base_dir= output_dir)
 wfSPM.connect([
         (infosource, selectfiles, [('subject_id', 'subject_id')]),
         (selectfiles, runinfo, [('events','events_file'),('regressors','regressors_file')]),
-        (selectfiles, gunzip, [('func','in_file')]),
-        (gunzip, smooth, [('out_file','in_files')]),
+        (selectfiles, extract, [('func','in_file')]),
+        (extract, smooth, [('roi_file','in_files')]),
         (smooth, runinfo, [('smoothed_files','in_file')]),
         (smooth, modelspec, [('smoothed_files', 'functional_runs')]),   
         (runinfo, modelspec, [('info', 'subject_info'), ('realign_file', 'realignment_parameters')]),
@@ -214,7 +213,7 @@ wfSPM.connect([
 #%% Adding data sink
 ########################################################################
 # Datasink
-datasink = Node(nio.DataSink(base_directory='/media/Drobo/work/KPE_SPM/Sink_ses-1'),
+datasink = Node(nio.DataSink(base_directory= output_dir),
                                          name="datasink")
                        
 
