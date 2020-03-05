@@ -35,11 +35,11 @@ from nipype.interfaces.matlab import MatlabCommand
 MatlabCommand.set_default_paths('/home/oad4/Downloads/spm12') # set default SPM12 path in my computer. 
 
 data_dir = os.path.abspath('/home/oad4/scratch60')
-output_dir = '/home/oad4/scratch60/work/kpeTask_ses2'
+output_dir = '/home/oad4/scratch60/work/kpeTask_ses1'
 removeTR = 4
 fwhm = 4
 tr = 1
-session = '2' # choose session
+session = '1' # choose session
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
                      regressors_names=None,
