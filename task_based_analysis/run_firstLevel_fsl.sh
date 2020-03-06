@@ -4,7 +4,7 @@
 #SBATCH --error=firstLevelFSLerror.err
 #SBATCH --job-name=firstLevelAnalysis
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=12
+#SBATCH --cpus-per-task=10
 #SBATCH --mem-per-cpu=10G
 #SBATCH --time=16:00:00
 #SBATCH --mail-type=ALL
@@ -18,4 +18,4 @@ module load miniconda
 
 source activate py37_dev
 
-python /home/oad4/kpe_task/fmri_fsl_cluster.py
+python /home/oad4/kpe_task/task_based_analysis/fmri_fsl_cluster.py

@@ -33,23 +33,17 @@ routines is being set to compressed NIFTI.
 """
 
 fsl.FSLCommand.set_default_output_type('NIFTI_GZ')
-"""
-Setting up workflows
---------------------
 
-In this tutorial we will be setting up a hierarchical workflow for fsl
-analysis. This will demonstrate how pre-defined workflows can be setup and
-shared across users, projects and labs.
-"""
-#%%
-data_dir = os.path.abspath('/home/oad4/scratch60/kpe_fsl/derivatives/fmriprep')
-output_dir = '/home/oad4/scratch60/kpe_work'
-fwhm = 6
+
+data_dir = '/home/oad4/scratch60'
+output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses1'
+removeTR = 4
+fwhm = 4
 tr = 1
-removeTR = 4#Number of TR's to remove before initiating the analysis
-#%%
+session = '1' # choose session
+
 #%% Methods 
-def _bids2nipypeinfo(in_file, events_file, regressors_file,
+def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
                      regressors_names=None,
                      motion_columns=None,
                      decimals=3, amplitude=1.0):
@@ -57,7 +51,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     import numpy as np
     import pandas as pd
     from nipype.interfaces.base.support import Bunch
-    removeTR = 4
+    
     # Process the events file
     events = pd.read_csv(events_file, sep=r'\s+')
 
@@ -70,7 +64,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     out_motion = Path('motion.par').resolve()
 
     regress_data = pd.read_csv(regressors_file, sep=r'\s+')
-    np.savetxt(out_motion, regress_data[motion_columns].values, '%g')
+    np.savetxt(out_motion, regress_data[motion_columns].values[removeTR:,], '%g')
     if regressors_names is None:
         regressors_names = sorted(set(regress_data.columns) - set(motion_columns))
 
@@ -80,11 +74,11 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     runinfo = Bunch(
         scans=in_file,
-        conditions=list(set(events.trial_type.values)),
+        conditions=list(set(events.trial_type_30.values)),
         **{k: [] for k in bunch_fields})
 
     for condition in runinfo.conditions:
-        event = events[events.trial_type.str.match(condition)]
+        event = events[events.trial_type_30.str.match(condition)]
 
         runinfo.onsets.append(np.round(event.onset.values-removeTR, 3).tolist()) # added -removeTR to align to the onsets after removing X number of TRs from the scan
         runinfo.durations.append(np.round(event.duration.values, 3).tolist())
@@ -99,8 +93,9 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['008', '1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464', '1480','1499']
-# Map field names to individual subject runs.
+subject_list = ['008','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468','1499']
+# Map field names to individual subject runs. removed 1223 and 1480 - awatining their preproc to finish
+
 
 
 infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
@@ -110,26 +105,30 @@ infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
 infosource.iterables = [('subject_id', subject_list)]
 
 # SelectFiles - to grab the data (alternativ to DataGrabber)
-templates = {'func': data_dir + '/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
-             'mask': data_dir + '/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
-             'regressors': data_dir + '/sub-{subject_id}/ses-1/func/sub-{subject_id}_ses-1_task-Memory_desc-confounds_regressors.tsv',
-             'events': '/home/oad4/scratch60/kpe_fsl/code/condition_files/sub-{subject_id}_ses-1.csv'}
+templates = {'func': data_dir +  '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
+             'mask': data_dir + '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
+             'regressors': data_dir + '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
+             'events':  data_dir + '/KPE_BIDS/condition_files/withNumbers/sub-{subject_id}_ses-' + session + '_30sec_window' + '.csv'}
 selectfiles = pe.Node(nio.SelectFiles(templates,
-                               base_directory=data_dir),
+                               ),
                    name="selectfiles")
-
 #%%
 
 # Extract motion parameters from regressors file
 runinfo = pe.Node(util.Function(
-    input_names=['in_file', 'events_file', 'regressors_file', 'regressors_names'],
+    input_names=['in_file', 'events_file', 'regressors_file', 'regressors_names', 'removeTR'],
     function=_bids2nipypeinfo, output_names=['info', 'realign_file']),
     name='runinfo')
+runinfo.inputs.removeTR = removeTR
 
 # Set the column names to be used from the confounds file
 runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
     ['a_comp_cor_%02d' % i for i in range(6)] + ['cosine%02d' % i for i in range(4)]
 #%%
+
+
+
+
 skip = pe.Node(interface=fsl.ExtractROI(), name = 'skip') 
 skip.inputs.t_min = removeTR
 skip.inputs.t_size = -1
@@ -148,7 +147,7 @@ changeTosrting = pe.Node(name="changeToString",
                                             output_names = ['arr'],
                                             function = changeTostring))
 #%%
-modelfit = pe.Workflow(name='modelfit', base_dir= '/home/oad4/scratch60/kpe_work')
+modelfit = pe.Workflow(name='modelfit', base_dir= output_dir)
 """
 Use :class:`nipype.algorithms.modelgen.SpecifyModel` to generate design information.
 """
@@ -166,14 +165,13 @@ file for analysis
 
 ## Building contrasts
 level1design = pe.Node(interface=fsl.Level1Design(), name="level1design")
-cont1 = ['Trauma>Sad', 'T', ['trauma', 'sad'], [1, -1]]
-cont2 = ['Trauma>Relax', 'T', ['trauma', 'relax'], [1, -1]]
-cont3 = ['Sad>Relax', 'T', ['sad', 'relax'], [1, -1]]
-cont4 = ['Sad', 'T', ['sad'], [1]]
-cont5 = ['Trauma', 'T', ['trauma'], [1]]
-cont6 = ['Relax', 'T', ['relax'], [1]]
+cont1 = ['Trauma1_0>Sad1_0', 'T', ['trauma1_0', 'sad1_0'], [1, -1]]
+cont2 = ['Trauma1_0>Relax1_0', 'T', ['trauma1_0', 'relax1_0'], [1, -1]]
+cont3 = ['Sad1_0>Relax1_0', 'T', ['sad1_0', 'relax1_0'], [1, -1]]
+cont4 = ['Sad1', 'T', ['sad1_0'], [1]]
+cont5 = ['Trauma1_0>Trauma1_1_2', 'T', ['trauma1_0', 'trauma1_1','trauma1_2'], [1, -0.5, -0.5]]
+cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'], [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
 contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
-
 
 
 level1design.inputs.interscan_interval = tr
@@ -200,19 +198,7 @@ modelestimate = pe.MapNode(
     interface=fsl.FILMGLS(smooth_autocorr=True, mask_size=5, threshold=1000),
     name='modelestimate',
     iterfield=['design_file', 'in_file', 'tcon_file'])
-"""
-Use :class:`nipype.interfaces.fsl.ContrastMgr` to generate contrast estimates
-"""
 
-#conestimate = pe.MapNode(
-#    interface=fsl.ContrastMgr(),
-#    name='conestimate',
-#    iterfield=[
-#        'tcon_file', 'param_estimates', 'sigmasquareds', 'corrections',
-#        'dof_file'
-#    ])
-#%% set variables
-    
 
 #%%
 modelfit.connect([
