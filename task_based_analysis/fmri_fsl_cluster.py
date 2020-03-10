@@ -93,8 +93,8 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['008','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468','1499']
-# Map field names to individual subject runs. removed 1223 and 1480 - awatining their preproc to finish
+subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468','1499']
+# Map field names to individual subject runs. removed 1480 - awatining their preproc to finish
 
 
 
@@ -168,8 +168,8 @@ level1design = pe.Node(interface=fsl.Level1Design(), name="level1design")
 cont1 = ['Trauma1_0>Sad1_0', 'T', ['trauma1_0', 'sad1_0'], [1, -1]]
 cont2 = ['Trauma1_0>Relax1_0', 'T', ['trauma1_0', 'relax1_0'], [1, -1]]
 cont3 = ['Sad1_0>Relax1_0', 'T', ['sad1_0', 'relax1_0'], [1, -1]]
-cont4 = ['Sad1', 'T', ['sad1_0'], [1]]
-cont5 = ['Trauma1_0>Trauma1_1_2', 'T', ['trauma1_0', 'trauma1_1','trauma1_2'], [1, -0.5, -0.5]]
+cont4 = ['trauma1_0 > trauma2_0', 'T', ['trauma1_0', 'trauma2_0'], [1, -1]]
+cont5 = ['Trauma1_0>Trauma1_2_3', 'T', ['trauma1_0', 'trauma1_2','trauma1_3'], [1, -0.5, -0.5]]
 cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'], [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
 contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
 
@@ -221,4 +221,4 @@ modelfit.connect([
     
 ])
 #%%
-modelfit.run('MultiProc', plugin_args={'n_procs': 4})
+modelfit.run('MultiProc', plugin_args={'n_procs': 5})

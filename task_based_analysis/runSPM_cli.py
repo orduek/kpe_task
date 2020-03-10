@@ -24,7 +24,6 @@ import nipype.pipeline.engine as pe  # pypeline engine
 import nipype.algorithms.rapidart as ra  # artifact detection
 import nipype.algorithms.modelgen as model  # model specification
 from nipype.algorithms.rapidart import ArtifactDetect
-from nipype.algorithms.misc import Gunzip
 from nipype import Node, Workflow, MapNode
 from nipype import SelectFiles
 from os.path import join as opj
@@ -35,11 +34,11 @@ from nipype.interfaces.matlab import MatlabCommand
 MatlabCommand.set_default_paths('/home/oad4/Downloads/spm12') # set default SPM12 path in my computer. 
 
 data_dir = os.path.abspath('/home/oad4/scratch60')
-output_dir = '/home/oad4/scratch60/work/kpeTask_ses2'
+output_dir = '/home/oad4/scratch60/work/kpeTask_ses3'
 removeTR = 4
 fwhm = 4
 tr = 1
-session = '2' # choose session
+session = '3' # choose session
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
                      regressors_names=None,
@@ -91,8 +90,8 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['008','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468','1499']
-# Map field names to individual subject runs. removed 1223 and 1480 - awatining their preproc to finish
+subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464','1468','1499']
+# Map field names to individual subject runs. removed 1480 - awatining their preproc to finish
 
 
 infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
@@ -114,10 +113,11 @@ selectfiles = pe.Node(nio.SelectFiles(templates,
 
 # Extract motion parameters from regressors file
 runinfo = pe.Node(util.Function(
-    input_names=['in_file', 'events_file', 'regressors_file', 'regressors_names'],
+    input_names=['in_file', 'events_file', 'regressors_file', 'regressors_names', 'removeTR'],
     function=_bids2nipypeinfo, output_names=['info', 'realign_file']),
     name='runinfo')
 
+runinfo.inputs.removeTR = removeTR
 # Set the column names to be used from the confounds file
 runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
     ['a_comp_cor_%02d' % i for i in range(6)] + ['cosine%02d' % i for i in range(4)]
@@ -126,10 +126,13 @@ runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
 cont1 = ['Trauma1_0>Sad1_0', 'T', ['trauma1_0', 'sad1_0'], [1, -1]]
 cont2 = ['Trauma1_0>Relax1_0', 'T', ['trauma1_0', 'relax1_0'], [1, -1]]
 cont3 = ['Sad1_0>Relax1_0', 'T', ['sad1_0', 'relax1_0'], [1, -1]]
-cont4 = ['Sad1', 'T', ['sad1_0'], [1]]
-cont5 = ['Trauma1_0>Trauma1_1_2', 'T', ['trauma1_0', 'trauma1_1','trauma1_2'], [1, -0.5, -0.5]]
-cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'], [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
+cont4 = ['trauma1_0 > trauma2_0', 'T', ['trauma1_0', 'trauma2_0'], [1, -1]]
+cont5 = ['Trauma1_0 > Trauma1_2_3', 'T', ['trauma1_0', 'trauma1_2','trauma1_3'], [1, -0.5, -0.5]]
+cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'],
+         [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
+
 contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
+
 #%% Addinf simple denozining procedures (remove dummy scans, smoothing, art detection) 
 extract = Node(fsl.ExtractROI(t_size=-1, output_type='NIFTI'),
               name="extract")
