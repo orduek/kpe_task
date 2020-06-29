@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# %%
 """
 Created on Fri Sep 27 14:11:22 2019
 
@@ -16,7 +17,7 @@ from scipy import stats
 import random
 import glob
 
-#%%
+# %%
 
 def generate_csv_list(path):
     fn_list = glob.glob(path+'/*')
@@ -33,7 +34,7 @@ def read_mats(fn_list):
     return fn_mats
 
 
-def train_cpm(ipmat, pheno, numNodes):
+def train_cpm(ipmat, pheno, numNodes, thr):
 
     """
     Accepts input matrices and pheno data
@@ -48,6 +49,7 @@ def train_cpm(ipmat, pheno, numNodes):
     negedges: negative edges are a set of edges have negative
               correlation with behavioral measures
     numNodes: Number of nodes in the parcellation
+    thr = threshold of pearson
     """
      
     cc=[stats.pearsonr(pheno,im) for im in ipmat]
@@ -55,9 +57,9 @@ def train_cpm(ipmat, pheno, numNodes):
     pmat=np.array([c[1] for c in cc])
     rmat=np.reshape(rmat,[numNodes,numNodes])
     pmat=np.reshape(pmat,[numNodes,numNodes])
-    posedges=(rmat > 0) & (pmat < 0.01)
+    posedges=(rmat > 0) & (pmat < thr)
     posedges=posedges.astype(int)
-    negedges=(rmat < 0) & (pmat < 0.01)
+    negedges=(rmat < 0) & (pmat < thr)
     negedges=negedges.astype(int)
     pe=ipmat[posedges.flatten().astype(bool),:]
     ne=ipmat[negedges.flatten().astype(bool),:]
@@ -123,7 +125,7 @@ def kfold_cpm(X,y,k):
         behav_actual[fold,:]=testpheno
 
 
-        pos_fit,neg_fit,posedges,negedges=train_cpm(trainmats,trainpheno, 116)
+        pos_fit,neg_fit,posedges,negedges=train_cpm(trainmats,trainpheno, 116, 0.01)
 
         pe=np.sum(testmats[posedges.flatten().astype(bool),:], axis=0)/2
         ne=np.sum(testmats[negedges.flatten().astype(bool),:], axis=0)/2
@@ -165,7 +167,7 @@ def run_validate(X,y,cvtype):
         behav_pred_neg=np.zeros([numsubs])
         for loo in range(0,numsubs):
 
-            print("Running LOO, sub no:",loo)
+          #  print("Running LOO, sub no:",loo)
       
             train_mats=np.delete(X,[loo],axis=1)
             train_pheno=np.delete(pheno,[loo],axis=0)
@@ -173,7 +175,7 @@ def run_validate(X,y,cvtype):
             test_mat=X[:,loo]
             test_pheno=y[loo]
 
-            pos_fit,neg_fit,posedges,negedges=train_cpm(train_mats,train_pheno, numNodes)
+            pos_fit,neg_fit,posedges,negedges=train_cpm(train_mats,train_pheno, numNodes, 0.01)
 
             pe=np.sum(test_mat[posedges.flatten().astype(bool)])/2
             ne=np.sum(test_mat[negedges.flatten().astype(bool)])/2
@@ -187,11 +189,13 @@ def run_validate(X,y,cvtype):
                behav_pred_neg[loo]=neg_fit[0]*ne + neg_fit[1]
             else:
                 behav_pred_neg[loo]='nan'
-
-        
-        Rpos=stats.pearsonr(behav_pred_pos,pheno)#[0]
-        Rneg=stats.pearsonr(behav_pred_neg,pheno)#[0]
-
+        # in case we run permutation tests and correlation returns an Nan adding try, except here
+        try:
+            Rpos=stats.pearsonr(behav_pred_pos,pheno)#[0]
+            Rneg=stats.pearsonr(behav_pred_neg,pheno)#[0]
+        except:
+            Rpos = (0.0, 0.99)
+            Rneg = (0.0, 0.99)
         return Rpos,Rneg, behav_pred_pos, behav_pred_neg
 
 
@@ -206,7 +210,14 @@ def run_validate(X,y,cvtype):
         ccn=np.array([stats.pearsonr(bn[i,:],ba[i,:]) for i in range(0,5)])
         Rneg_mean=ccn.mean(axis=0)[0]
 
+    elif cvtype == '7k':
+        bp,bn,ba=kfold_cpm(X,y,7)
 
+        ccp=np.array([stats.pearsonr(bp[i,:],ba[i,:]) for i in range(0,3)])
+        Rpos_mean=ccp.mean(axis=0)[0]
+
+        ccn=np.array([stats.pearsonr(bn[i,:],ba[i,:]) for i in range(0,3)])
+        Rneg_mean=ccn.mean(axis=0)[0]
 
     elif cvtype == '10k':
         bp,bn,ba=kfold_cpm(X,y,10)
@@ -238,27 +249,117 @@ def run_validate(X,y,cvtype):
     
 
 
-#%% 
-# first = np.array(reshape_ses1_trauma)
-# second = np.array(reshape_Ses2_trauma)
-# delta = np.subtract(second, first)
+# %%
+n = np.load('/home/or/kpe_task_analysis/trauma_ses1.npy')
+n.shape
+
+# %%
+first = np.load('/home/or/kpe_task_analysis/trauma_ses1.npy')
+second = np.load('/home/or/kpe_task_analysis/trauma_ses2.npy')
+delta = np.subtract(second, first)
 
 # delta1 = np.delete(delta, mask, axis=2)
 # delta1.shape
-# y = np.array([2,  -1,  30,  17,  28,   4,  30,  18,  22,  18,  -1,  11,   2,   4, -16,  32,   8,  14,  20,   3,  23])
-
-# cpm1_Rpos , cpm1_Rneg,behav_pred_pos, behav_pred_neg  = run_validate(delta, y, 'LOO')
-# #%%
-# X = delta
-# X=np.reshape(X,[-1,21])
-# pheno = y
-# fit_pos,fit_neg,posedges,negedges = train_cpm(X, pheno, 116)
-# np.savetxt('posEdgAAL.csv',posedges)
-# np.savetxt('negEdgAAL.csv',negedges)
-# #%%
-# # reshape and save as .mat for CPM
-# diffMat_21_CPM = np.moveaxis(np.array(delta),0, -1)
-# scipy.io.savemat('diffMat_2_1.mat', dict(x=delta))
+y = np.array([2,  -1,  30,  17,  28,   4,  30,  18,  22,  18,  -1,  11,   2,   4, -16,  32,   8,  14,  20,   3,  23])
+delta.shape
 
 
+# %%
 
+# %%
+## Run three fold with many iterations
+rposAll = []
+rnegAll = []
+for i in range(1000):
+    print(f'Iteration nu. {i}')
+    Rpos,Rneg = run_validate(delta, y, '7k')
+    rposAll.append(Rpos)
+    rnegAll.append(Rneg)
+
+
+# %%
+sns.distplot(rposAll)
+np.mean(rposAll)
+
+# %%
+rposAll = np.array(rposAll)
+np.quantile(rposAll, [0.05, 0.95])
+
+# %%
+sns.distplot(rnegAll)
+np.mean(rnegAll)
+
+# %%
+## use permutation test to assess the real value of this calculation
+nitr = 500
+rPos_perm = []
+rNeg_perm = []
+for i in range(nitr):
+    print (f'Iteration No. {i}')
+    y_rand = random.shuffle(y)
+    #print(y)
+    Rpos,Rneg, behav_pred_pos, behav_pred_neg = run_validate(delta, y, 'LOO')
+    rPos_perm.append(Rpos)
+    rNeg_perm.append(Rneg)
+
+# %%
+# plotting the permutation tests
+rPos_perm = np.array(rPos_perm)
+rNeg_perm = np.array(rNeg_perm)
+
+sns.distplot(rPos_perm[:,0])
+sns.distplot(rNeg_perm[:,0])
+
+# %%
+# run it one time not randomized
+y = np.array([2,  -1,  30,  17,  28,   4,  30,  18,  22,  18,  -1,  11,   2,   4, -16,  32,   8,  14,  20,   3,  23])
+Rpos,Rneg, behav_pred_pos, behav_pred_neg = run_validate(delta, y, 'LOO')
+
+# %%
+Rpos
+
+# %%
+# chances of receiving this result if its random is...
+sum(rPos_perm[:,0]>0.41) / len(rPos_perm)
+
+
+# %%
+# chances of rNeg
+sum(rNeg_perm[:,0]>0.24) / len(rNeg_perm)
+
+
+# %% [markdown]
+# ### So - positive correlation is above chance level, negative is close - but not above chance level
+
+# %%
+import matplotlib.pyplot as plt
+import seaborn as sns
+group_label = [1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1]
+df = pd.DataFrame({'positive_pred': behav_pred_pos, 'negative_pred':behav_pred_neg, 'observed': y, 'group':group_label})
+df = df.replace(to_replace={'group': {0:'midazolam', 1:'ketamine'}})
+sns.set_style("whitegrid")
+sns.regplot('positive_pred', 'observed', data=df)
+ax = sns.scatterplot('positive_pred', 'observed', data=df, hue='group')
+plt.legend(loc='upper left')
+ax.set(xlabel="Prediction from Positive Edges", ylabel = "Observed delta")
+print(f'Correlation between positive edges and changes in symptoms is {stats.pearsonr(df.positive_pred,df.observed)}')
+
+# %%
+df
+
+# %%
+import matplotlib.pyplot as plt
+import seaborn as sns
+group_label = [1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1]
+df = pd.DataFrame({'positive_pred': behav_pred_pos, 'negative_pred':behav_pred_neg, 'observed': y, 'group':group_label})
+df
+
+
+# %%
+df.replace(to_replace={'group': {0:'midazolam', 1:'ketamine'}})
+
+# %%
+sns.lmplot('positive_pred', 'observed', data=df, hue='group', scatter_kws={'alpha':0.5})
+
+# %%
+stats.pearsonr(df.negative_pred[df['group']=='midazolam'],df.observed[df['group']=='midazolam'])
