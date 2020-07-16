@@ -35,12 +35,12 @@ routines is being set to compressed NIFTI.
 fsl.FSLCommand.set_default_output_type('NIFTI_GZ')
 
 
-data_dir = '/home/oad4/scratch60'
-output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses3'
+data_dir = '/home/oad4/scratch60/kpe'
+output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses4'
 removeTR = 4
 fwhm = 4
 tr = 1
-session = '3' # choose session
+session = '4' # choose session
 
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
@@ -106,10 +106,10 @@ infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
 infosource.iterables = [('subject_id', subject_list)]
 
 # SelectFiles - to grab the data (alternativ to DataGrabber)
-templates = {'func': data_dir +  '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
-             'mask': data_dir + '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
-             'regressors': data_dir + '/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
-             'events':  data_dir + '/KPE_BIDS/condition_files/withNumbers/sub-{subject_id}_ses-' + session + '_30sec_window' + '.csv'}
+templates = {'func': data_dir +  '/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
+             'mask': data_dir + '/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
+             'regressors': data_dir + '/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
+             'events':  data_dir + '/condition_files/withNumbers/sub-{subject_id}_ses-' + session + '_30sec_window' + '.csv'}
 selectfiles = pe.Node(nio.SelectFiles(templates,
                                ),
                    name="selectfiles")
@@ -136,17 +136,11 @@ skip.inputs.t_size = -1
 
 #%%
 
-susan = create_susan_smooth()
-susan.inputs.inputnode.fwhm = fwhm
+susan =  pe.Node(interface=fsl.SUSAN(), name = 'susan') #create_susan_smooth()
+susan.inputs.fwhm = fwhm
+susan.inputs.brightness_threshold = 1000.0
 
-#%%
-def changeTostring(arr):
-    return arr[0]
 
-changeTosrting = pe.Node(name="changeToString",
-                         interface=Function(input_names = ['arr'],
-                                            output_names = ['arr'],
-                                            function = changeTostring))
 #%%
 modelfit = pe.Workflow(name='modelfit', base_dir= output_dir)
 """
@@ -206,16 +200,16 @@ modelfit.connect([
     (infosource, selectfiles, [('subject_id', 'subject_id')]),
     (selectfiles, runinfo, [('events','events_file'),('regressors','regressors_file')]),
     (selectfiles, skip,[('func','in_file')]),
-    (skip,susan,[('roi_file','inputnode.in_files')]),
-    (selectfiles, susan, [('mask','inputnode.mask_file')]),
-    (susan, runinfo, [('outputnode.smoothed_files', 'in_file')]),
-    (susan, modelspec, [('outputnode.smoothed_files', 'functional_runs')]),
+    (skip,susan,[('roi_file','in_file')]),
+    
+    (susan, runinfo, [('smoothed_file', 'in_file')]),
+    (susan, modelspec, [('smoothed_file', 'functional_runs')]),
     (runinfo, modelspec, [('info', 'subject_info'), ('realign_file', 'realignment_parameters')]),
     (modelspec, level1design, [('session_info', 'session_info')]),
     (level1design, modelgen, [('fsf_files', 'fsf_file'), ('ev_files',
                                                           'ev_files')]),
-    (susan, changeTosrting, [('outputnode.smoothed_files', 'arr')]),
-    (changeTosrting, mask, [('arr', 'in_file')]),
+   # (susan, changeTosrting, [('outputnode.smoothed_files', 'arr')]),
+    (susan, mask, [('smoothed.file', 'in_file')]),
     (selectfiles, mask, [('mask', 'mask_file')]),
     (mask, modelestimate, [('out_file','in_file')]),
     (modelgen, modelestimate, [('design_file', 'design_file'),('con_file', 'tcon_file'),('fcon_file','fcon_file')]),
