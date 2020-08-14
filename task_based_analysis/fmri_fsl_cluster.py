@@ -8,7 +8,7 @@ Created on Wed Dec  4 14:29:06 2019
 1st level analysis using FSL output
 In this one we smooth using SUSAN, which takes longer. 
 """
-
+#%%
 from __future__ import print_function
 from __future__ import division
 from builtins import str
@@ -36,12 +36,12 @@ fsl.FSLCommand.set_default_output_type('NIFTI_GZ')
 
 
 data_dir = '/home/oad4/scratch60/kpe'
-output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses4'
+output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses1_Nosmooth'
 removeTR = 4
-fwhm = 4
+fwhm = 6
 tr = 1
-session = '4' # choose session
-
+session = '1' # choose session
+output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses%s' %session
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
                      regressors_names=None,
@@ -93,8 +93,9 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364',
-'1369','1387','1390','1403','1464','1468','1480','1499', '1561']
+subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339',
+'1343','1351','1356','1364', '1369','1387','1390','1403','1419','1464',
+'1468','1480','1499', '1561', '1573', '1578']
 # Map field names to individual subject runs. 
 
 
@@ -166,7 +167,8 @@ cont3 = ['Sad1_0>Relax1_0', 'T', ['sad1_0', 'relax1_0'], [1, -1]]
 cont4 = ['trauma1_0 > trauma2_0', 'T', ['trauma1_0', 'trauma2_0'], [1, -1]]
 cont5 = ['Trauma1_0>Trauma1_2_3', 'T', ['trauma1_0', 'trauma1_2','trauma1_3'], [1, -0.5, -0.5]]
 cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'], [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
-contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
+cont7 = ['Trauma1_01>relax1_01', 'T', ['trauma1_0', 'trauma1_1', 'relax1_0', 'relax1_1'], [0.5,0.5,-0.5,-0.5]]
+contrasts = [cont1, cont2, cont3, cont4, cont5, cont6, cont7]
 
 
 level1design.inputs.interscan_interval = tr
@@ -178,10 +180,10 @@ Use :class:`nipype.interfaces.fsl.FEATModel` to generate a run specific mat
 file for use by FILMGLS
 """
 
-modelgen = pe.MapNode(
+modelgen = pe.Node(
     interface=fsl.FEATModel(),
     name='modelgen',
-    iterfield=['fsf_file', 'ev_files'])
+    )
 """
 Use :class:`nipype.interfaces.fsl.FILMGLS` to estimate a model specified by a
 mat file and a functional run
@@ -189,10 +191,10 @@ mat file and a functional run
 mask =  pe.Node(interface= fsl.maths.ApplyMask(), name = 'mask')
 
 
-modelestimate = pe.MapNode(
+modelestimate = pe.Node(
     interface=fsl.FILMGLS(smooth_autocorr=True, mask_size=5, threshold=1000),
     name='modelestimate',
-    iterfield=['design_file', 'in_file', 'tcon_file'])
+    )
 
 
 #%%
@@ -209,11 +211,11 @@ modelfit.connect([
     (level1design, modelgen, [('fsf_files', 'fsf_file'), ('ev_files',
                                                           'ev_files')]),
    # (susan, changeTosrting, [('outputnode.smoothed_files', 'arr')]),
-    (susan, mask, [('smoothed.file', 'in_file')]),
+    (susan, mask, [('smoothed_file', 'in_file')]),
     (selectfiles, mask, [('mask', 'mask_file')]),
     (mask, modelestimate, [('out_file','in_file')]),
     (modelgen, modelestimate, [('design_file', 'design_file'),('con_file', 'tcon_file'),('fcon_file','fcon_file')]),
     
 ])
 #%%
-modelfit.run('MultiProc', plugin_args={'n_procs': 6})
+modelfit.run('MultiProc', plugin_args={'n_procs': 7})
