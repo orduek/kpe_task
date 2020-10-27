@@ -8,7 +8,7 @@ Created on Wed Dec  4 14:29:06 2019
 1st level analysis using FSL output
 In this one we smooth using SUSAN, which takes longer. 
 """
-
+#%%
 from __future__ import print_function
 from __future__ import division
 from builtins import str
@@ -47,7 +47,7 @@ output_dir = '/media/Data/work'
 fwhm = 6
 tr = 1
 removeTR = 4#Number of TR's to remove before initiating the analysis
-#%%
+
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file,
                      regressors_names=None,

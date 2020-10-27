@@ -1,0 +1,3103 @@
+200223-21:16:43,5 nipype.workflow INFO:
+	 Workflow l1spm settings: ['check', 'execution', 'logging', 'monitoring']
+200223-21:16:43,209 nipype.workflow INFO:
+	 Running in parallel.
+200223-21:16:43,217 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 21 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 5/5.
+200223-21:16:43,269 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1499/selectfiles".
+200223-21:16:43,272 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1480/selectfiles".
+200223-21:16:43,275 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1468/selectfiles".
+200223-21:16:43,280 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1464/selectfiles".
+200223-21:16:43,285 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1403/selectfiles".
+200223-21:16:43,370 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200223-21:16:43,372 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200223-21:16:43,375 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200223-21:16:43,376 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200223-21:16:43,377 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200223-21:16:43,443 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200223-21:16:43,444 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200223-21:16:43,446 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200223-21:16:43,447 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200223-21:16:43,447 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200223-21:16:45,220 nipype.workflow INFO:
+	 [Job 0] Completed (l1spm.selectfiles).
+200223-21:16:45,223 nipype.workflow INFO:
+	 [Job 9] Completed (l1spm.selectfiles).
+200223-21:16:45,224 nipype.workflow INFO:
+	 [Job 18] Completed (l1spm.selectfiles).
+200223-21:16:45,226 nipype.workflow INFO:
+	 [Job 27] Completed (l1spm.selectfiles).
+200223-21:16:45,228 nipype.workflow INFO:
+	 [Job 36] Completed (l1spm.selectfiles).
+200223-21:16:45,231 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 21 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 5/5.
+200223-21:16:45,288 nipype.workflow INFO:
+	 [Job 1] Cached (l1spm.gunzip).
+200223-21:16:45,294 nipype.workflow INFO:
+	 [Job 10] Cached (l1spm.gunzip).
+200223-21:16:45,302 nipype.workflow INFO:
+	 [Job 19] Cached (l1spm.gunzip).
+200223-21:16:45,310 nipype.workflow INFO:
+	 [Job 28] Cached (l1spm.gunzip).
+200223-21:16:45,319 nipype.workflow INFO:
+	 [Job 37] Cached (l1spm.gunzip).
+200223-21:16:47,269 nipype.workflow INFO:
+	 [Job 2] Cached (l1spm.smooth).
+200223-21:16:47,275 nipype.workflow INFO:
+	 [Job 11] Cached (l1spm.smooth).
+200223-21:16:47,281 nipype.workflow INFO:
+	 [Job 20] Cached (l1spm.smooth).
+200223-21:16:47,288 nipype.workflow INFO:
+	 [Job 29] Cached (l1spm.smooth).
+200223-21:16:47,294 nipype.workflow INFO:
+	 [Job 38] Cached (l1spm.smooth).
+200223-21:16:49,288 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1499/runinfo".
+200223-21:16:49,306 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1480/runinfo".
+200223-21:16:49,330 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1468/runinfo".
+200223-21:16:49,342 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200223-21:16:49,356 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1464/runinfo".
+200223-21:16:49,368 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200223-21:16:49,383 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1403/runinfo".
+200223-21:16:49,391 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200223-21:16:49,409 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200223-21:16:49,419 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200223-21:16:50,17 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200223-21:16:50,357 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200223-21:16:50,357 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200223-21:16:50,423 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200223-21:16:50,454 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200223-21:16:51,226 nipype.workflow INFO:
+	 [Job 3] Completed (l1spm.runinfo).
+200223-21:16:51,228 nipype.workflow INFO:
+	 [Job 12] Completed (l1spm.runinfo).
+200223-21:16:51,230 nipype.workflow INFO:
+	 [Job 21] Completed (l1spm.runinfo).
+200223-21:16:51,231 nipype.workflow INFO:
+	 [Job 30] Completed (l1spm.runinfo).
+200223-21:16:51,233 nipype.workflow INFO:
+	 [Job 39] Completed (l1spm.runinfo).
+200223-21:16:51,236 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 21 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 5/5.
+200223-21:16:51,317 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1499/modelspec".
+200223-21:16:51,355 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1480/modelspec".
+200223-21:16:51,397 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1468/modelspec".
+200223-21:16:51,453 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1464/modelspec".
+200223-21:16:51,753 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1403/modelspec".
+200223-21:16:53,228 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 16 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200223-21:41:32,987 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200223-21:41:33,154 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200223-21:41:38,192 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200223-21:41:38,413 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200223-21:41:38,780 nipype.workflow INFO:
+	 [Job 4] Completed (l1spm.modelspec).
+200223-21:41:38,782 nipype.workflow INFO:
+	 [Job 40] Completed (l1spm.modelspec).
+200223-21:41:38,786 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 18 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200223-21:41:38,876 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200223-21:41:39,198 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1499/level1design".
+200223-21:41:41,241 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 16 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200223-21:41:41,290 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1403/level1design".
+200223-21:41:44,2 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200223-21:41:44,21 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200223-21:41:44,153 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200223-21:41:44,784 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200223-21:41:45,245 nipype.workflow INFO:
+	 [Job 13] Completed (l1spm.modelspec).
+200223-21:41:45,249 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 17 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200223-21:41:47,829 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200223-21:41:47,919 nipype.workflow INFO:
+	 [Job 31] Completed (l1spm.modelspec).
+200223-21:41:47,943 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 17 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+200223-21:41:47,952 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200223-21:41:48,20 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1480/level1design".
+200223-21:41:48,261 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1464/level1design".
+200223-21:41:48,933 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200223-21:41:49,6 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200223-21:41:49,326 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200223-21:41:49,922 nipype.workflow INFO:
+	 [Job 22] Completed (l1spm.modelspec).
+200223-21:41:49,927 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 17 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200223-21:41:50,212 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1468/level1design".
+200223-21:41:50,869 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200223-21:41:51,926 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 16 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200223-21:52:34,67 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200223-21:52:34,513 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200223-21:52:34,579 nipype.workflow INFO:
+	 [Job 5] Completed (l1spm.level1design).
+200223-21:52:34,580 nipype.workflow INFO:
+	 [Job 41] Completed (l1spm.level1design).
+200223-21:52:34,584 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 18 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200223-21:52:34,679 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1499/level1estimate".
+200223-21:52:34,767 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1403/level1estimate".
+200223-21:52:35,402 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200223-21:52:35,913 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200223-21:52:35,916 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200223-21:52:36,580 nipype.workflow INFO:
+	 [Job 14] Completed (l1spm.level1design).
+200223-21:52:36,583 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 17 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+200223-21:52:36,690 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1480/level1estimate".
+200223-21:52:36,961 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200223-21:52:37,301 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200223-21:52:37,946 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200223-21:52:38,582 nipype.workflow INFO:
+	 [Job 32] Completed (l1spm.level1design).
+200223-21:52:38,583 nipype.workflow INFO:
+	 [Job 23] Completed (l1spm.level1design).
+200223-21:52:38,584 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 18 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200223-21:52:38,639 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1468/level1estimate".
+200223-21:52:39,245 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1464/level1estimate".
+200223-21:52:39,803 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200223-21:52:40,63 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200223-21:52:40,584 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 16 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:36:38,716 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-00:36:40,674 nipype.workflow INFO:
+	 [Job 42] Completed (l1spm.level1estimate).
+200224-00:36:40,678 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 17 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:36:45,945 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 16 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:36:46,861 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1403/contrastestimate".
+200224-00:38:25,488 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-00:41:24,1 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-00:41:24,221 nipype.workflow INFO:
+	 [Job 43] Completed (l1spm.contrastestimate).
+200224-00:41:24,225 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 17 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:41:25,372 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1403/datasink".
+200224-00:41:26,224 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 16 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:41:26,701 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-00:41:32,529 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-00:41:34,230 nipype.workflow INFO:
+	 [Job 44] Completed (l1spm.datasink).
+200224-00:41:34,235 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 16 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:41:34,680 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1390/selectfiles".
+200224-00:41:36,91 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-00:41:36,234 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 15 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:41:37,84 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-00:41:38,234 nipype.workflow INFO:
+	 [Job 45] Completed (l1spm.selectfiles).
+200224-00:41:38,238 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 16 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:41:38,770 nipype.workflow INFO:
+	 [Job 46] Cached (l1spm.gunzip).
+200224-00:41:41,21 nipype.workflow INFO:
+	 [Job 47] Cached (l1spm.smooth).
+200224-00:41:43,479 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1390/runinfo".
+200224-00:41:44,240 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 15 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:41:44,748 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-00:41:54,218 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-00:41:54,249 nipype.workflow INFO:
+	 [Job 48] Completed (l1spm.runinfo).
+200224-00:41:54,253 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 16 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:41:54,901 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1390/modelspec".
+200224-00:41:56,252 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 15 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:53:12,890 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-00:53:16,962 nipype.workflow INFO:
+	 [Job 33] Completed (l1spm.level1estimate).
+200224-00:53:16,967 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 16 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:53:48,809 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 15 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:53:52,251 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1464/contrastestimate".
+200224-00:56:44,128 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-00:56:50,994 nipype.workflow INFO:
+	 [Job 15] Completed (l1spm.level1estimate).
+200224-00:56:50,998 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 16 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:57:20,160 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 15 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-00:57:23,544 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-00:57:24,536 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1480/contrastestimate".
+200224-01:01:04,784 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-01:04:28,526 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-01:04:30,604 nipype.workflow INFO:
+	 [Job 34] Completed (l1spm.contrastestimate).
+200224-01:04:30,608 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 16 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:04:56,109 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1464/datasink".
+200224-01:04:56,110 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 15 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:05:00,977 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-01:05:48,843 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-01:05:50,163 nipype.workflow INFO:
+	 [Job 35] Completed (l1spm.datasink).
+200224-01:05:50,167 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 15 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:05:52,271 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 14 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:05:52,273 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1387/selectfiles".
+200224-01:05:59,684 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-01:06:05,806 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-01:06:06,284 nipype.workflow INFO:
+	 [Job 54] Completed (l1spm.selectfiles).
+200224-01:06:06,288 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 15 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:06:08,126 nipype.workflow INFO:
+	 [Job 55] Cached (l1spm.gunzip).
+200224-01:06:10,400 nipype.workflow INFO:
+	 [Job 56] Cached (l1spm.smooth).
+200224-01:06:12,417 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 14 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:06:12,419 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1387/runinfo".
+200224-01:06:20,222 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-01:06:29,336 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-01:06:30,434 nipype.workflow INFO:
+	 [Job 57] Completed (l1spm.runinfo).
+200224-01:06:30,439 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 15 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:06:35,124 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 14 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:06:35,127 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1387/modelspec".
+200224-01:08:57,635 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-01:09:01,273 nipype.workflow INFO:
+	 [Job 16] Completed (l1spm.contrastestimate).
+200224-01:09:01,277 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 15 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:09:17,326 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 14 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:09:17,328 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1480/datasink".
+200224-01:09:27,749 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-01:09:54,978 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-01:09:55,363 nipype.workflow INFO:
+	 [Job 17] Completed (l1spm.datasink).
+200224-01:09:55,367 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 14 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:09:58,751 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1369/selectfiles".
+200224-01:09:58,754 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 13 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:10:09,508 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-01:10:13,475 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-01:10:14,769 nipype.workflow INFO:
+	 [Job 63] Completed (l1spm.selectfiles).
+200224-01:10:14,773 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 14 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:10:15,852 nipype.workflow INFO:
+	 [Job 64] Cached (l1spm.gunzip).
+200224-01:10:18,414 nipype.workflow INFO:
+	 [Job 65] Cached (l1spm.smooth).
+200224-01:10:20,919 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 13 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:10:20,920 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1369/runinfo".
+200224-01:10:25,431 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-01:10:33,366 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-01:10:34,931 nipype.workflow INFO:
+	 [Job 66] Completed (l1spm.runinfo).
+200224-01:10:34,936 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 14 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:10:42,310 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 13 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:10:42,314 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1369/modelspec".
+200224-01:19:36,42 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-01:19:40,663 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-01:19:40,869 nipype.workflow INFO:
+	 [Job 49] Completed (l1spm.modelspec).
+200224-01:19:40,872 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 14 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:19:42,44 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1390/level1design".
+200224-01:19:42,873 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 13 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-01:19:47,50 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-01:22:23,136 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-01:22:27,42 nipype.workflow INFO:
+	 [Job 6] Completed (l1spm.level1estimate).
+200224-01:22:27,46 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 14 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-01:23:02,897 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 13 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-01:23:05,673 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1499/contrastestimate".
+200224-01:25:46,975 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-01:25:55,79 nipype.workflow INFO:
+	 [Job 24] Completed (l1spm.level1estimate).
+200224-01:25:55,83 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 14 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:26:32,407 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 13 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:26:37,184 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1468/contrastestimate".
+200224-01:26:53,760 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-01:30:22,293 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-01:34:07,514 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-01:34:08,883 nipype.workflow INFO:
+	 [Job 7] Completed (l1spm.contrastestimate).
+200224-01:34:08,887 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 14 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:34:18,130 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 13 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:34:18,132 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1499/datasink".
+200224-01:34:21,247 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-01:34:48,522 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-01:34:50,160 nipype.workflow INFO:
+	 [Job 8] Completed (l1spm.datasink).
+200224-01:34:50,164 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 13 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:34:50,939 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1364/selectfiles".
+200224-01:34:52,163 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 12 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:34:54,281 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-01:34:55,547 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-01:34:56,165 nipype.workflow INFO:
+	 [Job 72] Completed (l1spm.selectfiles).
+200224-01:34:56,169 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 13 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:34:57,485 nipype.workflow INFO:
+	 [Job 73] Cached (l1spm.gunzip).
+200224-01:35:00,94 nipype.workflow INFO:
+	 [Job 74] Cached (l1spm.smooth).
+200224-01:35:02,363 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 12 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:35:02,364 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1364/runinfo".
+200224-01:35:05,612 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-01:35:09,272 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-01:35:10,368 nipype.workflow INFO:
+	 [Job 75] Completed (l1spm.runinfo).
+200224-01:35:10,372 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 13 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:35:14,862 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 12 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:35:14,864 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1364/modelspec".
+200224-01:37:27,66 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-01:37:29,3 nipype.workflow INFO:
+	 [Job 25] Completed (l1spm.contrastestimate).
+200224-01:37:29,7 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 13 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:37:52,765 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 12 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:37:52,767 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1468/datasink".
+200224-01:37:56,887 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-01:38:33,136 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-01:38:34,808 nipype.workflow INFO:
+	 [Job 26] Completed (l1spm.datasink).
+200224-01:38:34,812 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:38:35,520 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1356/selectfiles".
+200224-01:38:36,812 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:38:40,346 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-01:38:43,175 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-01:38:44,818 nipype.workflow INFO:
+	 [Job 81] Completed (l1spm.selectfiles).
+200224-01:38:44,822 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:38:46,850 nipype.workflow INFO:
+	 [Job 82] Cached (l1spm.gunzip).
+200224-01:38:47,932 nipype.workflow INFO:
+	 [Job 83] Cached (l1spm.smooth).
+200224-01:38:51,536 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:38:51,537 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1356/runinfo".
+200224-01:39:07,61 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-01:39:14,537 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-01:39:15,559 nipype.workflow INFO:
+	 [Job 84] Completed (l1spm.runinfo).
+200224-01:39:15,564 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:39:20,205 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-01:39:20,207 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1356/modelspec".
+200224-01:45:22,338 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-01:45:30,80 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-01:45:30,593 nipype.workflow INFO:
+	 [Job 58] Completed (l1spm.modelspec).
+200224-01:45:30,597 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+200224-01:45:32,800 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+200224-01:45:32,838 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1387/level1design".
+200224-01:45:39,174 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-01:49:39,324 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-01:49:43,204 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-01:49:45,65 nipype.workflow INFO:
+	 [Job 67] Completed (l1spm.modelspec).
+200224-01:49:45,70 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-01:49:45,976 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1369/level1design".
+200224-01:49:47,70 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-01:49:49,604 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-02:09:14,402 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-02:09:27,43 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-02:09:28,283 nipype.workflow INFO:
+	 [Job 76] Completed (l1spm.modelspec).
+200224-02:09:28,289 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-02:09:32,802 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-02:09:32,837 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1364/level1design".
+200224-02:09:41,960 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-02:12:51,819 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-02:12:52,935 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-02:12:53,2 nipype.workflow INFO:
+	 [Job 85] Completed (l1spm.modelspec).
+200224-02:12:53,7 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:12:53,393 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1356/level1design".
+200224-02:12:54,344 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-02:12:55,7 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:15:58,760 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-02:15:59,187 nipype.workflow INFO:
+	 [Job 50] Completed (l1spm.level1design).
+200224-02:15:59,191 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:15:59,511 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1390/level1estimate".
+200224-02:16:01,191 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:16:01,888 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-02:20:26,734 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-02:20:27,454 nipype.workflow INFO:
+	 [Job 59] Completed (l1spm.level1design).
+200224-02:20:27,459 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:20:27,679 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1387/level1estimate".
+200224-02:20:29,458 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:20:30,658 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-02:20:31,427 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-02:20:31,458 nipype.workflow INFO:
+	 [Job 68] Completed (l1spm.level1design).
+200224-02:20:31,462 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:20:31,795 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1369/level1estimate".
+200224-02:20:33,463 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-02:20:34,171 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-02:28:03,139 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-02:28:03,918 nipype.workflow INFO:
+	 [Job 77] Completed (l1spm.level1design).
+200224-02:28:03,922 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+200224-02:28:04,806 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1364/level1estimate".
+200224-02:28:05,922 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+200224-02:28:11,573 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-02:29:44,774 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-02:29:46,20 nipype.workflow INFO:
+	 [Job 86] Completed (l1spm.level1design).
+200224-02:29:46,24 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-02:29:46,623 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1356/level1estimate".
+200224-02:29:48,23 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-02:29:53,404 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-06:07:09,666 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-06:07:11,352 nipype.workflow INFO:
+	 [Job 60] Completed (l1spm.level1estimate).
+200224-06:07:11,356 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:07:16,85 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:07:16,88 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1387/contrastestimate".
+200224-06:08:38,543 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-06:11:23,506 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-06:11:24,338 nipype.workflow INFO:
+	 [Job 61] Completed (l1spm.contrastestimate).
+200224-06:11:24,343 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 12 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:11:25,147 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1387/datasink".
+200224-06:11:26,110 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-06:11:26,342 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 11 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:11:29,116 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-06:11:30,344 nipype.workflow INFO:
+	 [Job 62] Completed (l1spm.datasink).
+200224-06:11:30,347 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 11 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:11:30,976 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1351/selectfiles".
+200224-06:11:31,912 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-06:11:32,347 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 10 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:11:32,349 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-06:11:34,347 nipype.workflow INFO:
+	 [Job 90] Completed (l1spm.selectfiles).
+200224-06:11:34,351 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 11 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:11:34,653 nipype.workflow INFO:
+	 [Job 91] Cached (l1spm.gunzip).
+200224-06:11:36,844 nipype.workflow INFO:
+	 [Job 92] Cached (l1spm.smooth).
+200224-06:11:38,816 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1351/runinfo".
+200224-06:11:39,756 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-06:11:40,355 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 10 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:11:48,271 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-06:11:48,361 nipype.workflow INFO:
+	 [Job 93] Completed (l1spm.runinfo).
+200224-06:11:48,365 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 11 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:11:48,606 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1351/modelspec".
+200224-06:11:50,365 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 10 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:12:08,503 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-06:12:10,383 nipype.workflow INFO:
+	 [Job 51] Completed (l1spm.level1estimate).
+200224-06:12:10,388 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 11 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:12:11,765 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-06:12:12,954 nipype.workflow INFO:
+	 [Job 69] Completed (l1spm.level1estimate).
+200224-06:12:12,957 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1390/contrastestimate".
+200224-06:12:12,959 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 11 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:12:13,952 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1369/contrastestimate".
+200224-06:12:14,957 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 10 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:14:18,288 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-06:14:21,371 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-06:19:02,338 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-06:19:03,373 nipype.workflow INFO:
+	 [Job 52] Completed (l1spm.contrastestimate).
+200224-06:19:03,377 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 11 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:04,54 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-06:19:09,164 nipype.workflow INFO:
+	 [Job 70] Completed (l1spm.contrastestimate).
+200224-06:19:09,168 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1390/datasink".
+200224-06:19:09,170 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 11 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:12,362 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-06:19:13,106 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 10 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:13,108 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1369/datasink".
+200224-06:19:15,19 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-06:19:25,247 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-06:19:27,119 nipype.workflow INFO:
+	 [Job 53] Completed (l1spm.datasink).
+200224-06:19:27,123 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 10 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:28,446 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1343/selectfiles".
+200224-06:19:29,96 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-06:19:29,119 nipype.workflow INFO:
+	 [Job 71] Completed (l1spm.datasink).
+200224-06:19:29,123 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:29,680 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1339/selectfiles".
+200224-06:19:31,123 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 8 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:35,535 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-06:19:37,823 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-06:19:38,698 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-06:19:39,130 nipype.workflow INFO:
+	 [Job 99] Completed (l1spm.selectfiles).
+200224-06:19:39,134 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:40,421 nipype.workflow INFO:
+	 [Job 100] Cached (l1spm.gunzip).
+200224-06:19:40,510 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-06:19:41,131 nipype.workflow INFO:
+	 [Job 108] Completed (l1spm.selectfiles).
+200224-06:19:41,135 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 10 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:42,314 nipype.workflow INFO:
+	 [Job 101] Cached (l1spm.smooth).
+200224-06:19:43,135 nipype.workflow INFO:
+	 [Job 109] Cached (l1spm.gunzip).
+200224-06:19:44,835 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1343/runinfo".
+200224-06:19:45,647 nipype.workflow INFO:
+	 [Job 110] Cached (l1spm.smooth).
+200224-06:19:45,654 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:46,652 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1339/runinfo".
+200224-06:19:47,258 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-06:19:47,655 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 8 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.runinfo
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:49,804 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-06:19:51,339 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-06:19:51,657 nipype.workflow INFO:
+	 [Job 102] Completed (l1spm.runinfo).
+200224-06:19:51,662 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:52,239 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-06:19:52,719 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1343/modelspec".
+200224-06:19:53,659 nipype.workflow INFO:
+	 [Job 111] Completed (l1spm.runinfo).
+200224-06:19:53,663 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:19:54,918 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1339/modelspec".
+200224-06:19:55,661 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 8 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-06:29:09,349 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-06:29:22,252 nipype.workflow INFO:
+	 [Job 78] Completed (l1spm.level1estimate).
+200224-06:29:22,256 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-06:29:47,641 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 8 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-06:29:59,728 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1364/contrastestimate".
+200224-06:33:35,412 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-06:34:25,500 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-06:34:27,936 nipype.workflow INFO:
+	 [Job 87] Completed (l1spm.level1estimate).
+200224-06:34:27,940 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:34:52,556 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 8 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:34:54,368 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1356/contrastestimate".
+200224-06:37:08,928 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-06:37:11,409 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-06:37:12,701 nipype.workflow INFO:
+	 [Job 94] Completed (l1spm.modelspec).
+200224-06:37:12,705 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:37:14,167 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1351/level1design".
+200224-06:37:14,706 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 8 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:37:16,515 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-06:37:32,710 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-06:39:06,191 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-06:39:06,815 nipype.workflow INFO:
+	 [Job 79] Completed (l1spm.contrastestimate).
+200224-06:39:06,819 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 9 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:10,420 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 8 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:10,423 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1364/datasink".
+200224-06:39:11,809 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-06:39:27,822 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-06:39:28,437 nipype.workflow INFO:
+	 [Job 80] Completed (l1spm.datasink).
+200224-06:39:28,441 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 8 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:29,19 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1322/selectfiles".
+200224-06:39:30,440 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 7 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:31,161 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-06:39:31,852 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-06:39:32,440 nipype.workflow INFO:
+	 [Job 117] Completed (l1spm.selectfiles).
+200224-06:39:32,444 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 8 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:33,40 nipype.workflow INFO:
+	 [Job 118] Cached (l1spm.gunzip).
+200224-06:39:36,403 nipype.workflow INFO:
+	 [Job 119] Cached (l1spm.smooth).
+200224-06:39:36,919 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1322/runinfo".
+200224-06:39:38,446 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 7 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:39,282 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-06:39:41,911 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-06:39:42,448 nipype.workflow INFO:
+	 [Job 120] Completed (l1spm.runinfo).
+200224-06:39:42,452 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 8 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:45,892 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 7 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:39:45,895 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1322/modelspec".
+200224-06:43:20,575 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-06:43:22,119 nipype.workflow INFO:
+	 [Job 88] Completed (l1spm.contrastestimate).
+200224-06:43:22,123 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 8 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:43:31,153 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 7 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:43:31,155 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1356/datasink".
+200224-06:43:34,796 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-06:43:58,660 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-06:43:59,181 nipype.workflow INFO:
+	 [Job 89] Completed (l1spm.datasink).
+200224-06:43:59,185 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:44:00,78 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1315/selectfiles".
+200224-06:44:01,184 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:44:02,540 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-06:44:04,179 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-06:44:05,187 nipype.workflow INFO:
+	 [Job 126] Completed (l1spm.selectfiles).
+200224-06:44:05,190 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:44:06,656 nipype.workflow INFO:
+	 [Job 127] Cached (l1spm.gunzip).
+200224-06:44:08,272 nipype.workflow INFO:
+	 [Job 128] Cached (l1spm.smooth).
+200224-06:44:11,276 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:44:11,278 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1315/runinfo".
+200224-06:44:19,959 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-06:44:30,955 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-06:44:31,294 nipype.workflow INFO:
+	 [Job 129] Completed (l1spm.runinfo).
+200224-06:44:31,298 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:44:33,302 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+200224-06:44:33,306 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1315/modelspec".
+200224-06:47:12,351 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-06:47:18,962 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-06:47:19,479 nipype.workflow INFO:
+	 [Job 112] Completed (l1spm.modelspec).
+200224-06:47:19,483 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+200224-06:47:21,490 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+200224-06:47:21,538 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1339/level1design".
+200224-06:47:26,514 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-06:47:37,669 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-06:47:42,290 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-06:47:43,507 nipype.workflow INFO:
+	 [Job 103] Completed (l1spm.modelspec).
+200224-06:47:43,511 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-06:47:44,799 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1343/level1design".
+200224-06:47:45,511 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-06:47:48,119 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-06:59:56,726 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-07:00:00,105 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-07:00:00,266 nipype.workflow INFO:
+	 [Job 121] Completed (l1spm.modelspec).
+200224-07:00:00,270 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-07:00:01,330 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1322/level1design".
+200224-07:00:02,269 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-07:00:04,848 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-07:02:31,544 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-07:02:33,843 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-07:02:34,422 nipype.workflow INFO:
+	 [Job 130] Completed (l1spm.modelspec).
+200224-07:02:34,426 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:02:35,82 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1315/level1design".
+200224-07:02:36,429 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:02:36,452 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-07:07:51,10 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-07:07:52,734 nipype.workflow INFO:
+	 [Job 95] Completed (l1spm.level1design).
+200224-07:07:52,739 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:07:53,240 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1351/level1estimate".
+200224-07:07:54,738 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:07:56,157 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-07:08:40,563 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-07:08:40,783 nipype.workflow INFO:
+	 [Job 113] Completed (l1spm.level1design).
+200224-07:08:40,788 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:08:40,984 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1339/level1estimate".
+200224-07:08:42,788 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:08:45,61 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-07:08:50,811 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-07:08:52,796 nipype.workflow INFO:
+	 [Job 104] Completed (l1spm.level1design).
+200224-07:08:52,800 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:08:53,102 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1343/level1estimate".
+200224-07:08:54,800 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-07:08:56,885 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-07:15:53,999 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-07:15:55,238 nipype.workflow INFO:
+	 [Job 122] Completed (l1spm.level1design).
+200224-07:15:55,242 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+200224-07:15:55,656 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1322/level1estimate".
+200224-07:15:57,242 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+200224-07:16:02,397 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-07:17:56,629 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-07:17:57,359 nipype.workflow INFO:
+	 [Job 131] Completed (l1spm.level1design).
+200224-07:17:57,363 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-07:17:57,965 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1315/level1estimate".
+200224-07:17:59,363 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-07:18:04,14 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-10:30:32,38 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-10:30:35,207 nipype.workflow INFO:
+	 [Job 114] Completed (l1spm.level1estimate).
+200224-10:30:35,211 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:30:37,549 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:30:37,616 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1339/contrastestimate".
+200224-10:32:53,720 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-10:36:44,385 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-10:36:45,929 nipype.workflow INFO:
+	 [Job 115] Completed (l1spm.contrastestimate).
+200224-10:36:45,933 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 7 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:36:50,865 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 6 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:36:50,868 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1339/datasink".
+200224-10:36:52,521 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-10:37:06,22 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-10:37:06,880 nipype.workflow INFO:
+	 [Job 116] Completed (l1spm.datasink).
+200224-10:37:06,884 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 6 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:37:07,363 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1307/selectfiles".
+200224-10:37:08,884 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 5 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:37:10,432 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-10:37:12,264 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-10:37:12,884 nipype.workflow INFO:
+	 [Job 135] Completed (l1spm.selectfiles).
+200224-10:37:12,888 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 6 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:37:14,483 nipype.workflow INFO:
+	 [Job 136] Cached (l1spm.gunzip).
+200224-10:37:15,768 nipype.workflow INFO:
+	 [Job 137] Cached (l1spm.smooth).
+200224-10:37:18,89 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1307/runinfo".
+200224-10:37:18,889 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 5 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:37:21,626 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-10:37:31,213 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-10:37:32,902 nipype.workflow INFO:
+	 [Job 138] Completed (l1spm.runinfo).
+200224-10:37:32,906 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 6 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:37:34,801 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1307/modelspec".
+200224-10:37:34,904 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 5 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:45:16,179 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-10:45:25,385 nipype.workflow INFO:
+	 [Job 123] Completed (l1spm.level1estimate).
+200224-10:45:25,389 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 6 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:46:44,191 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 5 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-10:46:54,720 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1322/contrastestimate".
+200224-10:51:59,818 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-11:00:26,516 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-11:00:29,35 nipype.workflow INFO:
+	 [Job 124] Completed (l1spm.contrastestimate).
+200224-11:00:29,39 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 6 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:00:44,685 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 5 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:00:44,687 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1322/datasink".
+200224-11:00:50,260 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-11:01:23,304 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-11:01:24,724 nipype.workflow INFO:
+	 [Job 125] Completed (l1spm.datasink).
+200224-11:01:24,728 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 5 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:01:25,229 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1293/selectfiles".
+200224-11:01:26,728 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 4 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:01:30,410 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-11:01:32,657 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-11:01:35,718 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-11:01:38,739 nipype.workflow INFO:
+	 [Job 105] Completed (l1spm.level1estimate).
+200224-11:01:38,741 nipype.workflow INFO:
+	 [Job 144] Completed (l1spm.selectfiles).
+200224-11:01:38,745 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 6 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:02:00,273 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1343/contrastestimate".
+200224-11:02:01,165 nipype.workflow INFO:
+	 [Job 145] Cached (l1spm.gunzip).
+200224-11:02:01,172 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 5 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:02:02,814 nipype.workflow INFO:
+	 [Job 146] Cached (l1spm.smooth).
+200224-11:02:06,41 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 4 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:02:06,43 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1293/runinfo".
+200224-11:02:09,175 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-11:02:13,639 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-11:02:14,46 nipype.workflow INFO:
+	 [Job 147] Completed (l1spm.runinfo).
+200224-11:02:14,51 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 5 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:02:15,794 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1293/modelspec".
+200224-11:02:16,49 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 4 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:04:58,818 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-11:10:57,917 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-11:11:00,590 nipype.workflow INFO:
+	 [Job 106] Completed (l1spm.contrastestimate).
+200224-11:11:00,592 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 5 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:11:17,371 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 4 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:11:17,373 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1343/datasink".
+200224-11:11:21,684 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-11:11:48,324 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-11:11:49,402 nipype.workflow INFO:
+	 [Job 107] Completed (l1spm.datasink).
+200224-11:11:49,406 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 4 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:11:51,184 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1263/selectfiles".
+200224-11:11:51,405 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 3 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:11:56,653 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-11:12:01,194 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-11:12:01,412 nipype.workflow INFO:
+	 [Job 153] Completed (l1spm.selectfiles).
+200224-11:12:01,416 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 4 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:12:02,428 nipype.workflow INFO:
+	 [Job 154] Cached (l1spm.gunzip).
+200224-11:12:06,417 nipype.workflow INFO:
+	 [Job 155] Cached (l1spm.smooth).
+200224-11:12:08,908 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 3 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:12:08,910 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1263/runinfo".
+200224-11:12:14,12 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-11:12:20,425 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-11:12:20,918 nipype.workflow INFO:
+	 [Job 156] Completed (l1spm.runinfo).
+200224-11:12:20,922 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 4 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:12:23,418 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 3 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:12:23,422 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1263/modelspec".
+200224-11:16:37,826 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-11:16:41,820 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-11:16:43,684 nipype.workflow INFO:
+	 [Job 139] Completed (l1spm.modelspec).
+200224-11:16:43,688 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 4 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:16:45,892 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 3 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-11:16:45,938 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1307/level1design".
+200224-11:16:48,506 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-11:16:50,353 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-11:16:51,896 nipype.workflow INFO:
+	 [Job 132] Completed (l1spm.level1estimate).
+200224-11:16:51,900 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 4 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:17:43,298 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 3 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:17:46,147 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1315/contrastestimate".
+200224-11:20:43,366 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-11:25:51,878 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-11:25:53,780 nipype.workflow INFO:
+	 [Job 133] Completed (l1spm.contrastestimate).
+200224-11:25:53,784 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 4 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:26:01,479 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1315/datasink".
+200224-11:26:01,482 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 3 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:26:04,460 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-11:26:27,463 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-11:26:27,506 nipype.workflow INFO:
+	 [Job 134] Completed (l1spm.datasink).
+200224-11:26:27,510 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 3 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:26:27,970 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1253/selectfiles".
+200224-11:26:29,510 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 2 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:26:31,776 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-11:26:34,877 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-11:26:35,514 nipype.workflow INFO:
+	 [Job 162] Completed (l1spm.selectfiles).
+200224-11:26:35,518 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 3 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:26:36,255 nipype.workflow INFO:
+	 [Job 163] Cached (l1spm.gunzip).
+200224-11:26:40,214 nipype.workflow INFO:
+	 [Job 164] Cached (l1spm.smooth).
+200224-11:26:44,289 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1253/runinfo".
+200224-11:26:44,290 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 2 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:26:48,97 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-11:26:53,6 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-11:26:54,297 nipype.workflow INFO:
+	 [Job 165] Completed (l1spm.runinfo).
+200224-11:26:54,301 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 3 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:26:55,823 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1253/modelspec".
+200224-11:26:56,299 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 2 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:31:39,981 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-11:31:44,372 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-11:31:44,592 nipype.workflow INFO:
+	 [Job 148] Completed (l1spm.modelspec).
+200224-11:31:44,596 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 3 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:31:46,188 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1293/level1design".
+200224-11:31:46,596 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 2 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200224-11:31:50,125 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-11:36:06,9 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200224-11:36:10,859 nipype.workflow INFO:
+	 [Job 96] Completed (l1spm.level1estimate).
+200224-11:36:10,863 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 3 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+200224-11:36:48,619 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 2 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.modelspec
+200224-11:36:51,76 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1351/contrastestimate".
+200224-11:40:53,463 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200224-11:44:51,894 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-11:45:03,817 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-11:45:05,121 nipype.workflow INFO:
+	 [Job 157] Completed (l1spm.modelspec).
+200224-11:45:05,125 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 3 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:45:07,142 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 2 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:45:07,174 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1263/level1design".
+200224-11:45:15,911 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-11:48:10,285 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200224-11:48:11,316 nipype.workflow INFO:
+	 [Job 97] Completed (l1spm.contrastestimate).
+200224-11:48:11,320 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 3 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:48:24,697 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 2 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:48:24,700 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1351/datasink".
+200224-11:48:28,183 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200224-11:48:52,945 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200224-11:48:54,723 nipype.workflow INFO:
+	 [Job 98] Completed (l1spm.datasink).
+200224-11:48:54,729 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:48:56,963 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:48:56,964 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1223/selectfiles".
+200224-11:49:04,789 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200224-11:49:07,747 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200224-11:49:08,971 nipype.workflow INFO:
+	 [Job 171] Completed (l1spm.selectfiles).
+200224-11:49:08,975 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:49:10,656 nipype.workflow INFO:
+	 [Job 172] Cached (l1spm.gunzip).
+200224-11:49:12,919 nipype.workflow INFO:
+	 [Job 173] Cached (l1spm.smooth).
+200224-11:49:15,706 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:49:15,708 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1223/runinfo".
+200224-11:49:20,175 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200224-11:49:26,19 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200224-11:49:27,714 nipype.workflow INFO:
+	 [Job 174] Completed (l1spm.runinfo).
+200224-11:49:27,719 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:49:30,347 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+200224-11:49:30,351 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1223/modelspec".
+200224-12:03:08,42 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-12:03:17,376 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-12:03:19,199 nipype.workflow INFO:
+	 [Job 166] Completed (l1spm.modelspec).
+200224-12:03:19,203 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:03:22,973 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:03:23,6 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1253/level1design".
+200224-12:03:33,504 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-12:27:32,272 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-12:27:32,415 nipype.workflow INFO:
+	 [Job 140] Completed (l1spm.level1design).
+200224-12:27:32,419 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:27:34,395 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1307/level1estimate".
+200224-12:27:34,417 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.modelspec
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:27:58,225 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-12:37:29,697 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200224-12:37:36,556 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200224-12:37:37,7 nipype.workflow INFO:
+	 [Job 175] Completed (l1spm.modelspec).
+200224-12:37:37,9 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:37:48,288 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:37:48,321 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1223/level1design".
+200224-12:37:53,447 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200224-12:49:41,305 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-12:49:42,971 nipype.workflow INFO:
+	 [Job 149] Completed (l1spm.level1design).
+200224-12:49:42,975 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:49:46,377 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1293/level1estimate".
+200224-12:49:46,378 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1design
+200224-12:50:10,896 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-13:06:10,426 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-13:06:13,361 nipype.workflow INFO:
+	 [Job 158] Completed (l1spm.level1design).
+200224-13:06:13,365 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+200224-13:06:15,172 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1263/level1estimate".
+200224-13:06:15,363 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+200224-13:06:27,142 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-13:42:14,427 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-13:42:15,590 nipype.workflow INFO:
+	 [Job 167] Completed (l1spm.level1design).
+200224-13:42:15,594 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+200224-13:42:16,231 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1253/level1estimate".
+200224-13:42:17,594 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+200224-13:42:24,824 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200224-13:52:15,520 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200224-13:52:16,186 nipype.workflow INFO:
+	 [Job 176] Completed (l1spm.level1design).
+200224-13:52:16,190 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-13:52:16,796 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1223/level1estimate".
+200224-13:52:18,189 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200224-13:52:25,325 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200225-02:41:03,203 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200225-02:41:05,56 nipype.workflow INFO:
+	 [Job 150] Completed (l1spm.level1estimate).
+200225-02:41:05,60 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-02:42:10,915 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-02:42:10,917 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1293/contrastestimate".
+200225-02:48:06,678 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200225-03:00:47,390 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200225-03:00:50,65 nipype.workflow INFO:
+	 [Job 151] Completed (l1spm.contrastestimate).
+200225-03:00:50,71 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 2 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:00:52,270 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 1 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:00:52,272 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1293/datasink".
+200225-03:01:02,707 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200225-03:02:40,812 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200225-03:02:42,384 nipype.workflow INFO:
+	 [Job 152] Completed (l1spm.datasink).
+200225-03:02:42,388 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 1 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:02:53,891 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 0 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.selectfiles
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:02:53,892 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.selectfiles" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_008/selectfiles".
+200225-03:03:00,918 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200225-03:03:08,223 nipype.workflow INFO:
+	 [Node] Finished "l1spm.selectfiles".
+200225-03:03:09,904 nipype.workflow INFO:
+	 [Job 180] Completed (l1spm.selectfiles).
+200225-03:03:09,908 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 1 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:03:10,353 nipype.workflow INFO:
+	 [Job 181] Cached (l1spm.gunzip).
+200225-03:03:12,876 nipype.workflow INFO:
+	 [Job 182] Cached (l1spm.smooth).
+200225-03:03:16,367 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 0 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.runinfo
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:03:16,368 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.runinfo" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_008/runinfo".
+200225-03:03:21,375 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200225-03:03:25,389 nipype.workflow INFO:
+	 [Node] Finished "l1spm.runinfo".
+200225-03:03:26,375 nipype.workflow INFO:
+	 [Job 183] Completed (l1spm.runinfo).
+200225-03:03:26,379 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 1 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:03:29,80 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 0 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:03:29,83 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.modelspec" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_008/modelspec".
+200225-03:04:03,777 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200225-03:04:05,116 nipype.workflow INFO:
+	 [Job 141] Completed (l1spm.level1estimate).
+200225-03:04:05,120 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 1 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:04:24,529 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 0 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:04:24,532 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1307/contrastestimate".
+200225-03:15:38,594 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200225-03:28:18,402 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200225-03:28:20,14 nipype.workflow INFO:
+	 [Job 142] Completed (l1spm.contrastestimate).
+200225-03:28:20,18 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 1 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:29:44,430 nipype.workflow INFO:
+	 [MultiProc] Running 5 tasks, and 0 jobs ready. Free memory (GB): 55.32/56.32, Free processors: 0/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:29:44,433 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1307/datasink".
+200225-03:29:55,201 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200225-03:30:18,618 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200225-03:30:20,467 nipype.workflow INFO:
+	 [Job 143] Completed (l1spm.datasink).
+200225-03:30:20,471 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 0 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:30:23,895 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200225-03:30:32,480 nipype.workflow INFO:
+	 [Job 177] Completed (l1spm.level1estimate).
+200225-03:30:32,485 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 1 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:30:58,510 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 0 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+                       * l1spm.level1estimate
+200225-03:31:04,397 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1223/contrastestimate".
+200225-03:40:34,35 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200225-03:40:37,828 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200225-03:40:39,98 nipype.workflow INFO:
+	 [Job 159] Completed (l1spm.level1estimate).
+200225-03:40:39,100 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 1 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-03:40:40,365 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1263/contrastestimate".
+200225-03:40:41,101 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 0 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-03:51:57,483 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200225-03:57:58,190 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200225-03:58:00,139 nipype.workflow INFO:
+	 [Job 178] Completed (l1spm.contrastestimate).
+200225-03:58:00,143 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 1 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-03:58:13,309 nipype.workflow INFO:
+	 [MultiProc] Running 4 tasks, and 0 jobs ready. Free memory (GB): 55.52/56.32, Free processors: 1/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-03:58:13,376 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1223/datasink".
+200225-03:58:23,115 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200225-03:59:15,720 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200225-03:59:17,372 nipype.workflow INFO:
+	 [Job 179] Completed (l1spm.datasink).
+200225-03:59:17,376 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 0 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-04:07:22,525 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200225-04:07:23,867 nipype.workflow INFO:
+	 [Job 160] Completed (l1spm.contrastestimate).
+200225-04:07:23,871 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 1 jobs ready. Free memory (GB): 55.92/56.32, Free processors: 3/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-04:07:25,909 nipype.workflow INFO:
+	 [MultiProc] Running 3 tasks, and 0 jobs ready. Free memory (GB): 55.72/56.32, Free processors: 2/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-04:07:25,983 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1263/datasink".
+200225-04:07:27,143 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200225-04:07:55,809 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200225-04:07:55,936 nipype.workflow INFO:
+	 [Job 161] Completed (l1spm.datasink).
+200225-04:07:55,940 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 0 jobs ready. Free memory (GB): 55.92/56.32, Free processors: 3/5.
+                     Currently running:
+                       * l1spm.modelspec
+                       * l1spm.level1estimate
+200225-04:12:54,450 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifySPMModel")
+200225-04:13:38,559 nipype.workflow INFO:
+	 [Node] Finished "l1spm.modelspec".
+200225-04:13:40,288 nipype.workflow INFO:
+	 [Job 184] Completed (l1spm.modelspec).
+200225-04:13:40,292 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 1 jobs ready. Free memory (GB): 56.12/56.32, Free processors: 4/5.
+                     Currently running:
+                       * l1spm.level1estimate
+200225-04:13:40,962 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1design" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_008/level1design".
+200225-04:13:42,293 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 0 jobs ready. Free memory (GB): 55.92/56.32, Free processors: 3/5.
+                     Currently running:
+                       * l1spm.level1design
+                       * l1spm.level1estimate
+200225-04:13:42,557 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.spm.model.Level1Design")
+200225-05:18:37,312 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200225-05:18:38,222 nipype.workflow INFO:
+	 [Job 168] Completed (l1spm.level1estimate).
+200225-05:18:38,226 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 1 jobs ready. Free memory (GB): 56.12/56.32, Free processors: 4/5.
+                     Currently running:
+                       * l1spm.level1design
+200225-05:18:38,600 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1253/contrastestimate".
+200225-05:18:40,226 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 0 jobs ready. Free memory (GB): 55.92/56.32, Free processors: 3/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+                       * l1spm.level1design
+200225-05:23:34,74 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200225-05:25:57,461 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1design".
+200225-05:26:00,657 nipype.workflow INFO:
+	 [Job 185] Completed (l1spm.level1design).
+200225-05:26:00,661 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 1 jobs ready. Free memory (GB): 56.12/56.32, Free processors: 4/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+200225-05:26:12,516 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 0 jobs ready. Free memory (GB): 55.92/56.32, Free processors: 3/5.
+                     Currently running:
+                       * l1spm.level1estimate
+                       * l1spm.contrastestimate
+200225-05:26:15,669 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.level1estimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_008/level1estimate".
+200225-05:27:05,369 nipype.workflow INFO:
+	 [Node] Running "level1estimate" ("nipype.interfaces.spm.model.EstimateModel")
+200225-05:30:49,395 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200225-05:30:50,796 nipype.workflow INFO:
+	 [Job 169] Completed (l1spm.contrastestimate).
+200225-05:30:50,799 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 1 jobs ready. Free memory (GB): 56.12/56.32, Free processors: 4/5.
+                     Currently running:
+                       * l1spm.level1estimate
+200225-05:30:53,37 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 0 jobs ready. Free memory (GB): 55.92/56.32, Free processors: 3/5.
+                     Currently running:
+                       * l1spm.datasink
+                       * l1spm.level1estimate
+200225-05:30:53,109 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_1253/datasink".
+200225-05:30:53,714 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200225-05:31:52,579 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200225-05:31:53,97 nipype.workflow INFO:
+	 [Job 170] Completed (l1spm.datasink).
+200225-05:31:53,101 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 0 jobs ready. Free memory (GB): 56.12/56.32, Free processors: 4/5.
+                     Currently running:
+                       * l1spm.level1estimate
+200225-09:56:02,579 nipype.workflow INFO:
+	 [Node] Finished "l1spm.level1estimate".
+200225-09:56:03,113 nipype.workflow INFO:
+	 [Job 186] Completed (l1spm.level1estimate).
+200225-09:56:03,118 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 1 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 5/5.
+200225-09:56:03,295 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.contrastestimate" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_008/contrastestimate".
+200225-09:56:05,117 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 0 jobs ready. Free memory (GB): 56.12/56.32, Free processors: 4/5.
+                     Currently running:
+                       * l1spm.contrastestimate
+200225-09:58:23,52 nipype.workflow INFO:
+	 [Node] Running "contrastestimate" ("nipype.interfaces.spm.model.EstimateContrast")
+200225-10:00:56,100 nipype.workflow INFO:
+	 [Node] Finished "l1spm.contrastestimate".
+200225-10:00:57,404 nipype.workflow INFO:
+	 [Job 187] Completed (l1spm.contrastestimate).
+200225-10:00:57,409 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 1 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 5/5.
+200225-10:00:57,617 nipype.workflow INFO:
+	 [Node] Setting-up "l1spm.datasink" in "/media/Drobo/work/KPE_SPM_ses-1/l1spm/_subject_id_008/datasink".
+200225-10:00:57,728 nipype.workflow INFO:
+	 [Node] Running "datasink" ("nipype.interfaces.io.DataSink")
+200225-10:00:59,288 nipype.workflow INFO:
+	 [Node] Finished "l1spm.datasink".
+200225-10:00:59,405 nipype.workflow INFO:
+	 [Job 188] Completed (l1spm.datasink).
+200225-10:00:59,410 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 0 jobs ready. Free memory (GB): 56.32/56.32, Free processors: 5/5.

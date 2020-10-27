@@ -1,0 +1,16 @@
+// KPE CONSORT
+digraph {
+	node [shape=rectangle]
+	A [label="Total Screened"]
+	B [label="Total Eligible"]
+	C [label="Participated in 1st visit
+ N=25"]
+	D [label="Participated in 2nd visit"]
+	E [label="Participated in 3rd visit"]
+	F [label="Participated in 4th visit"]
+	A -> B
+	B -> C
+	C -> D
+	D -> E
+	E -> F
+}
