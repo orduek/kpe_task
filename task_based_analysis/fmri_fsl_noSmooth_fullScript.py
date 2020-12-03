@@ -22,7 +22,6 @@ import nipype.interfaces.utility as util  # utility
 import nipype.pipeline.engine as pe  # pypeline engine
 import nipype.algorithms.modelgen as model  # model generation
 #import nipype.algorithms.rapidart as ra  # artifact detection
-from nipype.workflows.fmri.fsl.preprocess import create_susan_smooth
 from nipype.interfaces.utility import Function
 
 
@@ -36,12 +35,12 @@ analysis. This will demonstrate how pre-defined workflows can be setup and
 shared across users, projects and labs.
 """
 #%%
-data_dir = '/home/oad4/scratch60/kpe'
-removeTR = 4
-fwhm = 0
+data_dir = '/gpfs/gibbs/pi/levy_ifat/Or/kpe'
+removeTR = 4 # remove first 4 seconds of the scan
+fwhm = 1
 tr = 1
-session = '1' # choose session
-output_dir = '/home/oad4/scratch60/work/allScript_ses%s_Nosmooth' %session
+session = '2' # choose session
+output_dir = '/gpfs/gibbs/pi/levy_ifat/Or/kpe/results/allScript_ses%s_Nosmooth' %session
 
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file,
@@ -94,8 +93,10 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['1253']#['008', '1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403'
-#,'1464','1468' ,'1480','1499', '1561']
+subject_list = ['1419']
+# ['008', '1223','1253','1263','1293','1307','1315','1322',
+# '1339','1343','1351','1356','1364','1369','1387','1390','1403', '1419', '1464','1468' ,'1480','1499',
+#  '1561', '1573','1578']
 # Map field names to individual subject runs.
 
 
@@ -133,9 +134,9 @@ skip.inputs.t_min = removeTR
 skip.inputs.t_size = -1
 
 #%%
-# susan =  pe.Node(interface=fsl.SUSAN(), name = 'susan') #create_susan_smooth()
-# susan.inputs.fwhm = fwhm
-# susan.inputs.brightness_threshold = 1000.0
+susan =  pe.Node(interface=fsl.SUSAN(), name = 'susan') #create_susan_smooth()
+susan.inputs.fwhm = fwhm
+susan.inputs.brightness_threshold = 1000.0
 
 
 #%%
@@ -177,24 +178,16 @@ Use :class:`nipype.interfaces.fsl.FEATModel` to generate a run specific mat
 file for use by FILMGLS
 """
 
-modelgen = pe.MapNode(
+modelgen = pe.Node(
     interface=fsl.FEATModel(),
-    name='modelgen',
-    iterfield=['fsf_file', 'ev_files'])
-"""
-Use :class:`nipype.interfaces.fsl.FILMGLS` to estimate a model specified by a
-mat file and a functional run
-"""
+    name='modelgen')
+
 mask =  pe.Node(interface= fsl.maths.ApplyMask(), name = 'mask')
 
 
-modelestimate = pe.MapNode(
+modelestimate = pe.Node(
     interface=fsl.FILMGLS(smooth_autocorr=True, mask_size=5, threshold=1000),
-    name='modelestimate',
-    iterfield=['design_file', 'in_file', 'tcon_file'])
-"""
-Use :class:`nipype.interfaces.fsl.ContrastMgr` to generate contrast estimates
-"""
+    name='modelestimate')
 
 
 #%%
@@ -202,15 +195,15 @@ modelfit.connect([
     (infosource, selectfiles, [('subject_id', 'subject_id')]),
     (selectfiles, runinfo, [('events','events_file'),('regressors','regressors_file')]),
     (selectfiles, skip,[('func','in_file')]),
-    (skip,runinfo,[('roi_file','in_file')]),
+    (skip,susan,[('roi_file','in_file')]),
    # (selectfiles, susan, [('mask','mask_file')]),
-   # (susan, runinfo, [('smoothed_file', 'in_file')]),
+    (susan, runinfo, [('smoothed_file', 'in_file')]),
     (skip, modelspec, [('roi_file', 'functional_runs')]),
     (runinfo, modelspec, [('info', 'subject_info'), ('realign_file', 'realignment_parameters')]),
     (modelspec, level1design, [('session_info', 'session_info')]),
     (level1design, modelgen, [('fsf_files', 'fsf_file'), ('ev_files',
                                                           'ev_files')]),
-    (skip, mask, [('roi_file', 'in_file')]),
+    (susan, mask, [('smoothed_file', 'in_file')]),
     (selectfiles, mask, [('mask', 'mask_file')]),
     (mask, modelestimate, [('out_file','in_file')]),
     (modelgen, modelestimate, [('design_file', 'design_file'),('con_file', 'tcon_file'),('fcon_file','fcon_file')]),

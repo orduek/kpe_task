@@ -91,7 +91,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
     return [runinfo], str(out_motion)
 #%%
 subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387',
-'1390','1403','1464','1468','1480','1499', '1561']
+'1390','1403','1464','1468','1480','1499'] # '1561'
 # Map field names to individual subject runs.
 
 

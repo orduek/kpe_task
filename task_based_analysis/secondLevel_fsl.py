@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# %%
 """
 Created on Wed Dec  4 14:29:06 2019
 
@@ -7,15 +8,9 @@ Created on Wed Dec  4 14:29:06 2019
 2nd level analysis using FSL output
 """
 
-#%%
-#%% Load packages
-from nipype.pipeline import engine as pe
-from nipype.interfaces import fsl, utility as niu, io as nio
-
-
-
-import os
-#%% Set variables
+# %%
+# %% Load packages
+# %% Set variables
 # set number of contrasts (cope)
 cope_list = ['1','2','3', '4', '5']
 # setting working directory (same as first level)
@@ -23,7 +18,7 @@ work_dir = '/media/Data/work/'
 # set input directory (where original files are)
 mask_dir = '/media/Data/KPE_BIDS/'
 
-#%% Now run second level
+# %% Now run second level
 workflow2nd = pe.Workflow(name="2nd_level", base_dir=work_dir)
 
 copeInput = pe.Node(niu.IdentityInterface(
@@ -48,7 +43,7 @@ selectCopes = pe.Node(nio.SelectFiles(templates,
                                base_directory=work_dir),
                    name="selectCopes")
 
-#%%
+# %%
 
 copemerge    = pe.Node(interface=fsl.Merge(dimension='t'),
                           name="copemerge")
@@ -117,7 +112,7 @@ workflow2nd.connect([
     (maskemerge, fdr_ztop, [('merged_file','mask_file')]),
     (flameo_ols, fdr_ztop, [('zstats','in_file')]),
 ])
-#%%
+# %%
 workflow2nd.run('MultiProc', plugin_args={'n_procs': 3})
 
 

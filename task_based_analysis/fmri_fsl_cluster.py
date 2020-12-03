@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# %%
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
 """
@@ -35,13 +36,13 @@ routines is being set to compressed NIFTI.
 fsl.FSLCommand.set_default_output_type('NIFTI_GZ')
 
 
-data_dir = '/home/oad4/scratch60/kpe'
-output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses1_Nosmooth'
+data_dir = '/gpfs/gibbs/pi/levy_ifat/Or/kpe'
+
 removeTR = 4
 fwhm = 6
 tr = 1
-session = '1' # choose session
-output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses%s' %session
+session = '3' # choose session
+output_dir = '/gpfs/gibbs/pi/levy_ifat/Or/kpe/results/ScriptPart_ses%s' %session
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file, removeTR = 4,
                      regressors_names=None,
@@ -114,7 +115,7 @@ templates = {'func': data_dir +  '/fmriprep/sub-{subject_id}/ses-' + session + '
 selectfiles = pe.Node(nio.SelectFiles(templates,
                                ),
                    name="selectfiles")
-#%%
+# %%
 
 # Extract motion parameters from regressors file
 runinfo = pe.Node(util.Function(
@@ -126,7 +127,7 @@ runinfo.inputs.removeTR = removeTR
 # Set the column names to be used from the confounds file
 runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
     ['a_comp_cor_%02d' % i for i in range(6)] + ['cosine%02d' % i for i in range(4)]
-#%%
+# %%
 
 
 
@@ -135,14 +136,14 @@ skip = pe.Node(interface=fsl.ExtractROI(), name = 'skip')
 skip.inputs.t_min = removeTR
 skip.inputs.t_size = -1
 
-#%%
+# %%
 
 susan =  pe.Node(interface=fsl.SUSAN(), name = 'susan') #create_susan_smooth()
 susan.inputs.fwhm = fwhm
 susan.inputs.brightness_threshold = 1000.0
 
 
-#%%
+# %%
 modelfit = pe.Workflow(name='modelfit', base_dir= output_dir)
 """
 Use :class:`nipype.algorithms.modelgen.SpecifyModel` to generate design information.
@@ -167,27 +168,21 @@ cont3 = ['Sad1_0>Relax1_0', 'T', ['sad1_0', 'relax1_0'], [1, -1]]
 cont4 = ['trauma1_0 > trauma2_0', 'T', ['trauma1_0', 'trauma2_0'], [1, -1]]
 cont5 = ['Trauma1_0>Trauma1_2_3', 'T', ['trauma1_0', 'trauma1_2','trauma1_3'], [1, -0.5, -0.5]]
 cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'], [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
-cont7 = ['Trauma1_01>relax1_01', 'T', ['trauma1_0', 'trauma1_1', 'relax1_0', 'relax1_1'], [0.5,0.5,-0.5,-0.5]]
-contrasts = [cont1, cont2, cont3, cont4, cont5, cont6, cont7]
+cont7 = ['Trauma1_01>relax1_1min', 'T', ['trauma1_0', 'trauma1_1', 'relax1_0', 'relax1_1'], [0.5,0.5,-0.5,-0.5]]
+cont8 = ['Trauma1_1min>sad1_1min', 'T', ['trauma1_0', 'trauma1_1', 'sad1_0', 'sad1_1'], [0.5,0.5,-0.5,-0.5]]
+contrasts = [cont1, cont2, cont3, cont4, cont5, cont6, cont7, cont8]
 
 
 level1design.inputs.interscan_interval = tr
 level1design.inputs.bases = {'dgamma': {'derivs': False}}
 level1design.inputs.contrasts = contrasts
 level1design.inputs.model_serial_correlations = True    
-"""
-Use :class:`nipype.interfaces.fsl.FEATModel` to generate a run specific mat
-file for use by FILMGLS
-"""
+
 
 modelgen = pe.Node(
     interface=fsl.FEATModel(),
     name='modelgen',
     )
-"""
-Use :class:`nipype.interfaces.fsl.FILMGLS` to estimate a model specified by a
-mat file and a functional run
-"""
 mask =  pe.Node(interface= fsl.maths.ApplyMask(), name = 'mask')
 
 
@@ -197,7 +192,7 @@ modelestimate = pe.Node(
     )
 
 
-#%%
+# %%
 modelfit.connect([
     (infosource, selectfiles, [('subject_id', 'subject_id')]),
     (selectfiles, runinfo, [('events','events_file'),('regressors','regressors_file')]),
@@ -218,4 +213,4 @@ modelfit.connect([
     
 ])
 #%%
-modelfit.run('MultiProc', plugin_args={'n_procs': 7})
+modelfit.run('MultiProc', plugin_args={'n_procs': 9})

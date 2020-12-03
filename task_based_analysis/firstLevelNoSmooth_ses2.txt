@@ -1,0 +1,125 @@
+Running script
+200806-03:59:37,655 nipype.workflow INFO:
+	 Workflow modelfit_ses_2 settings: ['check', 'execution', 'logging', 'monitoring']
+200806-03:59:37,783 nipype.workflow INFO:
+	 Running in parallel.
+200806-03:59:37,789 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 1 jobs ready. Free memory (GB): 112.71/112.71, Free processors: 5/5.
+200806-03:59:37,874 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.selectfiles" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/selectfiles".
+200806-03:59:37,885 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200806-03:59:37,921 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.selectfiles".
+200806-03:59:39,791 nipype.workflow INFO:
+	 [Job 0] Completed (modelfit_ses_2.selectfiles).
+200806-03:59:39,797 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 1 jobs ready. Free memory (GB): 112.71/112.71, Free processors: 5/5.
+200806-03:59:39,889 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.skip" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/skip".
+200806-03:59:39,901 nipype.workflow INFO:
+	 [Node] Running "skip" ("nipype.interfaces.fsl.utils.ExtractROI"), a CommandLine Interface with command:
+fslroi /home/oad4/scratch60/kpe/fmriprep/sub-1468/ses-2/func/sub-1468_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz /gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/skip/sub-1468_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi.nii.gz 4 -1
+200806-03:59:41,792 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 0 jobs ready. Free memory (GB): 112.51/112.71, Free processors: 4/5.
+                     Currently running:
+                       * modelfit_ses_2.skip
+200806-04:03:58,372 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.skip".
+200806-04:04:00,60 nipype.workflow INFO:
+	 [Job 1] Completed (modelfit_ses_2.skip).
+200806-04:04:00,64 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 2 jobs ready. Free memory (GB): 112.71/112.71, Free processors: 5/5.
+200806-04:04:00,126 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.mask" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/mask".
+200806-04:04:00,130 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.runinfo" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/runinfo".
+200806-04:04:00,137 nipype.workflow INFO:
+	 [Node] Running "mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/skip/sub-1468_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi.nii.gz -mas /home/oad4/scratch60/kpe/fmriprep/sub-1468/ses-2/func/sub-1468_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz /gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/mask/sub-1468_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi_masked.nii.gz
+200806-04:04:00,140 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200806-04:04:02,63 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 0 jobs ready. Free memory (GB): 112.31/112.71, Free processors: 3/5.
+                     Currently running:
+                       * modelfit_ses_2.runinfo
+                       * modelfit_ses_2.mask
+200806-04:04:06,553 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.runinfo".
+200806-04:04:08,68 nipype.workflow INFO:
+	 [Job 3] Completed (modelfit_ses_2.runinfo).
+200806-04:04:08,72 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 1 jobs ready. Free memory (GB): 112.51/112.71, Free processors: 4/5.
+                     Currently running:
+                       * modelfit_ses_2.mask
+200806-04:04:08,192 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.modelspec" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/modelspec".
+200806-04:04:08,279 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifyModel")
+200806-04:04:08,534 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.modelspec".
+200806-04:04:10,70 nipype.workflow INFO:
+	 [Job 4] Completed (modelfit_ses_2.modelspec).
+200806-04:04:10,74 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 1 jobs ready. Free memory (GB): 112.51/112.71, Free processors: 4/5.
+                     Currently running:
+                       * modelfit_ses_2.mask
+200806-04:04:10,444 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.level1design" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/level1design".
+200806-04:04:10,875 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.fsl.model.Level1Design")
+200806-04:04:12,57 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.level1design".
+200806-04:04:12,72 nipype.workflow INFO:
+	 [Job 5] Completed (modelfit_ses_2.level1design).
+200806-04:04:12,75 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 1 jobs ready. Free memory (GB): 112.51/112.71, Free processors: 4/5.
+                     Currently running:
+                       * modelfit_ses_2.mask
+200806-04:04:12,168 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.modelgen" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/modelgen".
+200806-04:04:12,185 nipype.workflow INFO:
+	 [Node] Setting-up "_modelgen0" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/modelgen/mapflow/_modelgen0".
+200806-04:04:12,240 nipype.workflow INFO:
+	 [Node] Running "_modelgen0" ("nipype.interfaces.fsl.model.FEATModel"), a CommandLine Interface with command:
+feat_model run0 
+200806-04:04:14,75 nipype.workflow INFO:
+	 [MultiProc] Running 2 tasks, and 0 jobs ready. Free memory (GB): 112.31/112.71, Free processors: 3/5.
+                     Currently running:
+                       * modelfit_ses_2.modelgen
+                       * modelfit_ses_2.mask
+200806-04:04:31,626 nipype.workflow INFO:
+	 [Node] Finished "_modelgen0".
+200806-04:04:31,630 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.modelgen".
+200806-04:04:32,93 nipype.workflow INFO:
+	 [Job 6] Completed (modelfit_ses_2.modelgen).
+200806-04:04:32,96 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 0 jobs ready. Free memory (GB): 112.51/112.71, Free processors: 4/5.
+                     Currently running:
+                       * modelfit_ses_2.mask
+200806-04:06:05,489 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.mask".
+200806-04:06:06,191 nipype.workflow INFO:
+	 [Job 2] Completed (modelfit_ses_2.mask).
+200806-04:06:06,195 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 1 jobs ready. Free memory (GB): 112.71/112.71, Free processors: 5/5.
+200806-04:06:06,270 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.modelestimate" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/modelestimate".
+200806-04:06:06,282 nipype.workflow INFO:
+	 [Node] Setting-up "_modelestimate0" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/modelestimate/mapflow/_modelestimate0".
+200806-04:06:06,291 nipype.workflow INFO:
+	 [Node] Running "_modelestimate0" ("nipype.interfaces.fsl.model.FILMGLS"), a CommandLine Interface with command:
+film_gls --ms=5 --rn=results --sa --con=/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/modelgen/mapflow/_modelgen0/run0.con --in=/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/mask/sub-1468_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi_masked.nii.gz --pd=/gpfs/ysm/scratch60/levy_ifat/oad4/work/fsl_analysis_ses2_Nosmooth/modelfit_ses_2/_subject_id_1468/modelgen/mapflow/_modelgen0/run0.mat --thr=1000.000000
+200806-04:06:08,194 nipype.workflow INFO:
+	 [MultiProc] Running 1 tasks, and 0 jobs ready. Free memory (GB): 112.51/112.71, Free processors: 4/5.
+                     Currently running:
+                       * modelfit_ses_2.modelestimate
+200806-07:33:07,830 nipype.workflow INFO:
+	 [Node] Finished "_modelestimate0".
+200806-07:33:07,839 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.modelestimate".
+200806-07:33:08,986 nipype.workflow INFO:
+	 [Job 7] Completed (modelfit_ses_2.modelestimate).
+200806-07:33:08,990 nipype.workflow INFO:
+	 [MultiProc] Running 0 tasks, and 0 jobs ready. Free memory (GB): 112.71/112.71, Free processors: 5/5.

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/oad4/kpe_task/task_based_analysis/fmri_fsl_cluster.py", line 216, in <module>
+    modelfit.run('MultiProc', plugin_args={'n_procs': 9})
+  File "/gpfs/ysm/project/levy_ifat/oad4/conda_envs/py37_dev/lib/python3.7/site-packages/nipype/pipeline/engine/workflows.py", line 599, in run
+    runner.run(execgraph, updatehash=updatehash, config=self.config)
+  File "/gpfs/ysm/project/levy_ifat/oad4/conda_envs/py37_dev/lib/python3.7/site-packages/nipype/pipeline/plugins/base.py", line 190, in run
+    report_nodes_not_run(notrun)
+  File "/gpfs/ysm/project/levy_ifat/oad4/conda_envs/py37_dev/lib/python3.7/site-packages/nipype/pipeline/plugins/tools.py", line 82, in report_nodes_not_run
+    raise RuntimeError(('Workflow did not execute cleanly. '
+RuntimeError: Workflow did not execute cleanly. Check log for details

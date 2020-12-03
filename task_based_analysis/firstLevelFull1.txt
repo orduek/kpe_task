@@ -1,0 +1,116 @@
+Running script
+200812-02:15:18,252 nipype.workflow INFO:
+	 Workflow modelfit_ses_2 settings: ['check', 'execution', 'logging', 'monitoring']
+200812-02:15:18,290 nipype.workflow INFO:
+	 Running serially.
+200812-02:15:18,290 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.selectfiles" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/selectfiles".
+200812-02:15:18,295 nipype.workflow INFO:
+	 [Node] Running "selectfiles" ("nipype.interfaces.io.SelectFiles")
+200812-02:15:18,301 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.selectfiles".
+200812-02:15:18,302 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.skip" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/skip".
+200812-02:15:18,306 nipype.workflow INFO:
+	 [Node] Running "skip" ("nipype.interfaces.fsl.utils.ExtractROI"), a CommandLine Interface with command:
+fslroi /home/oad4/scratch60/kpe/fmriprep/sub-1343/ses-2/func/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz /gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/skip/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi.nii.gz 4 -1
+200812-02:19:19,330 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.skip".
+200812-02:19:19,330 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.susan" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/susan".
+200812-02:19:19,336 nipype.workflow INFO:
+	 [Node] Running "susan" ("nipype.interfaces.fsl.preprocess.SUSAN"), a CommandLine Interface with command:
+susan /gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/skip/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi.nii.gz 1000.0000000000 2.5479654009 3 1 0 /gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/susan/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi_smooth.nii.gz
+200812-02:42:58,189 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.susan".
+200812-02:42:58,190 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.mask" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/mask".
+200812-02:42:58,197 nipype.workflow INFO:
+	 [Node] Running "mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/susan/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi_smooth.nii.gz -mas /home/oad4/scratch60/kpe/fmriprep/sub-1343/ses-2/func/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz /gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/mask/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi_smooth_masked.nii.gz
+200812-02:45:04,980 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.mask".
+200812-02:45:04,980 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.runinfo" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/runinfo".
+200812-02:45:04,986 nipype.workflow INFO:
+	 [Node] Running "runinfo" ("nipype.interfaces.utility.wrappers.Function")
+200812-02:45:06,763 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.runinfo".
+200812-02:45:06,763 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.modelspec" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/modelspec".
+200812-02:45:06,858 nipype.workflow INFO:
+	 [Node] Running "modelspec" ("nipype.algorithms.modelgen.SpecifyModel")
+200812-02:45:07,42 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.modelspec".
+200812-02:45:07,42 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.level1design" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/level1design".
+200812-02:45:07,468 nipype.workflow INFO:
+	 [Node] Running "level1design" ("nipype.interfaces.fsl.model.Level1Design")
+200812-02:45:08,49 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.level1design".
+200812-02:45:08,50 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.modelgen" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/modelgen".
+200812-02:45:08,67 nipype.workflow INFO:
+	 [Node] Setting-up "_modelgen0" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/modelgen/mapflow/_modelgen0".
+200812-02:45:08,83 nipype.workflow INFO:
+	 [Node] Running "_modelgen0" ("nipype.interfaces.fsl.model.FEATModel"), a CommandLine Interface with command:
+feat_model run0 
+200812-02:45:13,284 nipype.workflow INFO:
+	 [Node] Finished "_modelgen0".
+200812-02:45:13,289 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.modelgen".
+200812-02:45:13,289 nipype.workflow INFO:
+	 [Node] Setting-up "modelfit_ses_2.modelestimate" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/modelestimate".
+200812-02:45:13,298 nipype.workflow INFO:
+	 [Node] Setting-up "_modelestimate0" in "/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/modelestimate/mapflow/_modelestimate0".
+200812-02:45:13,302 nipype.workflow INFO:
+	 [Node] Running "_modelestimate0" ("nipype.interfaces.fsl.model.FILMGLS"), a CommandLine Interface with command:
+film_gls --ms=5 --rn=results --sa --con=/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/modelgen/mapflow/_modelgen0/run0.con --in=/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/mask/sub-1343_ses-2_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold_roi_smooth_masked.nii.gz --pd=/gpfs/ysm/scratch60/levy_ifat/oad4/work/allScript_ses2/modelfit_ses_2/_subject_id_1343/modelgen/mapflow/_modelgen0/run0.mat --thr=1000.000000
+200812-02:45:13,385 nipype.interface INFO:
+	 stdout 2020-08-12T02:45:13.385627:Log directory is: results
+200812-02:46:04,270 nipype.interface INFO:
+	 stdout 2020-08-12T02:46:04.270699:paradigm.getDesignMatrix().Nrows()=1166
+200812-02:46:04,270 nipype.interface INFO:
+	 stdout 2020-08-12T02:46:04.270699:paradigm.getDesignMatrix().Ncols()=27
+200812-02:46:04,270 nipype.interface INFO:
+	 stdout 2020-08-12T02:46:04.270699:sizeTS=1166
+200812-02:46:04,271 nipype.interface INFO:
+	 stdout 2020-08-12T02:46:04.270699:numTS=250886
+200812-02:46:04,877 nipype.interface INFO:
+	 stdout 2020-08-12T02:46:04.877069:Calculating residuals...
+200812-03:23:53,510 nipype.interface INFO:
+	 stdout 2020-08-12T03:23:53.509790:Completed
+200812-03:23:53,510 nipype.interface INFO:
+	 stdout 2020-08-12T03:23:53.509790:Estimating residual autocorrelation...
+200812-03:25:49,747 nipype.interface INFO:
+	 stdout 2020-08-12T03:25:49.747627:Calculating raw AutoCorrs... Completed
+200812-03:25:49,765 nipype.interface INFO:
+	 stdout 2020-08-12T03:25:49.765186:mode = 4782.3
+200812-03:25:49,768 nipype.interface INFO:
+	 stdout 2020-08-12T03:25:49.768727:sig = 761
+200812-03:25:49,768 nipype.interface INFO:
+	 stdout 2020-08-12T03:25:49.768832:Spatially smoothing auto corr estimates
+200812-03:28:05,426 nipype.interface INFO:
+	 stdout 2020-08-12T03:28:05.426927:.................................
+200812-03:28:05,427 nipype.interface INFO:
+	 stdout 2020-08-12T03:28:05.426927:Completed
+200812-03:28:05,428 nipype.interface INFO:
+	 stdout 2020-08-12T03:28:05.428380:Tukey M = 34
+200812-03:28:05,800 nipype.interface INFO:
+	 stdout 2020-08-12T03:28:05.800893:Tukey estimates... Completed
+200812-03:28:05,801 nipype.interface INFO:
+	 stdout 2020-08-12T03:28:05.800893:Completed
+200812-03:28:05,801 nipype.interface INFO:
+	 stdout 2020-08-12T03:28:05.800893:Prewhitening and Computing PEs...
+200812-03:28:05,801 nipype.interface INFO:
+	 stdout 2020-08-12T03:28:05.800893:Percentage done:
+200812-04:54:18,512 nipype.interface INFO:
+	 stdout 2020-08-12T04:54:18.512636:1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,Completed
+200812-04:54:18,513 nipype.interface INFO:
+	 stdout 2020-08-12T04:54:18.512636:Saving results... 
+200812-04:56:07,120 nipype.interface INFO:
+	 stdout 2020-08-12T04:56:07.120704:Completed
+200812-04:56:07,241 nipype.workflow INFO:
+	 [Node] Finished "_modelestimate0".
+200812-04:56:07,247 nipype.workflow INFO:
+	 [Node] Finished "modelfit_ses_2.modelestimate".

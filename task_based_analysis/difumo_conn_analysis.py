@@ -1,10 +1,9 @@
-```
+'''
 @author: Or Duek
 @date: Jul 16 2020
 
 This is a sciprt that uses the nee DiFuMo dictionary atlas (https://www.sciencedirect.com/science/article/pii/S1053811920306121#appsec7)
-
-```
+'''
 #%% import libraries
 import pandas as pd 
 from nilearn.input_data import NiftiMapsMasker
@@ -13,18 +12,21 @@ from nilearn import datasets
 import numpy as np
 import nilearn.plotting
 from sklearn.model_selection import StratifiedShuffleSplit
+import os
+import glob
 #%% Functions
 # extract RS data and create vector for each subject
 def removeVars (confoundFile):
     # this method takes the csv regressors file (from fmriPrep) and chooses a few to confound. You can change those few
     import pandas as pd
     confound = pd.read_csv(confoundFile,sep="\t", na_values="n/a")
-    finalConf = confound[['csf','white_matter', 'framewise_displacement', 'dvars', 'std_dvars',
-                          'trans_x', 'trans_y', 'trans_z', 'rot_x', 'rot_y', 'rot_z',
-                        ]] # can add 'global_signal' also ,
+    finalConf = confound[['csf', 'white_matter', 'framewise_displacement', 
+                          'a_comp_cor_00', 'a_comp_cor_01',	'a_comp_cor_02', 'a_comp_cor_03', 
+                          'a_comp_cor_04', 'a_comp_cor_05', 'trans_x', 'trans_y', 'trans_z', 
+                          'rot_x', 'rot_y', 'rot_z']] # can add 'global_signal' also ,,
+                          # 
      # change NaN of FD to zero
     finalConf = np.array(finalConf.fillna(0.0))
-    #finalConf[0,2] = 0 # if removing FD than should remove this one also
     return finalConf
 
 
@@ -41,18 +43,32 @@ medication_cond = pd.read_csv('/home/or/kpe_task_analysis/task_based_analysis/kp
 subject_list = np.array(medication_cond.scr_id)
 condition_label = np.array(medication_cond.med_cond)
 
+group_label = list(map(int, condition_label))
 #%%
 # Fetch grey matter mask from nilearn shipped with 
 # ICBM templates - should consider changing it to mean image
 # of our dataset
-#gm_mask = datasets.fetch_icbm152_brain_gm_mask(threshold=0.2)
-
+gm_mask = datasets.fetch_icbm152_brain_gm_mask(threshold=0.2)
+#%%
 # condition (medication condition)
+# create a mean mask of all subjects
+# load mask of brain
+ses= '2'
+brainmasks = glob.glob('/media/Data/Lab_Projects/KPE_PTSD_Project/neuroimaging/KPE_BIDS/derivatives/fmriprep/sub-*/ses-%s/func/sub-*_ses-%s_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz' %(ses,ses))
+print(brainmasks)
+%matplotlib inline
+#for mask in brainmasks:
+ #   nilearn.plotting.plot_roi(mask)
+    
+mean_mask = nilearn.image.mean_img(brainmasks)
+nilearn.plotting.plot_stat_map(mean_mask)
+group_mask = nilearn.image.math_img("a>=0.95", a=mean_mask)
+nilearn.plotting.plot_roi(group_mask)
 
 
 #%% fetch atlas
 maps_img = '/media/Data/work/DiFuMo_atlas/256/maps.nii.gz'
-labes = pd.read_csv('/media/Data/work/DiFuMo_atlas/256/labels_256_dictionary.csv')
+labels = pd.read_csv('/media/Data/work/DiFuMo_atlas/256/labels_256_dictionary.csv')
 #coords = nilearn.plotting.find_parcellation_cut_coords(labels_img=maps_img)
 
 # generate time series
@@ -65,8 +81,10 @@ mask_params = { 'mask_img': gm_mask,
 masker = NiftiMapsMasker(maps_img=maps_img, **mask_params)
 
 #%%
+#subject_list = ['KPE1223']
 subject_ts = []
 ses = '2'
+
 for sub in subject_list:
     print(f' Analysing subject {sub}')
     subject = sub.split('KPE')[1]
@@ -87,9 +105,7 @@ vec = connectome_measure.fit_transform(subject_ts)
 
 
 
- # %%
-group_label = list(map(str, condition_label))
-len(group_label)
+ 
 # %% XGboost
 
 from xgboost import XGBClassifier
@@ -111,10 +127,80 @@ scores = cross_val_score(model, vec, group_label,
 #%% permutation scores
 from sklearn.model_selection import permutation_test_score
 score, permutation_scores, pvalue = permutation_test_score(
-    model, vec, group_label, scoring="accuracy", cv=cv, n_permutations=500,
+    model, vec, condition_label, scoring="roc_auc", cv=cv, n_permutations=100,
      n_jobs=8, verbose=5)
 
 print("Classification score %s (pvalue : %s)" % (score, pvalue))
 
+#%% test the same, but on session 1
+subject_list_1 = list(subject_list)
+subject_list_1.remove('KPE1315')
+subject_ts_1 = []
+ses = '1'
+for sub in subject_list_1:
+    print(f' Analysing subject {sub}')
+    subject = sub.split('KPE')[1]
+    func = func_template.format(sub=subject, session=ses)
+    confound = confound_template.format(sub=subject, session=ses)
+    signals = masker.fit_transform(imgs=func, confounds=removeVars(confound))
+    subject_ts_1.append(signals)
+
 #%%
-score
+vec_1 = connectome_measure.fit_transform(subject_ts_1)
+
+
+# %% removing sbject 1315 from condition label
+subject_list[6]
+condition_label_1 = list(condition_label)
+del(condition_label_1[6])
+condition_label_1
+
+#%% run ML CV
+scores_1 = cross_val_score(model, vec_1, condition_label_1,
+                         scoring='roc_auc', cv=cv)
+
+#%%
+scores_1
+
+#%% Run NBS to compare the two networks
+# first we want to change the vectors to matrices for each session
+# session 2:
+connectome = connectome.ConnectivityMeasure(
+    
+    kind='correlation', vectorize=False)
+
+# Vectorized connectomes across subject-specific timeseries
+mat_2 = connectome.fit_transform(subject_ts)
+#mat_1 = connectome.fit_transform(subject_ts_1)
+#%%
+mat_2.shape
+# using the condition labels to seperate midazolam and ketamine
+ketamine_mat = []
+midazolam_mat = []
+for i,x in enumerate(condition_label):
+    print(i)
+    print(x)
+    if x==1:
+        # ketamine
+        ketamine_mat.append(mat_2[i])
+    else:
+        midazolam_mat.append(mat_2[i])
+
+#%% now reshape and NBS
+ketamine = np.moveaxis(np.array(ketamine_mat),0,-1)
+midazolam = np.moveaxis(np.array(midazolam_mat),0,-1)
+#%%
+from bct import nbs
+# we compare ket1 and ket3
+pval, adj, _ = nbs.nbs_bct(ketamine, midazolam, thresh=2.5, tail='both',k=500, paired=False,
+ verbose = True)
+# no difference in RS across groups
+
+# %%
+nilearn.plotting.plot_matrix(mat_2[0], labels=np.array(labels.Yeo_networks7) , 
+ colorbar=True)
+
+#%%
+np.array(labels.Difumo_names)
+
+

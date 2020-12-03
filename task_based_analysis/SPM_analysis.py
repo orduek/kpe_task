@@ -93,153 +93,12 @@ subject_list = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1
 # Map field names to individual subject runs.
 session = '1' # choose session
 
-infosource = pe.Node(util.IdentityInterface(fields=['subject_id'
-                                            ],
-                                    ),
-                  name="infosource")
-infosource.iterables = [('subject_id', subject_list)]
-
-# SelectFiles - to grab the data (alternativ to DataGrabber)
-templates = {'func': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz',
-             'mask': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz',
-             'regressors': '/media/Data/KPE_BIDS/derivatives/fmriprep/sub-{subject_id}/ses-' + session + '/func/sub-{subject_id}_ses-' + session + '_task-Memory_desc-confounds_regressors.tsv',
-             'events': '/media/Data/PTSD_KPE/condition_files/sub-{subject_id}_ses-' + session + '.csv'}
-selectfiles = pe.Node(nio.SelectFiles(templates,
-                               base_directory=data_dir),
-                   name="selectfiles")
-
-#%%
-
-# Extract motion parameters from regressors file
-runinfo = pe.Node(util.Function(
-    input_names=['in_file', 'events_file', 'regressors_file', 'regressors_names'],
-    function=_bids2nipypeinfo, output_names=['info', 'realign_file']),
-    name='runinfo')
-
-# Set the column names to be used from the confounds file
-runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \
-    ['a_comp_cor_%02d' % i for i in range(6)] + ['cosine%02d' % i for i in range(4)]
-#%%
-
-cont1 = ['Trauma1>Sad1', 'T', ['trauma1', 'sad1'], [1, -1]]
-cont2 = ['Trauma1>Relax1', 'T', ['trauma1', 'relax1'], [1, -1]]
-cont3 = ['Sad1>Relax1', 'T', ['sad1', 'relax1'], [1, -1]]
-cont4 = ['Sad1', 'T', ['sad1'], [1]]
-cont5 = ['Trauma1>Trauma2_3', 'T', ['trauma1', 'trauma2','trauma3'], [1, -0.5, -0.5]]
-cont6 = ['Trauma1', 'T', ['trauma1'], [1]]
-contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
-#%%
-gunzip = MapNode(Gunzip(), name='gunzip',
-                 iterfield=['in_file'])
-
-#%% Addinf simple denozining procedures (remove dummy scans, smoothing, art detection) 
-#extract = Node(fsl.ExtractROI(t_min=4, t_size=-1, output_type='NIFTI'),
-#               name="extract")
-
-smooth = Node(spm.Smooth(), name="smooth", fwhm = fwhm)
-# Artifact Detection - determines outliers in functional images
-#art = Node(ArtifactDetect(norm_threshold=2,
-#                          zintensity_threshold=3,
-#                          mask_type='spm_global',
-#                          parameter_source='FSL',
-#                          use_differences=[True, False],
-#                          plot_type='svg'),
-#           name="art")
-#%%
-
-################################################################
-
-
-modelspec = Node(interface=model.SpecifySPMModel(), name="modelspec") 
-modelspec.inputs.concatenate_runs = False
-modelspec.inputs.input_units = 'secs'
-modelspec.inputs.output_units = 'secs'
-#modelspec.inputs.outlier_files = '/media/Data/R_A_PTSD/preproccess_data/sub-1063_ses-01_task-3_bold_outliers.txt'
-modelspec.inputs.time_repetition = 1.  # make sure its with a dot 
-modelspec.inputs.high_pass_filter_cutoff = 128.
-
-################################################
-#modelspec.inputs.subject_info = subjectinfo(subject_id) # run per subject
-
-level1design = pe.Node(interface=spm.Level1Design(), name="level1design") #, base_dir = '/media/Data/work')
-level1design.inputs.timing_units = modelspec.inputs.output_units
-level1design.inputs.interscan_interval = 1.
-level1design.inputs.bases = {'hrf': {'derivs': [0, 0]}}
-level1design.inputs.model_serial_correlations = 'AR(1)'
-
-#######################################################################################################################
-# Initiation of a workflow
-wfSPM = Workflow(name="l1spm", base_dir="/media/Drobo/work/KPE_SPM_ses-1")
-wfSPM.connect([
-        (infosource, selectfiles, [('subject_id', 'subject_id')]),
-        (selectfiles, runinfo, [('events','events_file'),('regressors','regressors_file')]),
-        (selectfiles, gunzip, [('func','in_file')]),
-        (gunzip, smooth, [('out_file','in_files')]),
-        (smooth, runinfo, [('smoothed_files','in_file')]),
-        (smooth, modelspec, [('smoothed_files', 'functional_runs')]),   
-        (runinfo, modelspec, [('info', 'subject_info'), ('realign_file', 'realignment_parameters')]),
-        
-        ])
-wfSPM.connect([(modelspec, level1design, [("session_info", "session_info")])])
-
-
-
-
-##########################################################################3
-
-level1estimate = pe.Node(interface=spm.EstimateModel(), name="level1estimate")
-level1estimate.inputs.estimation_method = {'Classical': 1}
-
-contrastestimate = pe.Node(
-    interface=spm.EstimateContrast(), name="contrastestimate")
-#contrastestimate.inputs.contrasts = contrasts
-contrastestimate.overwrite = True
-contrastestimate.config = {'execution': {'remove_unnecessary_outputs': False}}
-contrastestimate.inputs.contrasts = contrasts
-
-
-########################################################################
-#%% Connecting level1 estimation and contrasts
-wfSPM.connect([
-         (level1design, level1estimate, [('spm_mat_file','spm_mat_file')]),
-         (level1estimate, contrastestimate,
-            [('spm_mat_file', 'spm_mat_file'), ('beta_images', 'beta_images'),
-            ('residual_image', 'residual_image')]),
-    ])
-
-
-
-###############################################################
-
 #%% Adding data sink
 ########################################################################
 # Datasink
 datasink = Node(nio.DataSink(base_directory='/media/Drobo/work/KPE_SPM/Sink_ses-1'),
                                          name="datasink")
                        
-
-wfSPM.connect([
-       # here we take only the contrast ad spm.mat files of each subject and put it in different folder. It is more convenient like that. 
-       (contrastestimate, datasink, [('spm_mat_file', '1stLevel.@spm_mat'),
-                                              ('spmT_images', '1stLevel.@T'),
-                                              ('con_images', '1stLevel.@con'),
-                                              ('spmF_images', '1stLevel.@F'),
-                                              ('ess_images', '1stLevel.@ess'),
-                                              ])
-        ])
-
-#%%
-wfSPM.write_graph("workflow_graph.dot", graph2use='colored', format='png', simple_form=True)
-%matplotlib inline
-from IPython.display import Image
-Image(filename="/workflow_graph.png")
-%matplotlib qt
-Image(filename = '/media/Data/work/KPE_SPM/l1spm/graph_detailed.png')
-wfSPM.write_graph(graph2use='flat')
-#%%
-#[]
-
-wfSPM.run('MultiProc', plugin_args={'n_procs': 5})
 
 #%% Gourp analysis - based on SPM - should condifer the fsl Randomize option (other script)
 # OneSampleTTestDesign - creates one sample T-Test Design
@@ -276,10 +135,10 @@ infosource.iterables = [('contrast_id', contrast_list)]
 
 # SelectFiles - to grab the data (alternative to DataGrabber)
 
-templates = {'cons': opj('/media/Data/work/KPE_SPM/Sink_ses-2/1stLevel/_sub*/', 
+templates = {'cons': opj('/media/Data/KPE_results/work/1stLevel/_sub*/', 
                          '{contrast_id}.nii')}
 selectfiles = Node(SelectFiles(templates,
-                               base_directory='/media/Data/work',
+                               
                                sort_filelist=True),
                    name="selectfiles")
 

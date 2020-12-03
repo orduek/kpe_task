@@ -2,7 +2,7 @@
 #SBATCH --partition=general
 #SBATCH --output=firstLevelSPM_ses3.txt
 #SBATCH --error=firstLevelSPM_ses3.err
-#SBATCH --job-name=firstLevelAnalysis_ses3
+#SBATCH --job-name=SPMfirstLevelAnalysis_ses3
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=10
 #SBATCH --mem-per-cpu=10G

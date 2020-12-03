@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# %%
 """
 Created on Wed Mar  6 16:02:52 2019
 
@@ -20,7 +21,7 @@ import pandas as pd
 
 # choose scripts channel
 #b = a.channels[7].raw_data
-#%%
+# %%
 # create loop that will look for changes between zero and back to zero as on and off set time points. 
 def lookZero(b, offSet): # take Channel data and if we need to adjust timings
     time_onset = []
@@ -35,8 +36,8 @@ def lookZero(b, offSet): # take Channel data and if we need to adjust timings
             look_for_zero = True
             time_onset.append(i/1000 - offSet)
     return (time_onset, time_offset)
-        
-#%% Function to extract actual data from subjects
+
+# %% Function to extract actual data from subjects
 def kpeTaskDat(filename):
     # takes filename and returns data frame of onsets and duration. Needs to attach condition and subject number
     import pandas as pd
@@ -76,8 +77,8 @@ def orderSize(folder):
     pairs.sort(key=lambda s: s[0], reverse = True)
     # Display pairs.
     return pairs[0][1] # return only file name
-#%% This part takes the scan sheet and create a data frame with condition and sessions. 
-totalScanData = pd.read_excel('/media/Data/PTSD_KPE/kpe_scan_table.xls', sheet_name = 'kpe_scan_table')        
+# %% This part takes the scan sheet and create a data frame with condition and sessions.
+totalScanData = pd.read_excel('/media/Data/Lab_Projects/KPE_PTSD_Project/other/kpe_scan_table.xls', sheet_name = 'kpe_scan_table')        
 # short loop to fill in subject numebrs and sessions
 totalScanData["subject_id"] = totalScanData["subject_id"].fillna('noSub') # filling all NaNs with noSub. 
 # create a session column
@@ -93,7 +94,7 @@ for index,rows  in totalScanData.iterrows():
  
 trialOrder = pd.DataFrame({'subject_id': totalScanData["subject_id"], "scriptOrder":totalScanData["Script Order"], "session":totalScanData["scan_num"]})
  # read subject id and pick the right line from the data frame
-#%%
+# %%
 def getCondition(subNum):
     
     # use scanSheet (from top lines), subjectNumber and session to return a list of condition by order of appereance    
@@ -137,12 +138,12 @@ def getCondition(subNum):
         #conditionTotal.append(conditionDat)
     #events= pd.DataFrame({'onset':scriptTime[0], 'duration':duration, 'condition':condition})
     # now we should create a data frame
-    
 
-#%% 
+
+# %%
 # this function takes subject and session number and returns the specific acq file
 def getFile(subNum, session):
-    data_dir = '/media/Data/PTSD_KPE/physio_data/raw/'
+    data_dir = '/media/Data/Lab_Projects/KPE_PTSD_Project/behavioral/physio_data/raw/'
     folder = data_dir + "kpe" + str(subNum) + "/" + "Scan_" + str(session) + "/"
     try:
         fullFile = orderSize(folder)
@@ -152,12 +153,12 @@ def getFile(subNum, session):
         return 99
 
 
-#%%
+# %%
 # now we can iterate through subjects and sessions and create subject data for each
 # for now - lets create tsv files for each subject per each session
-subList = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
-subList = ['1499']
-sessionList = [1,2,3]  
+#subList = ['008','1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403','1464']
+subList = ['008']#['1561','1573','1578','1419']
+sessionList = [1,2,3,4]  
 
 for sub in subList:
     subNum = sub
@@ -181,15 +182,16 @@ for sub in subList:
         onsetsDat['trial_type'] = conditionSession['condition'].tolist()
         # save as tsv file in specifi location BIDS compatible name (i.e. sub-subNum_ses_session_task_.tsv)
         # save filename in folder
-        onsetsDat.to_csv(r'/media/Data/PTSD_KPE/condition_files/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False, sep = '\t')
+        onsetsDat.to_csv(r'/media/Data/Lab_Projects/KPE_PTSD_Project/neuroimaging/KPE_BIDS/condition_files/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False, sep = '\t')
     
 
 
-#%% Addind trialType numbe (trauma1/2/3, sad1/2/3 etc.)
-events_file = '/media/Data/PTSD_KPE/condition_files/sub-1403_ses-1.csv'
+# %% Addind trialType number (trauma1/2/3, sad1/2/3 etc.)
+
 # first read csv file
 import glob
-file_list = glob.glob('/media/Data/PTSD_KPE/condition_files/sub-*_ses-*.csv')
+#file_list = glob.glob('/media/Data/PTSD_KPE/condition_files/sub-*_ses-*.csv')
+file_list = glob.glob('/media/Data/Lab_Projects/KPE_PTSD_Project/neuroimaging/KPE_BIDS/condition_files/sub-008_ses-*.csv')
 for file in file_list:
     events = pd.read_csv(file, sep=r'\t')
     # for every line add number
@@ -214,5 +216,50 @@ for file in file_list:
             r_i = r_i +1
     events["trial_type_N"] = trial_typeN
     # save refined csv file
-    events.to_csv(r'/media/Data/PTSD_KPE/condition_files/withNumbers/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False, sep = '\t')
+    events.to_csv(r'/media/Data/Lab_Projects/KPE_PTSD_Project/neuroimaging/KPE_BIDS/condition_files/withNumbers/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+'.csv', index = False, sep = '\t')
+
+# %% Create 30sec window for each script
+#file_list = glob.glob('/media/Data/PTSD_KPE/condition_files/withNumbers/sub-*_ses-*.csv')
+file_list = glob.glob('/media/Data/Lab_Projects/KPE_PTSD_Project/neuroimaging/KPE_BIDS/condition_files/withNumbers/sub-*_ses-4.csv')
+for file in file_list:
+    events = pd.read_csv(file, sep=r'\t')
+    
+    # for every line add number
+    subNum = file.split('sub-')[1].split('_')[0]
+    session = file.split('ses-')[1].split('.')[0]
+    # set index for each script and index (n) for each window
+    duration = []
+    onset = []
+    trial_typeN_60 = []
+    for line in events.iterrows():
+        #print(line)
+        newDuration = 60#round(line[1][1] / 4)
+        startOnset = line[1][0]
+       # print(startOnset)
+        for i in range(2):
+            print(line[1][3])
+            trial_typeN_60.append(line[1][3] + '_' +  str(i))
+            duration.append(newDuration)
+            onset.append(startOnset)
+            startOnset = startOnset + newDuration
+    df = pd.DataFrame({'onset':onset, 'duration': duration, 'trial_type_60': trial_typeN_60})
             
+    
+    # save refined csv file
+    df.to_csv(r'/media/Data/Lab_Projects/KPE_PTSD_Project/neuroimaging/KPE_BIDS/condition_files/withNumbers/'+'sub-' + str(subNum)+ '_' + 'ses-' +str(session)+ '_60sec_window' + '.csv', index = False, sep = '\t')
+
+# %%
+for line in events.iterrows():
+        #print(line)
+        newDuration = 60#round(line[1][1] / 4)
+        startOnset = line[1][0]
+       # print(startOnset)
+        for i in range(1):
+            print(line[1])#[3])
+            trial_typeN_60.append(line[1][3] + '_' +  str(i))
+            duration.append(newDuration)
+            onset.append(startOnset)
+            startOnset = startOnset + newDuration
+
+# %%
+pd.read_csv('/media/Data/Lab_Projects/KPE_PTSD_Project/neuroimaging/KPE_BIDS/condition_files/withNumbers/sub-008_ses-1_60sec_window.csv', sep='\t')

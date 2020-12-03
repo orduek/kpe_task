@@ -5,6 +5,7 @@ Created on Fri Mar  6 14:58:47 2020
 
 @author: Or Duek
 run tfce analysis for KPE study
+Need to turn it into nipype pipeline for convenience. 
 """
 
 import os
@@ -55,15 +56,35 @@ group_mask = nilearn.image.math_img("a>=0.95", a=mean_mask)
 nilearn.plotting.plot_roi(group_mask)
 #%%
 # grab con files for all relevant 
-contrast = '02' # set number of contrast
+contrast = '06' # set number of contrast
 ket_func_ses1 = ['/media/Data/KPE_results/work/kpeTask_ses1/1stLevel/_subject_id_%s/con_00%s.nii' % (sub, contrast) for sub in ket_list]
 ket_func_ses2 = ['/media/Data/KPE_results/work/kpeTask_ses2/1stLevel/_subject_id_%s/con_00%s.nii' % (sub, contrast) for sub in ket_list]
 mid_func_ses1 = ['/media/Data/KPE_results/work/kpeTask_ses1/1stLevel/_subject_id_%s/con_00%s.nii' % (sub, contrast) for sub in mid_list]
 mid_func_ses2 = ['/media/Data/KPE_results/work/kpeTask_ses2/1stLevel/_subject_id_%s/con_00%s.nii' % (sub, contrast) for sub in mid_list]
 
-
+allSub1 = ket_func_ses1 + mid_func_ses1
+allSub2 = ket_func_ses2 + mid_func_ses2
 #%% First compare ketamine group
 # create diff image 
+group = 'all'
+for ses1,ses2 in zip(allSub1,allSub2):
+    print (ses1)
+    print (ses2)
+    sub = ses1.split('id_')
+    sub = sub[1].split('/')[0]
+    print(sub)
+    diff_file = 'kpe' + sub + 'diff' + group + 'con' + contrast
+    cmd = ['fslmaths', str(ses2), '-sub', str(ses1), str(diff_file)]
+    subprocess.call(cmd)
+    
+    
+diff_list_con = glob.glob('/media/Data/work/fslRandomise/kpe*diff%scon%s.nii.gz' %(group,contrast))
+len(diff_list_con)
+
+#%% Midazolam
+#############
+### DONT RUN THIS IF YOU RUN THE PREVIOUS ONE - ONE IS FOR KETAMINE OTHER FOR MIDAZOLAM ###
+#################
 group = 'mid'
 for ses1,ses2 in zip(mid_func_ses1,mid_func_ses2):
     print (ses1)
@@ -72,14 +93,12 @@ for ses1,ses2 in zip(mid_func_ses1,mid_func_ses2):
     sub = sub[1].split('/')[0]
     print(sub)
     diff_file = 'kpe' + sub + 'diff' + group + 'con' + contrast
-    cmd = '!fslmaths' + ses1 + '-sub' + ses2 + diff_file
-    cmd = ['fslmaths', str(ses1), '-sub', str(ses2), str(diff_file)]
+    cmd = ['fslmaths', str(ses2), '-sub', str(ses1), str(diff_file)]
     subprocess.call(cmd)
     
     
 diff_list_con = glob.glob('/media/Data/work/fslRandomise/kpe*diff%scon%s.nii.gz' %(group,contrast))
 len(diff_list_con)
-
 
 #%% Creating concatenated contrast (across subjects) and group mask
 copes_concat = nilearn.image.concat_imgs(diff_list_con, auto_resample=True)
@@ -99,7 +118,31 @@ randomize.inputs.mask = os.path.join(work_dir, 'group_mask.nii.gz') # group mask
 randomize.inputs.one_sample_group_mean = True
 randomize.inputs.tfce = True
 #randomize.inputs.vox_p_values = True
-randomize.inputs.num_perm = 500
+randomize.inputs.num_perm = 1000
 #randomize.inputs.var_smooth = 5
 
 randomize.run()
+
+#%% negative
+from nipype.interfaces.fsl import BinaryMaths #MultiImageMaths
+maths = BinaryMaths()
+maths.inputs.in_file = os.path.join(work_dir, "con%s_%s.nii.gz" %(contrast, group))
+maths.inputs.out_file = os.path.join(work_dir, "negative_con%s_%s.nii.gz" %(contrast, group))
+maths.inputs.operation = 'mul'
+maths.inputs.operand_value = -1
+maths.cmdline
+maths.run()
+
+
+randomizeNeg = pe.Node(interface = fsl.Randomise(), base_dir = work_dir,
+                    name = 'randomizeNeg')
+randomizeNeg.inputs.in_file = os.path.join(work_dir,  "negative_con%s_%s.nii.gz" %(contrast,group)) # choose which file to run permutation test on
+randomizeNeg.inputs.mask = os.path.join(work_dir, 'group_mask.nii.gz') # group mask file (was created earlier)
+randomizeNeg.inputs.one_sample_group_mean = True
+randomizeNeg.inputs.tfce = True
+#randomize.inputs.vox_p_values = True
+randomizeNeg.inputs.num_perm = 1000
+#randomize.inputs.var_smooth = 5
+
+randomizeNeg.run()
+

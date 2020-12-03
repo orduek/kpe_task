@@ -8,7 +8,7 @@ Created on Wed Dec  4 14:29:06 2019
 1st level analysis using FSL output
 In this one we smooth using SUSAN, which takes longer. 
 """
-
+#%%
 from __future__ import print_function
 from __future__ import division
 from builtins import str
@@ -47,7 +47,7 @@ output_dir = '/media/Data/work'
 fwhm = 6
 tr = 1
 removeTR = 4#Number of TR's to remove before initiating the analysis
-#%%
+
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file,
                      regressors_names=None,
@@ -57,7 +57,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     import numpy as np
     import pandas as pd
     from nipype.interfaces.base.support import Bunch
-    removeTR = 4
+    
     # Process the events file
     events = pd.read_csv(events_file, sep=r'\s+')
 
@@ -70,7 +70,7 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
     out_motion = Path('motion.par').resolve()
 
     regress_data = pd.read_csv(regressors_file, sep=r'\s+')
-    np.savetxt(out_motion, regress_data[motion_columns].values, '%g')
+    np.savetxt(out_motion, regress_data[motion_columns].values[removeTR:,], '%g')
     if regressors_names is None:
         regressors_names = sorted(set(regress_data.columns) - set(motion_columns))
 
@@ -122,9 +122,11 @@ selectfiles = pe.Node(nio.SelectFiles(templates,
 
 # Extract motion parameters from regressors file
 runinfo = pe.Node(util.Function(
-    input_names=['in_file', 'events_file', 'regressors_file', 'regressors_names'],
+    input_names=['in_file', 'events_file', 'regressors_file', 'regressors_names', 'removeTR'],
     function=_bids2nipypeinfo, output_names=['info', 'realign_file']),
     name='runinfo')
+
+runinfo.inputs.removeTR = removeTR
 
 # Set the column names to be used from the confounds file
 runinfo.inputs.regressors_names = ['dvars', 'framewise_displacement'] + \

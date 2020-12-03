@@ -1,0 +1,10 @@
+/ContrastName1	ket>mid 
+/ContrastName2	mid > ket 
+/NumWaves	2
+/NumContrasts	2
+/PPheights		1.000000e+00	1.000000e+00
+/RequiredEffect		2.636	2.636
+
+/Matrix
+1.000000e+00 -1.000000e+00 
+-1.000000e+00 1.000000e+00 

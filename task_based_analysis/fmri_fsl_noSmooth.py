@@ -36,13 +36,13 @@ analysis. This will demonstrate how pre-defined workflows can be setup and
 shared across users, projects and labs.
 """
 #%%
-data_dir = '/home/oad4/scratch60/kpe'
-output_dir = '/home/oad4/scratch60/work/fsl_analysis_ses2_Nosmooth'
+data_dir = '/gpfs/gibbs/pi/levy_ifat/Or/kpe'
+
 removeTR = 4
 fwhm = 0
 tr = 1
-session = '2' # choose session
-
+session = '3' # choose session
+output_dir = '/gpfs/gibbs/pi/levy_ifat/Or/kpe/results/ScriptPart_ses%s_Nosmooth' %session
 #%% Methods 
 def _bids2nipypeinfo(in_file, events_file, regressors_file,
                      regressors_names=None,
@@ -94,8 +94,9 @@ def _bids2nipypeinfo(in_file, events_file, regressors_file,
 
     return [runinfo], str(out_motion)
 #%%
-subject_list = ['1468']#['1351'] #['008', '1223','1253','1263','1293','1307','1315','1322','1339','1343','1351','1356','1364','1369','1387','1390','1403'
-#,'1464','1468' '1480','1499', '1561']
+subject_list = ['008', '1223','1253','1263','1293','1307','1315','1322',
+    '1339','1343','1351','1356','1364','1369','1387','1390','1403', '1419', '1464','1468' ,'1480','1499',
+    '1561', '1573','1578']
 # Map field names to individual subject runs.
 
 
@@ -133,13 +134,13 @@ skip.inputs.t_min = removeTR
 skip.inputs.t_size = -1
 
 #%%
-# susan =  pe.Node(interface=fsl.SUSAN(), name = 'susan') #create_susan_smooth()
-# susan.inputs.fwhm = fwhm
-# susan.inputs.brightness_threshold = 1000.0
+#susan =  pe.Node(interface=fsl.SUSAN(), name = 'susan') #create_susan_smooth()
+#susan.inputs.fwhm = fwhm
+#susan.inputs.brightness_threshold = 1000.0
 
 
 #%%
-modelfit = pe.Workflow(name='modelfit_ses_' + session, base_dir= output_dir)
+modelfit = pe.Workflow(name='modelfit', base_dir= output_dir)
 """
 Use :class:`nipype.algorithms.modelgen.SpecifyModel` to generate design information.
 """
@@ -163,7 +164,8 @@ cont3 = ['Sad1_0>Relax1_0', 'T', ['sad1_0', 'relax1_0'], [1, -1]]
 cont4 = ['trauma1_0 > trauma2_0', 'T', ['trauma1_0', 'trauma2_0'], [1, -1]]
 cont5 = ['Trauma1_0>Trauma1_2_3', 'T', ['trauma1_0', 'trauma1_2','trauma1_3'], [1, -0.5, -0.5]]
 cont6 = ['Trauma1 > Trauma2', 'T', ['trauma1_0', 'trauma1_1', 'trauma1_2', 'trauma1_3', 'trauma2_0', 'trauma2_1', 'trauma2_2', 'trauma2_3'], [0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25 ]]
-contrasts = [cont1, cont2, cont3, cont4, cont5, cont6]
+cont7 = ['Trauma1min > Relaxed1min', 'T', ['trauma1_0', 'trauma1_1', 'relax1_0','relax1_1'], [.5,.5,-.5,-.5]]
+contrasts = [cont1, cont2, cont3, cont4, cont5, cont6, cont7]
 
 
 
@@ -177,24 +179,15 @@ Use :class:`nipype.interfaces.fsl.FEATModel` to generate a run specific mat
 file for use by FILMGLS
 """
 
-modelgen = pe.MapNode(
+modelgen = pe.Node(
     interface=fsl.FEATModel(),
-    name='modelgen',
-    iterfield=['fsf_file', 'ev_files'])
-"""
-Use :class:`nipype.interfaces.fsl.FILMGLS` to estimate a model specified by a
-mat file and a functional run
-"""
+    name='modelgen')
 mask =  pe.Node(interface= fsl.maths.ApplyMask(), name = 'mask')
 
 
-modelestimate = pe.MapNode(
+modelestimate = pe.Node(
     interface=fsl.FILMGLS(smooth_autocorr=True, mask_size=5, threshold=1000),
-    name='modelestimate',
-    iterfield=['design_file', 'in_file', 'tcon_file'])
-"""
-Use :class:`nipype.interfaces.fsl.ContrastMgr` to generate contrast estimates
-"""
+    name='modelestimate')
 
 
 #%%
@@ -217,7 +210,5 @@ modelfit.connect([
     
 ])
 #%%
-modelfit.run('MultiProc', plugin_args={'n_procs': 5})
+modelfit.run('MultiProc', plugin_args={'n_procs': 10})
 
-
-# %%
