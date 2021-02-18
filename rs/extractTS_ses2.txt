@@ -1,0 +1,264 @@
+Running script
+['/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1369/ses-3/func/sub-1369_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1351/ses-3/func/sub-1351_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1561/ses-3/func/sub-1561_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1578/ses-3/func/sub-1578_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1387/ses-3/func/sub-1387_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1499/ses-3/func/sub-1499_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1573/ses-3/func/sub-1573_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1364/ses-3/func/sub-1364_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1403/ses-3/func/sub-1403_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-008/ses-3/func/sub-008_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1343/ses-3/func/sub-1343_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1307/ses-3/func/sub-1307_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1419/ses-3/func/sub-1419_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1263/ses-3/func/sub-1263_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1322/ses-3/func/sub-1322_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1390/ses-3/func/sub-1390_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1223/ses-3/func/sub-1223_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1339/ses-3/func/sub-1339_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1293/ses-3/func/sub-1293_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1464/ses-3/func/sub-1464_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz', '/gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1356/ses-3/func/sub-1356_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz']
+Folder already exist
+ Analysing subject 008
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+Resampling maps
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-008/ses-3/func/sub-008_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1223
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1223/ses-3/func/sub-1223_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1253
+Subject 1253 has no data
+ Analysing subject 1263
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1263/ses-3/func/sub-1263_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1293
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1293/ses-3/func/sub-1293_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1307
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1307/ses-3/func/sub-1307_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1315
+Subject 1315 has no data
+ Analysing subject 1322
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1322/ses-3/func/sub-1322_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1339
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1339/ses-3/func/sub-1339_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1343
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1343/ses-3/func/sub-1343_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1351
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1351/ses-3/func/sub-1351_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1356
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1356/ses-3/func/sub-1356_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1364
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1364/ses-3/func/sub-1364_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1369
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1369/ses-3/func/sub-1369_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1387
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1387/ses-3/func/sub-1387_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1390
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1390/ses-3/func/sub-1390_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1403
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1403/ses-3/func/sub-1403_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1419
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1419/ses-3/func/sub-1419_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1464
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1464/ses-3/func/sub-1464_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1468
+Subject 1468 has no data
+ Analysing subject 1480
+Subject 1480 has no data
+ Analysing subject 1499
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1499/ses-3/func/sub-1499_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1561
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1561/ses-3/func/sub-1561_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1573
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1573/ses-3/func/sub-1573_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
+ Analysing subject 1578
+[NiftiMapsMasker.fit_transform] loading regions from /gpfs/gibbs/pi/levy_ifat/Or/DiFuMo_atlas/256/maps.nii.gz
+[NiftiMapsMasker.fit_transform] loading mask from Nifti1Image(
+shape=(97, 115, 97),
+affine=array([[   2. ,    0. ,    0. ,  -96.5],
+       [   0. ,    2. ,    0. , -132.5],
+       [   0. ,    0. ,    2. ,  -78.5],
+       [   0. ,    0. ,    0. ,    1
+[NiftiMapsMasker.transform_single_imgs] Loading data from /gpfs/gibbs/pi/levy_ifat/Or/kpe/fmriprep/sub-1578/ses-3/func/sub-1578_ses-3_task-rest_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz
+[NiftiMapsMasker.transform_single_imgs] Smoothing images
+[NiftiMapsMasker.transform_single_imgs] Extracting region signals
+[NiftiMapsMasker.transform_single_imgs] Cleaning extracted signals
